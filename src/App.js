@@ -18,9 +18,8 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        
+        <Navigation />
         <Switch>
-          <Navigation />
           <Route exact path="/" component={Inicio} />
           <Route exact path="/notas" component={Notas} />
           <Route exact path="/horario" component={Horario} />
