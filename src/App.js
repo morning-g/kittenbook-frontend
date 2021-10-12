@@ -8,6 +8,9 @@ import Acceso from "./componentes/Login";
 import Registro from "./componentes/Registro";
 import Pie from "./componentes/Pie";
 import MenuAppBar from "./componentes/AppBar";
+import Precios from './componentes/Precios';
+import PoliticaPrivacidad from './componentes/PoliticaPrivacidad';
+import ToS from "./componentes/ToS";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -21,16 +24,21 @@ function App() {
         <MenuAppBar />
         <Switch>
           <Route exact path="/" component={Inicio} />
+
           <Route exact path="/notas" component={Notas} />
           <Route exact path="/horario" component={Horario} />
           <Route exact path="/tareas" component={Tareas} />
           <Route exact path="/reticula" component={Reticula} />
+
           <Route exact path="/login" component={Acceso} />
           <Route exact path="/registro" component={Registro} />
+          <Route exact path="/precios" component={Precios} />
+          <Route exact path="/tos" component={ToS} />
+          <Route exact path="/politicaprivacidad" component={PoliticaPrivacidad} />
         </Switch>
-        <Stack spacing={2} direction="row">
+        {/* <Stack spacing={2} direction="row">
           <Button variant="contained">Acceder</Button>
-        </Stack>
+        </Stack> */}
       </BrowserRouter>
       <Pie />
     </div>
