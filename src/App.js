@@ -4,9 +4,10 @@ import Notas from "./componentes/Notas";
 import Tareas from "./componentes/Tareas";
 import Reticula from "./componentes/Reticula";
 import Inicio from "./componentes/Inicio";
-import Acceso from './componentes/Login';
-import Registro from './componentes/Registro';
-import Pie from './componentes/Pie'
+import Acceso from "./componentes/Login";
+import Registro from "./componentes/Registro";
+import Pie from "./componentes/Pie";
+import MenuAppBar from "./componentes/AppBar";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -16,7 +17,8 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navegacion />
+        {/* <Navegacion /> */}
+        <MenuAppBar />
         <Switch>
           <Route exact path="/" component={Inicio} />
           <Route exact path="/notas" component={Notas} />
