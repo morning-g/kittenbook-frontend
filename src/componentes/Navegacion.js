@@ -9,7 +9,7 @@ import FeedIcon from "@mui/icons-material/Feed";
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Navigation(props) {
+export default function Navegacion(props) {
   return (
     <BottomNavigation showLabels>
       <BottomNavigationAction
