@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-export default class Reticula extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Reticula</h1>
-            </div>
-        )
-    }
+export default function Reticula(props) {
+  return (
+    <div>
+      <h1>Reticula</h1>
+    </div>
+  );
 }
