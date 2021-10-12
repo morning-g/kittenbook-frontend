@@ -6,7 +6,7 @@
 // import Button from "@mui/material/Button";
 // import DataGrid from "@mui/material/Grid";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/Navegacion";
 import Horario from "./components/Horario";
 import Notas from "./components/Notas";
 import Tareas from "./components/Tareas";
@@ -18,8 +18,9 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navigation />
+        
         <Switch>
+          <Navigation />
           <Route exact path="/" component={Inicio} />
           <Route exact path="/notas" component={Notas} />
           <Route exact path="/horario" component={Horario} />
