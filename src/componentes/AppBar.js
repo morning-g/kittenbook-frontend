@@ -23,7 +23,10 @@ export default function MenuAppBar() {
       >
         <Toolbar sx={{ flexWrap: "wrap" }}>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            Company name
+            OmegaWare
+          </Typography>
+          <Typography variant="h8" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+            KittenBook
           </Typography>
           <nav>
             <Link
