@@ -6,6 +6,7 @@ import Reticula from "./componentes/Reticula";
 import Inicio from "./componentes/Inicio";
 import Acceso from "./componentes/Login";
 import Registro from "./componentes/Registro";
+import Creditos from "./componentes/Creditos"
 import Pie from "./componentes/Pie";
 import MenuAppBar from "./componentes/AppBar";
 import Precios from './componentes/Precios';
@@ -29,7 +30,7 @@ function App() {
           <Route exact path="/horario" component={Horario} />
           <Route exact path="/tareas" component={Tareas} />
           <Route exact path="/reticula" component={Reticula} />
-
+          <Route exact path="/creditos" component={Creditos} />
           <Route exact path="/login" component={Acceso} />
           <Route exact path="/registro" component={Registro} />
           <Route exact path="/precios" component={Precios} />
