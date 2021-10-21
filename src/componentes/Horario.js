@@ -5,6 +5,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { TableCell } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,19 +55,19 @@ export default function Horario() {
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
+            variant="fullWidth"
           >
-            <Tab label="Programacion" {...a11yProps(0)} />
-            <Tab label="Calculo" {...a11yProps(1)} />
-            <Tab label="Estadistica" {...a11yProps(2)} />
-            <Tab label="Quimica" {...a11yProps(3)} />
+            <Tab label="Lunes" {...a11yProps(0)} />
+            <Tab label="Martes" {...a11yProps(1)} />
+            <Tab label="Miercoles" {...a11yProps(2)} />
+            <Tab label="Jueves" {...a11yProps(3)} />
+            <Tab label="Viernes" {...a11yProps(4)} />
+            <Tab label="Sabado" {...a11yProps(5)} />
+            
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <p>Lunes: 8am-9am</p>
-          <p>Martes: 8am-9am</p>
-          <p>Miercoles: 8am-9am</p>
-          <p>Jueves: 8am-9am</p>
-          <p>Viernes: 8am-9am</p>
+          <p>Materia1: 8am-9am, Clave: M1A, Grupo 1, Profesor Juan</p>
         </TabPanel>
         <TabPanel value={value} index={1}>
           No definido
