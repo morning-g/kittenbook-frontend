@@ -1,18 +1,10 @@
-import React, {Component} from "react";
-import Button from "@mui/material/Button";
-import { Container } from "react-bootstrap";
+import React from 'react'
 
-function Tarea () {
+export function Tarea( {tarea}) {
+    const {id, titulo, categoria, creacion, limite, recurso, notificacion} = tarea
     return (
-        <Container>
-            <h3>Tarea Random</h3>
-            <Button>Icono notificaciones</Button>
-            <p style={{color: 'red'}}>Fecha límite: 21/Oct/2021: 23:59</p>
-            <p style={{color: 'blue'}}>Individual</p>
-            <textarea disabled></textarea>
-            <a>tarea.jpg</a>
-        </Container>
-    );
+        <div>
+            {titulo}
+        </div>
+    )
 }
-
-export default Tarea;
