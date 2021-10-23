@@ -57,10 +57,10 @@ export default function ColorTabs() {
         aria-label="secondary tabs example"
         variant = "fullWidth"
       >
-        <Tab value="one" label="Ecuaciones diferenciales" />
-        <Tab value="two" label="Item Two" />
-        <Tab value="three" label="Item Three" />
-        <Tab value="Cuarto" label="Item 4" />
+        <Tab value="uno" label="Ecuaciones diferenciales" />
+        <Tab value="dos" label="Programacion " />
+        <Tab value="tres" label="Calculo" />
+        <Tab value="Cuatro" label="Estadistica" />
       </Tabs>
     </Box>
   );
