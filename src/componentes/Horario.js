@@ -9,8 +9,8 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import Divider from '@mui/material/Divider';
-import { Link } from 'react-router-dom';
+import Divider from "@mui/material/Divider";
+import { Link } from "react-router-dom";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -54,69 +54,155 @@ export default function Horario() {
   return (
     <Container>
       <Box sx={{ width: "100%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-            variant="fullWidth"
-          >
-            <Tab label="Lunes" {...a11yProps(0)} />
-            <Tab label="Martes" {...a11yProps(1)} />
-            <Tab label="Miercoles" {...a11yProps(2)} />
-            <Tab label="Jueves" {...a11yProps(3)} />
-            <Tab label="Viernes" {...a11yProps(4)} />
-            <Tab label="Sabado" {...a11yProps(5)} />
-          </Tabs>
-        </Box>
-       
-        <TabPanel value={value} index={0} >
-        <Card sx={{ minWidth: 100}}>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-              Grupo 1, Clave: MPA1
-            </Typography>
-          <Typography variant="h5" component="div">
-            Fundamentos de programación
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Profesor: Juan Escutia
-          </Typography>
-          <Typography variant="body2">
-            Horario: 8am a 9am
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Link to="/notas">
-             <Button size="small">Apuntes de la materia</Button>
-          </Link>
-        </CardActions>
-      </Card>
-      <Divider variant="inset" component=""/>
-      <Card sx={{ minWidth: 100}}>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-              Grupo 1, Clave: MPA1
-            </Typography>
-          <Typography variant="h5" component="div">
-            Estadística
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Profesor: Juan Escutia
-          </Typography>
-          <Typography variant="body2">
-            Horario: 8am a 9am
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Link to="/notas">
-            <Button size="small">Apuntes de la materia</Button>
-          </Link>
-        </CardActions>
-      </Card>
-      </TabPanel>
 
-      <TabPanel value={value} index={1}>
+        <TabPanel value={value} index={0}>
+          <Card sx={{ minWidth: 100 }}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Grupo 1, Clave: MPA1
+              </Typography>
+              <Typography variant="h5" component="div">
+                Fundamentos de programación
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Profesor: Juan Escutia
+              </Typography>
+              <Typography sx={{ mb: 1.0 }} color="text.secondary">
+                Omnis voluptatem sequi et molestiae similique nostrum. Doloribus
+                voluptas minima esse dolorem omnis officiis.
+              </Typography>
+              <Typography variant="body2">Fecha de creación: 01/09/2021</Typography>
+              <Typography variant="body2">1</Typography>
+            </CardContent>
+            <CardActions>
+              <Link to="/notas">
+                <Button size="small">Apuntes de la materia</Button>
+              </Link>
+            </CardActions>
+          </Card>
+          <Divider variant="inset" component="" />
+          <Card sx={{ minWidth: 100 }}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Grupo 1, Clave: MPA1
+              </Typography>
+              <Typography variant="h5" component="div">
+                Estadística
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Profesor: Juan Escutia
+              </Typography>
+              <Typography sx={{ mb: 1.0 }} color="text.secondary">
+                Omnis voluptatem sequi et molestiae similique nostrum. Doloribus
+                voluptas minima esse dolorem omnis officiis.
+              </Typography>
+              <Typography variant="body2">Fecha de creación: 01/09/2021</Typography>
+              <Typography variant="body2">2</Typography>
+            </CardContent>
+            <CardActions>
+              <Link to="/notas">
+                <Button size="small">Apuntes de la materia</Button>
+              </Link>
+            </CardActions>
+          </Card>
+          <Divider variant="inset" component="" />
+          <Card sx={{ minWidth: 100 }}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Grupo 3, Clave: ASL3
+              </Typography>
+              <Typography variant="h5" component="div">
+                Big Data
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Profesor: Lamia Hamdan
+              </Typography>
+              <Typography sx={{ mb: 1.0 }} color="text.secondary">
+                Omnis voluptatem sequi et molestiae similique nostrum. Doloribus
+                voluptas minima esse dolorem omnis officiis.
+              </Typography>
+              <Typography variant="body2">Fecha de creación: 01/09/2021</Typography>
+              <Typography variant="body2">3</Typography>
+            </CardContent>
+            <CardActions>
+              <Link to="/notas">
+                <Button size="small">Apuntes de la materia</Button>
+              </Link>
+            </CardActions>
+          </Card>
+          <Divider variant="inset" component="" />
+          <Card sx={{ minWidth: 100 }}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Grupo 2, Clave: MP34
+              </Typography>
+              <Typography variant="h5" component="div">
+                Programación Lógica y Funcional
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Profesor: Lamia Hamdan
+              </Typography>
+              <Typography sx={{ mb: 1.0 }} color="text.secondary">
+                Omnis voluptatem sequi et molestiae similique nostrum. Doloribus
+                voluptas minima esse dolorem omnis officiis.
+              </Typography>
+              <Typography variant="body2">Fecha de creación: 01/09/2021</Typography>
+              <Typography variant="body2">4</Typography>
+            </CardContent>
+            <CardActions>
+              <Link to="/notas">
+                <Button size="small">Apuntes de la materia</Button>
+              </Link>
+            </CardActions>
+          </Card>
+          <Divider variant="inset" component="" />
+          <Card sx={{ minWidth: 100 }}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Grupo 5, Clave: OPE9
+              </Typography>
+              <Typography variant="h5" component="div">
+                Inteligencia Artificial
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Profesor: Lamia Hamdan
+              </Typography>
+              <Typography sx={{ mb: 1.0 }} color="text.secondary">
+                Omnis voluptatem sequi et molestiae similique nostrum. Doloribus
+                voluptas minima esse dolorem omnis officiis.
+              </Typography>
+              <Typography variant="body2">Fecha de creación: 01/09/2021</Typography>
+              <Typography variant="body2">5</Typography>
+            </CardContent>
+            <CardActions>
+              <Link to="/notas">
+                <Button size="small">Apuntes de la materia</Button>
+              </Link>
+            </CardActions>
+          </Card>
+        </TabPanel>
+
+        <TabPanel value={value} index={1}>
           No definido
         </TabPanel>
         <TabPanel value={value} index={2}>
@@ -129,4 +215,3 @@ export default function Horario() {
     </Container>
   );
 }
-
