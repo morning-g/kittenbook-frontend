@@ -1,10 +1,11 @@
 import React from "react";
 
 import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
 
 export default function PoliticaPrivacidad(props) {
   return (
-    <Container>
+    <Container maxWidth="md">
       <div>
         <br />
         <br />
@@ -103,8 +104,10 @@ export default function PoliticaPrivacidad(props) {
         <br />
         <h5>Contacto</h5>
         <p>
-          Si tiene alguna pregunta sobre esta política de privacidad, póngase en
-          contacto con nosotros.
+          Si tiene alguna pregunta sobre esta política de privacidad,{" "}
+          <Link href="/contacto" variant="body2">
+            póngase en contacto con nosotros.
+          </Link>
         </p>
       </div>
     </Container>

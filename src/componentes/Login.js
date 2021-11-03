@@ -178,7 +178,7 @@ export default function Login() {
                 required
                 fullWidth
                 id="email"
-                label="Email"
+                label="Correo electrónico"
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -195,7 +195,7 @@ export default function Login() {
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
-                label="Recuerdame"
+                label="Recuérdame"
               />
               <Button
                 type="submit"
@@ -207,12 +207,12 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="/olvidopassword" variant="body2">
                     Olvidé la contraseña
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/registro" variant="body2">
                     {"¿No tienes una cuenta?"}
                   </Link>
                 </Grid>

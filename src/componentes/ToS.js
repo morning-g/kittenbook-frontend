@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 
 export default function ToS(props) {
   return (
-    <Container>
+    <Container maxWidth="md">
       <div>
         <br />
         <br />

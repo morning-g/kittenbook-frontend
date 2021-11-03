@@ -1,4 +1,7 @@
 import Navegacion from "./componentes/Navegacion";
+import OlvidoPassword from "./componentes/OlvidoPassword";
+import Ubicaciones from "./componentes/Ubicaciones";
+import Contacto from "./componentes/Contacto";
 import Horario from "./componentes/Horario";
 import Notas from "./componentes/Notas";
 import Tareas from "./componentes/Tareas";
@@ -36,6 +39,9 @@ function App() {
           <Route exact path="/precios" component={Precios} />
           <Route exact path="/tos" component={ToS} />
           <Route exact path="/politicaprivacidad" component={PoliticaPrivacidad} />
+          <Route exact path="/olvidopassword" component={OlvidoPassword} />
+          <Route exact path="/contacto" component={Contacto} />
+          <Route exact path="/ubicaciones" component={Ubicaciones} />
         </Switch>
         {/* <Stack spacing={2} direction="row">
           <Button variant="contained">Acceder</Button>

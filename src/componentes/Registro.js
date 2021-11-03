@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -26,6 +27,13 @@ export default function Registro() {
       password: data.get("password"),
     });
   };
+
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [password, setPassword] = useState("");
+
+  const enviarRegistro = () => {};
 
   return (
     <ThemeProvider theme={theme}>
@@ -61,6 +69,7 @@ export default function Registro() {
                   id="firstName"
                   label="Nombre"
                   autoFocus
+                  onChange={(e) => {setNombre(e.target.value)}}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -71,6 +80,7 @@ export default function Registro() {
                   label="Apellido"
                   name="lastName"
                   autoComplete="lname"
+                  onChange={(e) => {setApellido(e.target.value)}}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -81,6 +91,7 @@ export default function Registro() {
                   label="Correo electrónico"
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => {setCorreo(e.target.value)}}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -92,6 +103,7 @@ export default function Registro() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={(e) => {setPassword(e.target.value)}}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -108,6 +120,7 @@ export default function Registro() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={enviarRegistro}
             >
               Crear cuenta
             </Button>
