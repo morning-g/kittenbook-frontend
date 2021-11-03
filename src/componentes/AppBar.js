@@ -1,12 +1,13 @@
 import * as React from "react";
 
+import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import CssBaseline from '@mui/material/CssBaseline';
-import Link from '@mui/material/Link';
-import GlobalStyles from '@mui/material/GlobalStyles';
-import Button from '@mui/material/Button';
+import CssBaseline from "@mui/material/CssBaseline";
+import Link from "@mui/material/Link";
+import GlobalStyles from "@mui/material/GlobalStyles";
+import Button from "@mui/material/Button";
 
 export default function MenuAppBar() {
   return (
@@ -21,43 +22,56 @@ export default function MenuAppBar() {
         elevation={0}
         sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
       >
-        <Toolbar sx={{ flexWrap: "wrap" }}>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            OmegaWare
-          </Typography>
-          <Typography variant="h8" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            KittenBook
-          </Typography>
-          <nav>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
+        <Container maxWidth="md">
+          <Toolbar sx={{ flexWrap: "wrap" }}>
+            <img src="../../public/bookish.png"/>
+            <Typography
+              variant="h4"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1 }}
             >
-              Features
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Enterprise
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Soporte
-            </Link>
-          </nav>
-          <Button href="Login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-            Login
-          </Button>
-        </Toolbar>
+              <Link
+                color="text.primary"
+                href="/"
+                sx={{ my: 1, mx: 1.5 }}
+                underline="none"
+              >
+                ΩW
+              </Link>
+              
+            </Typography>
+            <nav>
+              <Link
+                variant="button"
+                color="text.primary"
+                href="#"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                Features
+              </Link>
+              <Link
+                variant="button"
+                color="text.primary"
+                href="#"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                Enterprise
+              </Link>
+              <Link
+                variant="button"
+                color="text.primary"
+                href="#"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                Soporte
+              </Link>
+            </nav>
+            <Button href="Login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Login
+            </Button>
+          </Toolbar>
+        </Container>
       </AppBar>
     </div>
   );

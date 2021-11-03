@@ -1,7 +1,9 @@
 import Navegacion from "./componentes/Navegacion";
 import OlvidoPassword from "./componentes/OlvidoPassword";
 import Ubicaciones from "./componentes/Ubicaciones";
+import AcercaDe from "./componentes/AcercaDe";
 import Contacto from "./componentes/Contacto";
+import Equipo from "./componentes/Equipo";
 import Horario from "./componentes/Horario";
 import Notas from "./componentes/Notas";
 import Tareas from "./componentes/Tareas";
@@ -15,6 +17,7 @@ import MenuAppBar from "./componentes/AppBar";
 import Precios from './componentes/Precios';
 import PoliticaPrivacidad from './componentes/PoliticaPrivacidad';
 import ToS from "./componentes/ToS";
+
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -42,6 +45,8 @@ function App() {
           <Route exact path="/olvidopassword" component={OlvidoPassword} />
           <Route exact path="/contacto" component={Contacto} />
           <Route exact path="/ubicaciones" component={Ubicaciones} />
+          <Route exact path="/acercade" component={AcercaDe} />
+          <Route exact path="/equipo" component={Equipo} />
         </Switch>
         {/* <Stack spacing={2} direction="row">
           <Button variant="contained">Acceder</Button>

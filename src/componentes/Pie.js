@@ -29,13 +29,10 @@ const footers = [
     description: ["Equipo", "Acerca de", "Contacto", "Ubicaciones"],
   },
   {
-    title: "Productos",
+    title: "Kittenbook",
     description: [
-      "Kittenbook",
-      "Random feature",
-      "Team feature",
-      "Developer stuff",
-      "Another one",
+      "¿Qué es?",
+      "Precios"
     ],
   },
   {
