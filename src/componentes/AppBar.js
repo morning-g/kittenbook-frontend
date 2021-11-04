@@ -2,6 +2,7 @@ import * as React from "react";
 
 import logo from "../bookish.png";
 
+import ImageListItem from '@mui/material/ImageListItem';
 import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -23,15 +24,15 @@ export default function MenuAppBar(props) {
         position="sticky"
         color="default"
         elevation={0}
-        sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
+        sx={{ borderBottom: (theme) => `2px solid ${theme.palette.divider}` }}
       >
         <Container maxWidth="md">
           <Toolbar sx={{ flexWrap: "wrap" }}>
-            <img src={logo} style={{width: "7%"}}/>
+            {/* <img src={logo} style={{width: "27%"}}/> */}
             <Typography
               variant="h4"
               color="inherit"
-              noWrap
+              width="60%"
               sx={{ flexGrow: 1 }}
             >
               <Link
@@ -40,7 +41,7 @@ export default function MenuAppBar(props) {
                 sx={{ my: 1, mx: 1.5 }}
                 underline="none"
               >
-                ΩW
+                <img src={logo} style={{width: "27%", float: "initial"}}/>
               </Link>
               
             </Typography>
