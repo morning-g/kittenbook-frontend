@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import logo from "../bookish.png";
+
 import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -24,7 +26,7 @@ export default function MenuAppBar() {
       >
         <Container maxWidth="md">
           <Toolbar sx={{ flexWrap: "wrap" }}>
-            <img src="../../public/bookish.png"/>
+            <img src={logo} style={{width: "5%"}}/>
             <Typography
               variant="h4"
               color="inherit"
@@ -32,7 +34,7 @@ export default function MenuAppBar() {
               sx={{ flexGrow: 1 }}
             >
               <Link
-                color="text.primary"
+                color="#125394"
                 href="/"
                 sx={{ my: 1, mx: 1.5 }}
                 underline="none"
@@ -41,7 +43,7 @@ export default function MenuAppBar() {
               </Link>
               
             </Typography>
-            <nav>
+            {/* <nav>
               <Link
                 variant="button"
                 color="text.primary"
@@ -66,9 +68,12 @@ export default function MenuAppBar() {
               >
                 Soporte
               </Link>
-            </nav>
-            <Button href="Login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-              Login
+            </nav> */}
+            <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Iniciar sesión
+            </Button>
+            <Button href="/registro" variant="contained" sx={{ my: 1, mx: 1.5 }}>
+              Registro
             </Button>
           </Toolbar>
         </Container>

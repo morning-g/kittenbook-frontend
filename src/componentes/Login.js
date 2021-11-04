@@ -141,7 +141,7 @@ export default function Login() {
           md={7}
           sx={{
             backgroundImage:
-              "url(http://itlalaguna.edu.mx/img/ubicacionITL.jpeg)",
+              "url(https://www.elsiglodetorreon.com.mx/m/i/2019/10/1235546.jpeg)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"

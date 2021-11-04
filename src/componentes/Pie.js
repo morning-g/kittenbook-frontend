@@ -36,15 +36,6 @@ const footers = [
     ],
   },
   {
-    title: "Recursos",
-    description: [
-      "Resource",
-      "Resource name",
-      "Another resource",
-      "Final resource",
-    ],
-  },
-  {
     title: "Legal",
     description: ["Política de privacidad", "Términos de uso"],
   },
