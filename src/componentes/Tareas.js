@@ -27,7 +27,6 @@ function TabPanel (props) {
       {value === index && (
         <Box sx={{p:3}}>
           <Typography>{children}</Typography>
-          <h1>Tabpanel</h1>
         </Box>
       )}
     </div>
@@ -79,10 +78,8 @@ function ListaTabs() {
     }
 
     setTabs ((prevTabs) => {
-      return [...prevTabs, {titulo, value:prevTabs.size}]
+      return [...prevTabs, {titulo, value:prevTabs.length}]
     })
-
-    tabTituloRef.current.value = null;
     handleClose();
   }
 
@@ -135,8 +132,8 @@ function ListaTabs() {
       </Box>
       <div>
         {tabs.map((tab) => (
-          <TabPanel>
-
+          <TabPanel index={tab.value} value={value}>
+            <h2>{tab.titulo}</h2>
           </TabPanel>
         ))}
       </div>
