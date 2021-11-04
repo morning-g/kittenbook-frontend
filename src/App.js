@@ -19,9 +19,6 @@ import Precios from './componentes/Precios';
 import PoliticaPrivacidad from './componentes/PoliticaPrivacidad';
 import ToS from "./componentes/ToS";
 
-
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
@@ -29,7 +26,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         {/* <Navegacion /> */}
-        <MenuAppBar />
+        <MenuAppBar position="fixed"/>
         <Switch>
           <Route exact path="/" component={Inicio} />
 

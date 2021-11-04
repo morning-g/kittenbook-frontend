@@ -11,22 +11,23 @@ import Link from "@mui/material/Link";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import Button from "@mui/material/Button";
 
-export default function MenuAppBar() {
+export default function MenuAppBar(props) {
   return (
-    <div>
+    <React.Fragment>
       <GlobalStyles
         styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
       />
       <CssBaseline />
+
       <AppBar
-        position="static"
+        position="sticky"
         color="default"
         elevation={0}
         sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
       >
         <Container maxWidth="md">
           <Toolbar sx={{ flexWrap: "wrap" }}>
-            <img src={logo} style={{width: "5%"}}/>
+            <img src={logo} style={{width: "7%"}}/>
             <Typography
               variant="h4"
               color="inherit"
@@ -78,6 +79,6 @@ export default function MenuAppBar() {
           </Toolbar>
         </Container>
       </AppBar>
-    </div>
+    </React.Fragment>
   );
 }
