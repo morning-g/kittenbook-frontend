@@ -11,8 +11,7 @@ export default function PoliticaPrivacidad(props) {
         <br />
         <p>Última actualización: (12/10/2021)</p>
         <p>
-          OmegaWare ("nosotros", "nos" o "nuestro") opera
-          https://kittenbook.software (el "Sitio"). Esta página le informa de
+          OmegaWare ("nosotros", "nos" o "nuestro") opera <a href="https://kittenbook.software"> https://kittenbook.software</a> (el "Sitio"). Esta página le informa de
           nuestras políticas relativas a la recopilación, el uso y la
           divulgación de la información personal que recibimos de los usuarios
           del Sitio.

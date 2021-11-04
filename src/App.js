@@ -5,6 +5,7 @@ import AcercaDe from "./componentes/AcercaDe";
 import Contacto from "./componentes/Contacto";
 import Equipo from "./componentes/Equipo";
 import Horario from "./componentes/Horario";
+import Producto from "./componentes/Producto";
 import Notas from "./componentes/Notas";
 import Tareas from "./componentes/Tareas";
 import Reticula from "./componentes/Reticula";
@@ -47,6 +48,7 @@ function App() {
           <Route exact path="/ubicaciones" component={Ubicaciones} />
           <Route exact path="/acercade" component={AcercaDe} />
           <Route exact path="/equipo" component={Equipo} />
+          <Route exact path="/producto" component={Producto} />
         </Switch>
         {/* <Stack spacing={2} direction="row">
           <Button variant="contained">Acceder</Button>

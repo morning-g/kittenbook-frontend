@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-
+import Container from "@mui/material/Container";
 
 export default function Inicio(props) {
   return (
-    <div>
-      <h1>Inicio</h1>
-    </div>
+    <Container maxWidth="md">
+
+    </Container>
   );
 }

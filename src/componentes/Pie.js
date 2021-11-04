@@ -41,6 +41,17 @@ const footers = [
   },
 ];
 
+const rutasDiccionario = {
+  "Equipo": "/equipo",
+  "Acerca de": "/acercade",
+  "Contacto": "/contacto",
+  "Ubicaciones": "/ubicaciones",
+  "¿Qué es?": "/producto",
+  "Precios": "/precios",
+  "Política de privacidad": "/politicaprivacidad",
+  "Términos de uso": "/tos"
+};
+
 export default function Pie() {
   return (
     <React.Fragment>
@@ -62,7 +73,7 @@ export default function Pie() {
               <ul>
                 {footer.description.map((item) => (
                   <li key={item}>
-                    <Link href="#" variant="subtitle1" color="text.secondary">
+                    <Link href={rutasDiccionario[item]} variant="subtitle1" color="text.secondary">
                       {item}
                     </Link>
                   </li>
