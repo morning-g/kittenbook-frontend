@@ -12,6 +12,7 @@ import DialogContentText from '@mui/material/DialogContentText'
 import Add from '@mui/icons-material/Add'
 import Typography from '@mui/material/Typography'
 import PropTypes from 'prop-types'
+import ListadoTareas from './ListadoTareas'
 
 function TabPanel (props) {
   const { children, value, index, ...other } = props;
@@ -63,6 +64,12 @@ function ListaTabs() {
    {titulo:"Lenguajes y Automatas II", value:4}
   ]);
 
+  const [tareas, setTareas] = useState ([
+  {id: 0, titulo:"Tarea de cálculo", contenido: "Realizar los ejercicios de derivación indicados en clase.",
+  tab: "Calculo",categoria:"Individual", creacion: new Date(), limite: new Date(2021,10,7, 23,59), recurso: null, notificacion: false},
+  {id: 1, titulo:"Proyecto Algoritmos Genéticos", contenido: "Realizar proyecto de algoritmos Genéticos, buscando un programa que realice busquedas optimizadas.",
+  tab: "Inteligencia Artificial",categoria:"En equipo", creacion: new Date(), limite: new Date(2021,10,7, 23,55), recurso: null, notificacion: false}])
+
   // Ref al input del Dialog para insertar categoría
   const tabTituloRef = useRef();
 
@@ -111,7 +118,7 @@ function ListaTabs() {
   const handleChange = (event, newValue) => {
       setValue(newValue);
   };
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(0);
   return (
     <div>
       <Box sx={{ width: '95%', maxWidth: 1000, margin: "0 auto", justifyContent:"center", display:"flex"}}>
@@ -134,6 +141,7 @@ function ListaTabs() {
         {tabs.map((tab) => (
           <TabPanel index={tab.value} value={value}>
             <h2>{tab.titulo}</h2>
+            <ListadoTareas tareas={tareas} materia={tab.titulo}/>
           </TabPanel>
         ))}
       </div>

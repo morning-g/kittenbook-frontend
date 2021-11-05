@@ -1,12 +1,11 @@
 import React from 'react'
 import { Tarea } from './Tarea';
 
-export function ListadoTareas({tareas}) {
-    const {id, titulo, categoria, creacion, limite, recurso, notificacion} = tarea
+export default function ListadoTareas({tareas, materia}) {
     return (
         <a>
             {tareas.map((tarea) => (
-                <Tarea tarea = {tarea}/>
+                <Tarea tarea = {tarea} materia = {materia}/>
             ))}
         </a>
     );
