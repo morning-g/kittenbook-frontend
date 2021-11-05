@@ -11,6 +11,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
+import { AppBar, Toolbar } from "@mui/material";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -53,6 +54,36 @@ export default function Horario() {
 
   return (
     <Container>
+      <AppBar position="relative" color="inherit"
+        sx={{ borderBottom: (theme) => `2px solid ${theme.palette.divider}` }}
+      >
+        <Container maxWidth="xl">
+          <Toolbar sx={{ flexWrap: "wrap" }}>
+            <Typography
+              variant="h6"
+              color="inherit"
+              width="10%"
+              sx={{ flexGrow: 1 }}
+            >     
+            </Typography>
+            <Button href="/notas" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Notas
+            </Button>
+            <Button href="/tareas" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Tareas
+            </Button>
+            <Button href="/reticula" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Reticula
+            </Button>
+            <Button href="/creditos" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Creditos
+            </Button>
+            <Button href="/horario" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Horario
+            </Button>
+          </Toolbar>
+        </Container>
+      </AppBar>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs

@@ -25,9 +25,36 @@ export default function Notas() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-        <div>
-          <h2>Tus notas</h2>
-        </div>
+        <AppBar position="relative" color="inherit"
+        sx={{ borderBottom: (theme) => `2px solid ${theme.palette.divider}` }}
+      >
+        <Container maxWidth="xl">
+          <Toolbar sx={{ flexWrap: "wrap" }}>
+            <Typography
+              variant="h6"
+              color="inherit"
+              width="10%"
+              sx={{ flexGrow: 1 }}
+            >     
+            </Typography>
+            <Button href="/notas" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Notas
+            </Button>
+            <Button href="/tareas" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Tareas
+            </Button>
+            <Button href="/reticula" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Reticula
+            </Button>
+            <Button href="/creditos" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Creditos
+            </Button>
+            <Button href="/horario" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Horario
+            </Button>
+          </Toolbar>
+        </Container>
+      </AppBar>
       <main>
         <Container sx={{ py: 1 }} maxWidth="md">
           <Grid container spacing={4}>
