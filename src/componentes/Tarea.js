@@ -13,8 +13,8 @@ export function Tarea( {tarea, materia}) {
         <Grid item sx={{display:"flex", position:"relative"}}>
             { tab === materia && (
                 <Card sx={{ maxWidth: 300, display:"flex",
-                 flexDirection:"column", justifyContent:"space-between", background:"cyan" }}>
-                    <CardActionArea>
+                 flexDirection:"column", position:"relative", background:"cyan" }}>
+                    <CardActionArea sx={{display:"flex", height:"100%", alignItems:"flex-start"}}>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div" color="#9a00ad">
                         {titulo}
@@ -35,7 +35,7 @@ export function Tarea( {tarea, materia}) {
                         </Typography>
                     </CardContent>
                     </CardActionArea>
-                    <IconButton sx={{padding:16+"px", marginLeft:"auto"}}><EditIcon/></IconButton>
+                    <IconButton sx={{padding:16+"px", position:"absolute", right:0, bottom:0}}><EditIcon/></IconButton>
                 </Card>
             )}
         </Grid>
