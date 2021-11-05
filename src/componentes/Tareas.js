@@ -68,7 +68,11 @@ function ListaTabs() {
   {id: 0, titulo:"Tarea de cálculo", contenido: "Realizar los ejercicios de derivación indicados en clase.",
   tab: "Calculo",categoria:"Individual", creacion: new Date(), limite: new Date(2021,10,7, 23,59), recurso: null, notificacion: false},
   {id: 1, titulo:"Proyecto Algoritmos Genéticos", contenido: "Realizar proyecto de algoritmos Genéticos, buscando un programa que realice busquedas optimizadas.",
-  tab: "Inteligencia Artificial",categoria:"En equipo", creacion: new Date(), limite: new Date(2021,10,7, 23,55), recurso: null, notificacion: false}])
+  tab: "Inteligencia Artificial",categoria:"En equipo", creacion: new Date(), limite: new Date(2021,10,7, 23,55), recurso: null, notificacion: false},
+  {id: 2, titulo:"Sprint 7", contenido: "Realizar el septimo sprint del proyecto y los avances de la app.",
+  tab: "Gestión de Proyectos de Software",categoria:"En equipo", creacion: new Date(), limite: new Date(2021,10,5, 23,55), recurso: null, notificacion: false},
+  {id: 3, titulo:"Investigación sobre integrales definidas", contenido: "Investigar las integrales definidas y realizar un ensayo, incluyendo antecedentes y aportes de personajes importantes.",
+  tab: "Calculo",categoria:"Individual", creacion: new Date(), limite: new Date(2021,10,6, 23,55), recurso: null, notificacion: false}])
 
   // Ref al input del Dialog para insertar categoría
   const tabTituloRef = useRef();
