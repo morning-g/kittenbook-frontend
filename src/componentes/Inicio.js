@@ -118,7 +118,7 @@ export default function Inicio(props) {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      
+
       <br />
       <StandardImageList />
     </Container>

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import logo from "../bookish.png";
 
-import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItem from "@mui/material/ImageListItem";
 import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -41,9 +41,8 @@ export default function MenuAppBar(props) {
                 sx={{ my: 1, mx: 1.5 }}
                 underline="none"
               >
-                <img src={logo} style={{width: "27%", float: "initial"}}/>
+                <img src={logo} style={{ width: "27%", float: "initial" }} />
               </Link>
-              
             </Typography>
             {/* <nav>
               <Link
@@ -74,7 +73,11 @@ export default function MenuAppBar(props) {
             <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
               Iniciar sesión
             </Button>
-            <Button href="/registro" variant="contained" sx={{ my: 1, mx: 1.5 }}>
+            <Button
+              href="/registro"
+              variant="contained"
+              sx={{ my: 1, mx: 1.5 }}
+            >
               Registro
             </Button>
           </Toolbar>

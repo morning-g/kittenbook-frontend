@@ -30,10 +30,7 @@ const footers = [
   },
   {
     title: "Kittenbook",
-    description: [
-      "¿Qué es?",
-      "Precios"
-    ],
+    description: ["¿Qué es?", "Precios"],
   },
   {
     title: "Legal",
@@ -42,14 +39,14 @@ const footers = [
 ];
 
 const rutasDiccionario = {
-  "Equipo": "/equipo",
+  Equipo: "/equipo",
   "Acerca de": "/acercade",
-  "Contacto": "/contacto",
-  "Ubicaciones": "/ubicaciones",
+  Contacto: "/contacto",
+  Ubicaciones: "/ubicaciones",
   "¿Qué es?": "/producto",
-  "Precios": "/precios",
+  Precios: "/precios",
   "Política de privacidad": "/politicaprivacidad",
-  "Términos de uso": "/tos"
+  "Términos de uso": "/tos",
 };
 
 export default function Pie() {
@@ -73,7 +70,11 @@ export default function Pie() {
               <ul>
                 {footer.description.map((item) => (
                   <li key={item}>
-                    <Link href={rutasDiccionario[item]} variant="subtitle1" color="text.secondary">
+                    <Link
+                      href={rutasDiccionario[item]}
+                      variant="subtitle1"
+                      color="text.secondary"
+                    >
                       {item}
                     </Link>
                   </li>

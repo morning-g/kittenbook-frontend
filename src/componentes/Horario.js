@@ -9,8 +9,8 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import Divider from '@mui/material/Divider';
-import { Link } from 'react-router-dom';
+import Divider from "@mui/material/Divider";
+import { Link } from "react-router-dom";
 import { AppBar, Toolbar } from "@mui/material";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,7 +54,9 @@ export default function Horario() {
 
   return (
     <Container>
-      <AppBar position="relative" color="inherit"
+      <AppBar
+        position="relative"
+        color="inherit"
         sx={{ borderBottom: (theme) => `2px solid ${theme.palette.divider}` }}
       >
         <Container maxWidth="xl">
@@ -64,8 +66,7 @@ export default function Horario() {
               color="inherit"
               width="10%"
               sx={{ flexGrow: 1 }}
-            >     
-            </Typography>
+            ></Typography>
             <Button href="/notas" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
               Notas
             </Button>
@@ -100,54 +101,58 @@ export default function Horario() {
             <Tab label="Sabado" {...a11yProps(5)} />
           </Tabs>
         </Box>
-       
-        <TabPanel value={value} index={0} >
-        <Card sx={{ minWidth: 100}}>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-              Grupo 1, Clave: MPA1
-            </Typography>
-          <Typography variant="h5" component="div">
-            Fundamentos de programación
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Profesor: Juan Escutia
-          </Typography>
-          <Typography variant="body2">
-            Horario: 8am a 9am
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Link to="/notas">
-             <Button size="small">Apuntes de la materia</Button>
-          </Link>
-        </CardActions>
-      </Card>
-      <Divider variant="inset" component=""/>
-      <Card sx={{ minWidth: 100}}>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-              Grupo 1, Clave: MPA1
-            </Typography>
-          <Typography variant="h5" component="div">
-            Estadística
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Profesor: Juan Escutia
-          </Typography>
-          <Typography variant="body2">
-            Horario: 8am a 9am
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Link to="/notas">
-            <Button size="small">Apuntes de la materia</Button>
-          </Link>
-        </CardActions>
-      </Card>
-      </TabPanel>
 
-      <TabPanel value={value} index={1}>
+        <TabPanel value={value} index={0}>
+          <Card sx={{ minWidth: 100 }}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Grupo 1, Clave: MPA1
+              </Typography>
+              <Typography variant="h5" component="div">
+                Fundamentos de programación
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Profesor: Juan Escutia
+              </Typography>
+              <Typography variant="body2">Horario: 8am a 9am</Typography>
+            </CardContent>
+            <CardActions>
+              <Link to="/notas">
+                <Button size="small">Apuntes de la materia</Button>
+              </Link>
+            </CardActions>
+          </Card>
+          <Divider variant="inset" component="" />
+          <Card sx={{ minWidth: 100 }}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Grupo 1, Clave: MPA1
+              </Typography>
+              <Typography variant="h5" component="div">
+                Estadística
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Profesor: Juan Escutia
+              </Typography>
+              <Typography variant="body2">Horario: 8am a 9am</Typography>
+            </CardContent>
+            <CardActions>
+              <Link to="/notas">
+                <Button size="small">Apuntes de la materia</Button>
+              </Link>
+            </CardActions>
+          </Card>
+        </TabPanel>
+
+        <TabPanel value={value} index={1}>
           No definido
         </TabPanel>
         <TabPanel value={value} index={2}>
@@ -160,4 +165,3 @@ export default function Horario() {
     </Container>
   );
 }
-

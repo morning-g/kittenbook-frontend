@@ -68,7 +68,9 @@ export default function Registro() {
                   id="firstName"
                   label="Nombre"
                   autoFocus
-                  onChange={(e) => {setNombre(e.target.value)}}
+                  onChange={(e) => {
+                    setNombre(e.target.value);
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -79,7 +81,9 @@ export default function Registro() {
                   label="Apellido"
                   name="lastName"
                   autoComplete="lname"
-                  onChange={(e) => {setApellido(e.target.value)}}
+                  onChange={(e) => {
+                    setApellido(e.target.value);
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -90,7 +94,9 @@ export default function Registro() {
                   label="Correo electrónico"
                   name="email"
                   autoComplete="email"
-                  onChange={(e) => {setCorreo(e.target.value)}}
+                  onChange={(e) => {
+                    setCorreo(e.target.value);
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -102,7 +108,9 @@ export default function Registro() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  onChange={(e) => {setPassword(e.target.value)}}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>

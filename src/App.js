@@ -12,11 +12,11 @@ import Reticula from "./componentes/Reticula";
 import Inicio from "./componentes/Inicio";
 import Acceso from "./componentes/Login";
 import Registro from "./componentes/Registro";
-import Creditos from "./componentes/Creditos"
+import Creditos from "./componentes/Creditos";
 import Pie from "./componentes/Pie";
 import MenuAppBar from "./componentes/AppBar";
-import Precios from './componentes/Precios';
-import PoliticaPrivacidad from './componentes/PoliticaPrivacidad';
+import Precios from "./componentes/Precios";
+import PoliticaPrivacidad from "./componentes/PoliticaPrivacidad";
 import ToS from "./componentes/ToS";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -26,7 +26,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         {/* <Navegacion /> */}
-        <MenuAppBar position="fixed"/>
+        <MenuAppBar position="fixed" />
         <Switch>
           <Route exact path="/" component={Inicio} />
 
@@ -39,7 +39,11 @@ function App() {
           <Route exact path="/registro" component={Registro} />
           <Route exact path="/precios" component={Precios} />
           <Route exact path="/tos" component={ToS} />
-          <Route exact path="/politicaprivacidad" component={PoliticaPrivacidad} />
+          <Route
+            exact
+            path="/politicaprivacidad"
+            component={PoliticaPrivacidad}
+          />
           <Route exact path="/olvidopassword" component={OlvidoPassword} />
           <Route exact path="/contacto" component={Contacto} />
           <Route exact path="/ubicaciones" component={Ubicaciones} />
