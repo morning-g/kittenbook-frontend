@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import React, {useEffect, useState} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,135 +12,150 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
 
 const theme = createTheme();
 
 export default function Registro() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        const data = new FormData(event.currentTarget);
+        Axios.post("http://localhost:3005/api/usuarios", {
+            username: data.get("username"),
+            firstName: data.get("firstName"),
+            lastName: data.get("lastName"),
+            password: data.get("password")
+        }, {headers}).then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
+        console.log({
+            username: data.get("username"),
+            firstName: data.get("firstName"),
+            lastName: data.get("lastName"),
+            password: data.get("password")
+        });
+    };
 
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [correo, setCorreo] = useState("");
-  const [password, setPassword] = useState("");
+    const [nombre, setNombre] = useState("");
+    const [apellido, setApellido] = useState("");
+    const [correo, setCorreo] = useState("");
+    const [password, setPassword] = useState("");
 
-  const enviarRegistro = () => {};
+    const enviarRegistro = () => {
+    };
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Registrarse
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="Nombre"
-                  autoFocus
-                  onChange={(e) => {
-                    setNombre(e.target.value);
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Apellido"
-                  name="lastName"
-                  autoComplete="lname"
-                  onChange={(e) => {
-                    setApellido(e.target.value);
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Correo electrónico"
-                  name="email"
-                  autoComplete="email"
-                  onChange={(e) => {
-                    setCorreo(e.target.value);
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Contraseña"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="Quiero recibir notificaciones y marketing a mi correo electrónico."
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={enviarRegistro}
-            >
-              Crear cuenta
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  Acceder
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline/>
+                <Box
+                    sx={{
+                        marginTop: 8,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
+                    <Avatar sx={{m: 1, bgcolor: "secondary.main"}}>
+                        <LockOutlinedIcon/>
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Registrarse
+                    </Typography>
+                    <Box
+                        component="form"
+                        noValidate
+                        onSubmit={handleSubmit}
+                        sx={{mt: 3}}
+                    >
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    autoComplete="fname"
+                                    name="firstName"
+                                    required
+                                    fullWidth
+                                    id="firstName"
+                                    label="Nombre"
+                                    autoFocus
+                                    onChange={(e) => {
+                                        setNombre(e.target.value);
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="lastName"
+                                    label="Apellido"
+                                    name="lastName"
+                                    autoComplete="lname"
+                                    onChange={(e) => {
+                                        setApellido(e.target.value);
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="username"
+                                    label="Nombre de usuario"
+                                    name="username"
+                                    autoComplete="username"
+                                    onChange={(e) => {
+                                        setCorreo(e.target.value);
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Contraseña"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="new-password"
+                                    onChange={(e) => {
+                                        setPassword(e.target.value);
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox value="allowExtraEmails" color="primary"/>
+                                    }
+                                    label="Quiero recibir notificaciones y marketing a mi correo electrónico."
+                                />
+                            </Grid>
+                        </Grid>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{mt: 3, mb: 2}}
+                            onClick={enviarRegistro}
+                        >
+                            Crear cuenta
+                        </Button>
+                        <Grid container justifyContent="flex-end">
+                            <Grid item>
+                                <Link href="/login" variant="body2">
+                                    Acceder
+                                </Link>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Box>
+            </Container>
+        </ThemeProvider>
+    );
 }
