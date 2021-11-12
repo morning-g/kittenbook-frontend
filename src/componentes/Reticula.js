@@ -1,17 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import Container from "@mui/material/Container";
-//import * as React from 'react';
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 
 const cards = [
@@ -205,7 +200,6 @@ export default function Reticula() {
                   borderColor: "divider",
                   flexDirection: "column",
                   borderRadius: "20px",
-                  border: "solid .1px",
                 }}
               >
                 <CardContent sx={{ flexGrow: 1 }}>
@@ -392,7 +386,7 @@ export default function Reticula() {
             >
               9
             </Typography>
-            <Typography display="inline-block" position="relative"></Typography>
+            <Typography display="inline-block" position="relative"/>
             <Grid container spacing={1} columnSpacing={4.3}>
               {cards.map((card) => (
                 <Grid

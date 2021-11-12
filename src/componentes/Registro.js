@@ -17,13 +17,15 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 const theme = createTheme();
 
 export default function Registro() {
+    Axios.defaults.withCredentials = true;
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const headers = {
             'Content-Type': 'application/json'
         };
         const data = new FormData(event.currentTarget);
-        Axios.post("http://localhost:3005/api/usuarios", {
+        Axios.post("http://localhost:3005/api/usuarios/registro", {
             username: data.get("username"),
             firstName: data.get("firstName"),
             lastName: data.get("lastName"),

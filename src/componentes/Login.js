@@ -17,20 +17,24 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 const theme = createTheme();
 
 export default function Login() {
+    Axios.defaults.withCredentials = true;
+
     const handleSubmit = (event) => {
         event.preventDefault();
+        const headers = {
+            'Content-Type': 'application/json'
+        };
         const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        Axios.get("http://localhost:3005/api/usuarios", {
-            email: data.get("username"),
+        Axios.post("http://localhost:3005/api/usuarios/login", {
+            username: data.get("username"),
             password: data.get("password")
-        }).then(function (response) {
+        }, {headers}).then(function (response) {
             console.log(response);
         }).catch(function (error) {
             console.log(error);
         });
         console.log({
-            email: data.get("username"),
+            username: data.get("username"),
             password: data.get("password")
         });
     };
