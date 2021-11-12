@@ -13,10 +13,18 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import {useState} from "react";
 
 const theme = createTheme();
 
 export default function Login() {
+    const [usuario, setUsuario] = useState("");
+    const [password, setPassword] = useState("");
+    const [estatus, setEstatus] = useState(0);
+    let esValido = usuario === "" || password === "";
+
     Axios.defaults.withCredentials = true;
 
     const handleSubmit = (event) => {
@@ -30,12 +38,10 @@ export default function Login() {
             password: data.get("password")
         }, {headers}).then(function (response) {
             console.log(response);
+            setEstatus(response.status);
         }).catch(function (error) {
             console.log(error);
-        });
-        console.log({
-            username: data.get("username"),
-            password: data.get("password")
+            setEstatus(error.response.status);
         });
     };
 
@@ -91,6 +97,9 @@ export default function Login() {
                                 name="username"
                                 autoComplete="email"
                                 autoFocus
+                                onChange={(e) => {
+                                    setUsuario(e.target.value);
+                                }}
                             />
                             <TextField
                                 margin="normal"
@@ -101,7 +110,26 @@ export default function Login() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                }}
                             />
+                            {estatus === 401 ? <Alert severity="warning">
+                                <AlertTitle>Alerta</AlertTitle>
+                                El nombre de usuario dado no existe.
+                            </Alert> : null}
+                            {estatus === 402 ? <Alert severity="warning">
+                                <AlertTitle>Alerta</AlertTitle>
+                                El nombre de usuario y/o la contraseña no son correctos.
+                            </Alert> : null}
+                            {estatus === 200 ? <Alert severity="success">
+                                <AlertTitle>Éxito</AlertTitle>
+                                Ingresando...
+                            </Alert> : null}
+                            {estatus !== 0 && estatus !== 401 && estatus !== 402 && estatus !== 200 ? <Alert severity="warning">
+                                <AlertTitle>Error</AlertTitle>
+                                Ocurrió un error al procesar la solicitud.
+                                </Alert> : null}
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary"/>}
                                 label="Recuérdame"
@@ -110,6 +138,7 @@ export default function Login() {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
+                                disabled={esValido ? true : false}
                                 sx={{mt: 3, mb: 2}}
                             >
                                 Iniciar sesión

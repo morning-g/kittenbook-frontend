@@ -41,7 +41,7 @@ export default function MenuAppBar(props) {
                 sx={{ my: 1, mx: 1.5 }}
                 underline="none"
               >
-                <img src={logo} style={{ width: "27%", float: "initial" }} />
+                <img src={logo} style={{ width: "27%", float: "initial", unselectable: "on" }} />
               </Link>
             </Typography>
             {/* <nav>

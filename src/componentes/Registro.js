@@ -1,5 +1,6 @@
 import Axios from "axios";
 import React, {useEffect, useState} from "react";
+import {Redirect} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,10 +14,20 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 const theme = createTheme();
 
 export default function Registro() {
+    const [nombre, setNombre] = useState("");
+    const [apellido, setApellido] = useState("");
+    const [usuario, setUsuario] = useState("");
+    const [password, setPassword] = useState("");
+    const [estatus, setEstatus] = useState(0);
+    let [estatusCheckbox, setEstatusCheckbox] = useState(false);
+    let esValido = nombre === "" || apellido === "" || usuario === "" || password === "";
+
     Axios.defaults.withCredentials = true;
 
     const handleSubmit = (event) => {
@@ -32,21 +43,12 @@ export default function Registro() {
             password: data.get("password")
         }, {headers}).then(function (response) {
             console.log(response);
+            setEstatus(response.status);
         }).catch(function (error) {
             console.log(error);
-        });
-        console.log({
-            username: data.get("username"),
-            firstName: data.get("firstName"),
-            lastName: data.get("lastName"),
-            password: data.get("password")
+            setEstatus(error.response.status);
         });
     };
-
-    const [nombre, setNombre] = useState("");
-    const [apellido, setApellido] = useState("");
-    const [correo, setCorreo] = useState("");
-    const [password, setPassword] = useState("");
 
     const enviarRegistro = () => {
     };
@@ -112,7 +114,7 @@ export default function Registro() {
                                     name="username"
                                     autoComplete="username"
                                     onChange={(e) => {
-                                        setCorreo(e.target.value);
+                                        setUsuario(e.target.value);
                                     }}
                                 />
                             </Grid>
@@ -129,13 +131,35 @@ export default function Registro() {
                                         setPassword(e.target.value);
                                     }}
                                 />
+                                <br/>
+                            </Grid>
+                            <Grid item xs={12}>
+                                {estatus === 401 ? <Alert severity="warning">
+                                    <AlertTitle>Alerta</AlertTitle>
+                                    El nombre de usuario dado ya existe.
+                                </Alert> : null}
+                                {estatus !== 0 && estatus !== 401 && estatus !== 200 && estatus !== 402 ?
+                                    <Alert severity="error">
+                                        <AlertTitle>Error</AlertTitle>
+                                        Ocurrió un error al procesar la solicitud.
+                                    </Alert> : null}
+                                {estatus === 200 ? <Alert severity="success">
+                                    <AlertTitle>Éxito</AlertTitle>
+                                    Usuario registrado con éxito.
+                                </Alert> : null}
+                                {estatus === 402 ? <Alert severity="warning">
+                                    <AlertTitle>Éxito</AlertTitle>
+                                    Por favor llene todos los campos requeridos.
+                                </Alert> : null}
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControlLabel
                                     control={
-                                        <Checkbox value="allowExtraEmails" color="primary"/>
+                                        <Checkbox value="allowExtraEmails" color="primary" onChange={(e) => {
+                                            setEstatusCheckbox(e.target.checked)
+                                        }}/>
                                     }
-                                    label="Quiero recibir notificaciones y marketing a mi correo electrónico."
+                                    label="Confirmo que he leído y acepto los términos y condiciones y la política de privacidad."
                                 />
                             </Grid>
                         </Grid>
@@ -144,6 +168,7 @@ export default function Registro() {
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
+                            disabled={esValido || estatusCheckbox == false ? true : false}
                             onClick={enviarRegistro}
                         >
                             Crear cuenta

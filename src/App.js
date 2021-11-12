@@ -33,12 +33,13 @@ function App() {
     if (user) {
         return (
             <div className="App">
-                <MenuAppBarLogeado position="fixed"/>
+                <MenuAppBarLogeado username={username} position="fixed"/>
                 <Navegacion/>
                 <BrowserRouter>
                     <Switch>
                         <Route exact path="/" component={Inicio}/>
-                        <Route exact path="/inicio" component={Dashboard}/>
+                        <Route exact path="/inicio"
+                               render={(props) => <Dashboard {...props} username="usuario"/>}/>
                         <Route exact path="/notas" component={Notas}/>
                         <Route exact path="/horario" component={Horario}/>
                         <Route exact path="/tareas" component={Tareas}/>
@@ -59,11 +60,8 @@ function App() {
                         <Route exact path="/acercade" component={AcercaDe}/>
                         <Route exact path="/equipo" component={Equipo}/>
                         <Route exact path="/producto" component={Producto}/>
-                        <Route path='*' exact={true} component={Componente404} />
+                        <Route path='*' exact={true} component={Componente404}/>
                     </Switch>
-                    {/* <Stack spacing={2} direction="row">
-          <Button variant="contained">Acceder</Button>
-        </Stack> */}
                 </BrowserRouter>
                 <Pie/>
             </div>
@@ -72,12 +70,13 @@ function App() {
 
     return (
         <div className="App">
-            <MenuAppBar position="fixed"/>
+            <MenuAppBarLogeado position="fixed"/>
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={Inicio}/>
 
-                    <Route exact path="/inicio" component={Dashboard}/>
+                    <Route exact path="/inicio"
+                           render={(props) => <Dashboard {...props} username="usuario"/>}/>
                     <Route exact path="/notas" component={Notas}/>
                     <Route exact path="/horario" component={Horario}/>
                     <Route exact path="/tareas" component={Tareas}/>
@@ -99,7 +98,7 @@ function App() {
                     <Route exact path="/acercade" component={AcercaDe}/>
                     <Route exact path="/equipo" component={Equipo}/>
                     <Route exact path="/producto" component={Producto}/>
-                    <Route path='*' exact={true} component={Componente404} />
+                    <Route path='*' exact={true} component={Componente404}/>
                 </Switch>
             </BrowserRouter>
             <Pie/>

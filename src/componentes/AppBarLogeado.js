@@ -1,6 +1,8 @@
-import * as React from "react";
+import React from "react";
+import Axios from "axios";
 
 import logo from "../bookish.png";
+import "./image.css";
 
 import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
@@ -53,7 +55,7 @@ export default function MenuAppBarLogeado(props) {
                                 sx={{my: 1, mx: 1.5}}
                                 underline="none"
                             >
-                                <img src={logo} style={{width: "27%", float: "initial"}}/>
+                                <img src={logo} style={{width: "27%", float: "initial"}} className="unselectable"/>
                             </Link>
                         </Typography>
                         <div>
@@ -82,8 +84,17 @@ export default function MenuAppBarLogeado(props) {
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
-                                <MenuItem onClick={handleClose}>Cerrar sesión</MenuItem>
+                                <MenuItem divider={true}>{props.username}</MenuItem>
+                                <MenuItem onClick={event => {
+                                    Axios.get("http://localhost:3005/api/usuarios/logout").then((res) => {
+                                        console.log(res.data);
+                                    }).catch((err) => {
+                                        console.log(err);
+                                    });
+                                    window.location.href = '/'
+                                }}>Cerrar sesión</MenuItem>
                             </Menu>
+
                         </div>
                     </Toolbar>
                 </Container>
