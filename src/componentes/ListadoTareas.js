@@ -1,5 +1,5 @@
 import React from "react";
-import { Tarea } from "./Tarea";
+import Tarea from "./Tarea";
 import Grid from "@mui/material/Grid";
 
 export default function ListadoTareas({ tareas, materia }) {

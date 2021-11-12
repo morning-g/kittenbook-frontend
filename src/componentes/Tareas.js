@@ -18,6 +18,9 @@ import Add from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import ListadoTareas from "./ListadoTareas";
+import { InputLabel, OutlinedInput, Select } from "@mui/material";
+import FormControl from "@mui/material/FormControl"
+import { DateTimePicker } from "@mui/lab";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -29,6 +32,7 @@ function TabPanel(props) {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
+      style={{width:"100%"}}
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
@@ -122,6 +126,36 @@ function ListaTabs() {
 
   // Ref al input del Dialog para insertar categoría
   const tabTituloRef = useRef();
+  
+  // Ref al input del Dialog para insertar tarea
+  const tareaTituloRef = useRef ();
+  const tareaContenidoRef = useRef ();
+  const tareaCategoriaRef = useRef ();
+  const tareaLimiteRef = useRef ();
+  const tareaNotificacionRef = useRef ();
+
+  const handleTareaClose = () => {
+    setTareasOpen(false);
+  }
+
+  const handleAddTarea = () => {
+    const titulo       = tareaTituloRef.current.value;
+    const contenido    = tareaContenidoRef.current.value;
+    const categoria    = tareaCategoriaRef.current.value;
+    const limite       = tareaLimiteRef.current.value;
+    const notificacion = tareaNotificacionRef.current.value; 
+    if ( titulo === "" ) {
+      handleError();
+      handlehelperText();
+      return;
+    }
+
+    setTareas ((prevTareas) => { 
+      return [ ...prevTareas, { id: prevTareas.length, titulo,
+         contenido, tab : value, categoria, limite, recurso : null ,notificacion}]
+    })
+    handleTareaClose();
+  }
 
   // Añadir una nueva categoría (Tab)
   const handleAddTab = () => {
@@ -157,6 +191,11 @@ function ListaTabs() {
     setOpen(true);
   };
 
+  const [openTareas, setTareasOpen] = useState(false);
+  const handleTareasClickOpen = () => {
+    setTareasOpen(true);
+  };
+
   //Cambiar estado para cerrar Dialog
   const handleClose = () => {
     setOpen(false);
@@ -164,9 +203,22 @@ function ListaTabs() {
     setHelperText("");
   };
 
+  const [category, setCategoriaSelectValue] = useState('')
+
+  const CategoriaChange = (event) => {
+    setCategoriaSelectValue (event.target.value);
+  }
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const [notificaciones, setNotificacionesSelectValue] = useState(false)
+
+  const NotificacionesChange = (event) => {
+    setNotificacionesSelectValue (event.target.value);
+  }
+
   const [value, setValue] = React.useState(0);
   return (
     <div>
@@ -205,7 +257,6 @@ function ListaTabs() {
           width: "95%",
           maxWidth: 1000,
           margin: "0 auto",
-          justifyContent: "center",
           display: "flex",
         }}>
         {tabs.map((tab) => (
@@ -222,11 +273,15 @@ function ListaTabs() {
                       flexDirection: "column",
                       position: "relative",
                       background: "white",
+                      boxShadow:"none",
+                      backgroundColor:"transparent"
                   }}
                   >
-                  <CardActionArea sx={{ display: "flex", height: "100%", alignItems: "flex-start" }}>
+                  <CardActionArea 
+                  sx={{ display: "flex", height: "100%", alignItems: "flex-start" }}
+                  onClick={handleTareasClickOpen} >
                       <CardContent sx={{ display: "flex", height: "100%", alignItems: "center" }}>
-                      <AddCircleOutlineIcon sx={{fontSize: 150}}/>
+                      <AddCircleOutlineIcon sx={{fontSize: 100, color:"#1976d2"}}/>
                       </CardContent>
                   </CardActionArea>
                   </Card>
@@ -257,6 +312,67 @@ function ListaTabs() {
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
           <Button onClick={handleAddTab}>Agregar</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={openTareas} onClose={handleTareaClose} maxWidth="lg">
+        <DialogTitle>Agregar tarea</DialogTitle>
+        <DialogContent sx={{width:"500px"}}>
+          <DialogContentText>
+            inserta un título para tu tarea.
+          </DialogContentText>
+          <TextField
+            inputRef={tabTituloRef}
+            autoFocus
+            margin="dense"
+            id="titulo"
+            label="Titulo"
+            type="text"
+            fullWidth
+            helperText={helpertext}
+            variant="standard"
+            error={error}
+          />
+          <Box sx={{display:"flex", justifyContent:"space-between"}}>
+            <div>
+              <DialogContentText>
+                inserta una categoria.
+              </DialogContentText>
+              <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    native
+                    value={category}
+                    onChange = {CategoriaChange}
+                    input={<OutlinedInput inputRef={tareaCategoriaRef} label="Category" id="demo-dialog-native" />}
+                    >
+                    <option value={"idividual"}>Individual</option>
+                    <option value={"En equipo"}>En equipo</option>
+                  </Select>
+              </FormControl>
+            </div>
+            <div>
+              <DialogContentText>
+                Notificaciones
+              </DialogContentText>
+              <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    native
+                    value={notificaciones}
+                    onChange = {NotificacionesChange}
+                    input={<OutlinedInput inputRef={tareaNotificacionRef}
+                    label="notificaciones" id="demo-dialog-native" />}
+                    >
+                    <option value={true}>Activadas</option>
+                    <option value={false}>Desactivadas</option>
+                  </Select>
+              </FormControl>
+            </div>
+            
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleTareaClose}>Cancelar</Button>
+          <Button onClick={handleAddTarea}>Agregar</Button>
         </DialogActions>
       </Dialog>
     </div>

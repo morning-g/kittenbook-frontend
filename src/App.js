@@ -21,7 +21,6 @@ import Precios from "./componentes/Precios";
 import PoliticaPrivacidad from "./componentes/PoliticaPrivacidad";
 import ToS from "./componentes/ToS";
 import Componente404 from "./componentes/404";
-
 import React, {useEffect, useState} from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 

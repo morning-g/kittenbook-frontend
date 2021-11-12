@@ -4,10 +4,10 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Grid";
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 
-export function Tarea({ tarea, materia }) {
+export default function Tarea({ tarea, materia }) {
   const {
     id,
     contenido,
