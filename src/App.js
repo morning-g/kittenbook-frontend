@@ -69,7 +69,7 @@ function App() {
 
     return (
         <div className="App">
-            <MenuAppBarLogeado position="fixed"/>
+            <MenuAppBar position="fixed"/>
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={Inicio}/>
