@@ -16,16 +16,20 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import {useState} from "react";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const theme = createTheme();
 
-export default function Login() {
+export default function Login(props) {
     const [usuario, setUsuario] = useState("");
     const [password, setPassword] = useState("");
     const [estatus, setEstatus] = useState(0);
     const [ingresado, setIngresado] = useState(false);
     let esValido = usuario === "" || password === "";
+
+    const sleep = () => {
+        return new Promise(resolve => setTimeout(() => resolve(), 3000));
+    };
 
     Axios.defaults.withCredentials = true;
 
@@ -41,6 +45,10 @@ export default function Login() {
         }, {headers}).then(function (response) {
             console.log(response);
             setEstatus(response.status);
+            if (estatus == 200) {
+                setIngresado(true);
+                sleep().then()
+            }
         }).catch(function (error) {
             console.log(error);
             setEstatus(error.response.status);
@@ -128,9 +136,10 @@ export default function Login() {
                                 <AlertTitle>Éxito</AlertTitle>
                                 Ingresando...
                             </Alert> : null}
-                            {estatus !== 0 && estatus !== 401 && estatus !== 402 && estatus !== 200 ? <Alert severity="warning">
-                                <AlertTitle>Error</AlertTitle>
-                                Ocurrió un error al procesar la solicitud.
+                            {estatus !== 0 && estatus !== 401 && estatus !== 402 && estatus !== 200 ?
+                                <Alert severity="warning">
+                                    <AlertTitle>Error</AlertTitle>
+                                    Ocurrió un error al procesar la solicitud.
                                 </Alert> : null}
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary"/>}
@@ -142,11 +151,15 @@ export default function Login() {
                                 variant="contained"
                                 disabled={esValido ? true : false}
                                 sx={{mt: 3, mb: 2}}
-                                // onClick={() => { setTimeout(setIngresado(true), 3000) }}
+                                onClick={() => {
+                                    sleep().then(() => {
+                                        setIngresado(true)
+                                    })
+                                }}
                             >
                                 Iniciar sesión
                             </Button>
-                            {/*{ingresado ? <Redirect to="/"/> : null}*/}
+                            {ingresado ? <Redirect to="/"/> : null}
                             <Grid container>
                                 <Grid item xs>
                                     <Link href="/olvidopassword" variant="body2">

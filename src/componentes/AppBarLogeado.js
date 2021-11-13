@@ -36,7 +36,6 @@ export default function MenuAppBarLogeado(props) {
         }).catch((err) => {
             console.log(err);
         });
-        // window.location.href = '/';
     };
 
     return (
@@ -54,7 +53,6 @@ export default function MenuAppBarLogeado(props) {
             >
                 <Container maxWidth="md">
                     <Toolbar sx={{flexWrap: "wrap"}}>
-                        {/* <img src={logo} style={{width: "27%"}}/> */}
                         <Typography
                             variant="h4"
                             color="inherit"

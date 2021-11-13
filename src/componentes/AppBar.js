@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import logo from "../bookish.png";
+import "./image.css";
 
-import ImageListItem from "@mui/material/ImageListItem";
 import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -28,7 +28,6 @@ export default function MenuAppBar(props) {
       >
         <Container maxWidth="md">
           <Toolbar sx={{ flexWrap: "wrap" }}>
-            {/* <img src={logo} style={{width: "27%"}}/> */}
             <Typography
               variant="h4"
               color="inherit"
@@ -41,35 +40,9 @@ export default function MenuAppBar(props) {
                 sx={{ my: 1, mx: 1.5 }}
                 underline="none"
               >
-                <img src={logo} style={{ width: "27%", float: "initial", unselectable: "on" }} />
+                <img src={logo} style={{ width: "27%", float: "initial", className: "unselectable" }} />
               </Link>
             </Typography>
-            {/* <nav>
-              <Link
-                variant="button"
-                color="text.primary"
-                href="#"
-                sx={{ my: 1, mx: 1.5 }}
-              >
-                Features
-              </Link>
-              <Link
-                variant="button"
-                color="text.primary"
-                href="#"
-                sx={{ my: 1, mx: 1.5 }}
-              >
-                Enterprise
-              </Link>
-              <Link
-                variant="button"
-                color="text.primary"
-                href="#"
-                sx={{ my: 1, mx: 1.5 }}
-              >
-                Soporte
-              </Link>
-            </nav> */}
             <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
               Iniciar sesión
             </Button>

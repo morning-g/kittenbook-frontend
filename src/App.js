@@ -89,13 +89,13 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Inicio}/>
 
-                    <Route exact path="/inicio"
-                           render={(props) => <Dashboard {...props} username="usuario"/>}/>
-                    <Route exact path="/notas" component={Notas}/>
-                    <Route exact path="/horario" component={Horario}/>
-                    <Route exact path="/tareas" component={Tareas}/>
-                    <Route exact path="/reticula" component={Reticula}/>
-                    <Route exact path="/creditos" component={Creditos}/>
+                    {/*<Route exact path="/inicio"*/}
+                    {/*       render={(props) => <Dashboard {...props} username="usuario"/>}/>*/}
+                    {/*<Route exact path="/notas" component={Notas}/>*/}
+                    {/*<Route exact path="/horario" component={Horario}/>*/}
+                    {/*<Route exact path="/tareas" component={Tareas}/>*/}
+                    {/*<Route exact path="/reticula" component={Reticula}/>*/}
+                    {/*<Route exact path="/creditos" component={Creditos}/>*/}
 
                     <Route exact path="/login" component={Acceso}/>
                     <Route exact path="/registro" component={Registro}/>
