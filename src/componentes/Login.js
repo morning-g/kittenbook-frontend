@@ -16,6 +16,7 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import {useState} from "react";
+import {Redirect} from "react-router-dom";
 
 const theme = createTheme();
 
@@ -23,6 +24,7 @@ export default function Login() {
     const [usuario, setUsuario] = useState("");
     const [password, setPassword] = useState("");
     const [estatus, setEstatus] = useState(0);
+    const [ingresado, setIngresado] = useState(false);
     let esValido = usuario === "" || password === "";
 
     Axios.defaults.withCredentials = true;
@@ -140,9 +142,11 @@ export default function Login() {
                                 variant="contained"
                                 disabled={esValido ? true : false}
                                 sx={{mt: 3, mb: 2}}
+                                // onClick={() => { setTimeout(setIngresado(true), 3000) }}
                             >
                                 Iniciar sesión
                             </Button>
+                            {/*{ingresado ? <Redirect to="/"/> : null}*/}
                             <Grid container>
                                 <Grid item xs>
                                     <Link href="/olvidopassword" variant="body2">

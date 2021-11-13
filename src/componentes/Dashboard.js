@@ -6,7 +6,7 @@ export default function Dashboard (props) {
         <Container maxWidth="md">
             <br />
             <br />
-            <h2>¡Bienvenido, {props.username}!</h2>
+            <h2>¡Bienvenid@, {props.username}!</h2>
         </Container>
     )
 }
