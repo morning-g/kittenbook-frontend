@@ -24,20 +24,36 @@ import Componente404 from "./componentes/404";
 import React, {useEffect, useState} from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
-function App() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [user, setUser] = useState();
+import Axios from "axios";
 
-    if (user) {
+function App() {
+    Axios.defaults.withCredentials = true;
+
+    const [username, setUsername] = useState("");
+    const [authenticated, setAuthenticated] = useState(false);
+
+    useEffect(() => {
+        Axios.get('http://localhost:3005/api/usuarios/autenticado').then((res) => {
+            console.log(res.data);
+            if (res.data.username !== undefined && res.data.authenticated !== undefined) {
+                setUsername(res.data.username);
+                setAuthenticated(res.data.authenticated === "true" ? true : false);
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+    }, []);
+
+    if (authenticated) {
         return (
             <div className="App">
-                <MenuAppBarLogeado position="fixed"/>
+                <MenuAppBarLogeado username={username} position="fixed"/>
                 <Navegacion/>
                 <BrowserRouter>
                     <Switch>
                         <Route exact path="/" component={Inicio}/>
-                        <Route exact path="/inicio" component={Dashboard}/>
+                        <Route exact path="/inicio"
+                               render={(props) => <Dashboard {...props} username={username}/>}/>
                         <Route exact path="/notas" component={Notas}/>
                         <Route exact path="/horario" component={Horario}/>
                         <Route exact path="/tareas" component={Tareas}/>
@@ -58,11 +74,8 @@ function App() {
                         <Route exact path="/acercade" component={AcercaDe}/>
                         <Route exact path="/equipo" component={Equipo}/>
                         <Route exact path="/producto" component={Producto}/>
-                        <Route path='*' exact={true} component={Componente404} />
+                        <Route path='*' exact={true} component={Componente404}/>
                     </Switch>
-                    {/* <Stack spacing={2} direction="row">
-          <Button variant="contained">Acceder</Button>
-        </Stack> */}
                 </BrowserRouter>
                 <Pie/>
             </div>
@@ -76,7 +89,8 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Inicio}/>
 
-                    <Route exact path="/inicio" component={Dashboard}/>
+                    <Route exact path="/inicio"
+                           render={(props) => <Dashboard {...props} username="usuario"/>}/>
                     <Route exact path="/notas" component={Notas}/>
                     <Route exact path="/horario" component={Horario}/>
                     <Route exact path="/tareas" component={Tareas}/>
@@ -98,7 +112,7 @@ function App() {
                     <Route exact path="/acercade" component={AcercaDe}/>
                     <Route exact path="/equipo" component={Equipo}/>
                     <Route exact path="/producto" component={Producto}/>
-                    <Route path='*' exact={true} component={Componente404} />
+                    <Route path='*' exact={true} component={Componente404}/>
                 </Switch>
             </BrowserRouter>
             <Pie/>

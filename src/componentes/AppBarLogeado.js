@@ -1,6 +1,8 @@
-import * as React from "react";
+import React from "react";
+import Axios from "axios";
 
 import logo from "../bookish.png";
+import "./image.css";
 
 import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
@@ -13,8 +15,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
+import Button from "@mui/material/Button";
 
 export default function MenuAppBarLogeado(props) {
+    Axios.defaults.withCredentials = true;
+
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleMenu = (event) => {
@@ -23,6 +28,15 @@ export default function MenuAppBarLogeado(props) {
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const logout = (e) => {
+        Axios.get("http://localhost:3005/api/usuarios/logout").then((res) => {
+            console.log("request made");
+        }).catch((err) => {
+            console.log(err);
+        });
+        // window.location.href = '/';
     };
 
     return (
@@ -53,7 +67,7 @@ export default function MenuAppBarLogeado(props) {
                                 sx={{my: 1, mx: 1.5}}
                                 underline="none"
                             >
-                                <img src={logo} style={{width: "27%", float: "initial"}}/>
+                                <img src={logo} style={{width: "27%", float: "initial"}} className="unselectable"/>
                             </Link>
                         </Typography>
                         <div>
@@ -82,8 +96,10 @@ export default function MenuAppBarLogeado(props) {
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
-                                <MenuItem onClick={handleClose}>Cerrar sesión</MenuItem>
+                                <MenuItem divider={true}>{props.username}</MenuItem>
+                                <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
                             </Menu>
+
                         </div>
                     </Toolbar>
                 </Container>
