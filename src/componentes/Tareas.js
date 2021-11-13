@@ -315,9 +315,9 @@ function ListaTabs() {
         </DialogActions>
       </Dialog>
 
-      <Dialog open={openTareas} onClose={handleTareaClose} maxWidth="lg">
+      <Dialog open={openTareas} onClose={handleTareaClose} maxWidth="false" fullWidth>
         <DialogTitle>Agregar tarea</DialogTitle>
-        <DialogContent sx={{width:"500px"}}>
+        <DialogContent>
           <DialogContentText>
             inserta un título para tu tarea.
           </DialogContentText>
@@ -333,12 +333,12 @@ function ListaTabs() {
             variant="standard"
             error={error}
           />
-          <Box sx={{display:"flex", justifyContent:"space-between"}}>
+          <Box sx={{display:"flex", justifyContent:"space-between", flexWrap:"wrap"}}>
             <div>
               <DialogContentText>
                 inserta una categoria.
               </DialogContentText>
-              <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <FormControl sx={{ m: 1, minWidth: "150px" }}>
                   <Select
                     native
                     value={category}
@@ -354,21 +354,29 @@ function ListaTabs() {
               <DialogContentText>
                 Notificaciones
               </DialogContentText>
-              <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <FormControl sx={{ m: 1, minWidth: "150px" }}>
                   <Select
                     native
                     value={notificaciones}
                     onChange = {NotificacionesChange}
-                    input={<OutlinedInput inputRef={tareaNotificacionRef}
-                    label="notificaciones" id="demo-dialog-native" />}
+                    input={<OutlinedInput inputRef={tareaNotificacionRef} label="notificaciones"/>}
                     >
                     <option value={true}>Activadas</option>
                     <option value={false}>Desactivadas</option>
                   </Select>
               </FormControl>
             </div>
-            
           </Box>
+          <FormControl fullWidth sx={{m:1}}>
+            <DialogContentText>
+              Contenido de la tarea
+            </DialogContentText>
+            <TextField
+              id="outlined-multiline-static"
+              multiline
+              rows={4}
+            />
+          </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleTareaClose}>Cancelar</Button>
