@@ -105,9 +105,13 @@ function App() {
 
     return (
         <div className="App">
-            <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit">
-                {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
-            </IconButton>
+            <Container maxWidth={true}>
+                    <Box sx={{ mx: "auto", width: 55}}>
+                        <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit" align="center">
+                            {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
+                        </IconButton>
+                    </Box>
+                </Container>
             <MenuAppBar position="fixed"/>
             <BrowserRouter>
                 <Switch>
