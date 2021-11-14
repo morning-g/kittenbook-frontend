@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 
-export default function Tarea({ tarea, materia }) {
+export default function Materia({ tarea, materia }) {
   const {
     id,
     titulo,
@@ -68,7 +68,6 @@ export default function Tarea({ tarea, materia }) {
               borderColor: "divider",
               flexDirection: "column",
               borderRadius: "20px",}}
-              color="text.secondary"
               align="center"
               > {calificacion}</Typography>
             </CardContent>

@@ -2,7 +2,7 @@ import React from "react";
 import Materia from "./Materia";
 import Grid from "@mui/material/Grid";
 
-export default function ListadoTareas({ tareas, materia }) {
+export default function MateriasEstilo({ tareas, materia }) {
   return (
     <Grid container sx={{display:"block"}}>
       {tareas.map((tarea) => (

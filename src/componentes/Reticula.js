@@ -62,16 +62,16 @@ function ListaTabs() {
     { titulo: "Reticula", value: 3 },
   ]);
 
-  const [tareas, setTareas] = useState([
+  const [materias, setMaterias] = useState([
     {
       id: 0,
       titulo: "Fundamentos de programación",
-      grupo: "1",
+      grupo: 1,
       clave: "A15",
       docente: "Profesor: Juan Perez",
-      semestre: "2",
-      oportunidad: "1",
-      calificacion: "100",
+      semestre: 1,
+      oportunidad: 1,
+      calificacion: 80,
       tab: "Materias aprobadas",
     },
   ]);
@@ -85,27 +85,30 @@ function ListaTabs() {
   const materiaSemestreRef = useRef();
   const materiaOportunidadRef = useRef();
   const materiaCalificacionRef = useRef();
-  const tareaContenidoRef = useRef();
-  const tareaCategoriaRef = useRef();
 
   const handleMateriaClose = () => {
-    setTareasOpen(false);
+    setMateriasOpen(false);
   };
 
   const agregarMateria = () => {
     const titulo = materiaTituloRef.current.value;
-    const contenido = tareaContenidoRef.current.value;
-    const categoria = tareaCategoriaRef.current.value;
+    const grupo = materiaGrupoRef.current.value;
+    const clave = materiaClaveRef.current.value;
+    const docente = materiaDocenteRef.current.value;
+    const semestre = materiaSemestreRef.current.value;
+    const oportunidad = materiaOportunidadRef.current.value;
+    const calificacion = materiaCalificacionRef.current.value;
     if (titulo === "") {
       handleError();
       handlehelperText();
       return;
     }
 
-    setTareas((prevTareas) => {
+    setMaterias((materias) => {
       return [
-        ...prevTareas,
-        { id: prevTareas.length, titulo, contenido, tab: value, categoria },
+        ...materias,
+        { id: materias.length, titulo, grupo, clave, docente, semestre, oportunidad,
+          calificacion,tab: value},
       ];
     });
     handleMateriaClose();
@@ -123,9 +126,9 @@ function ListaTabs() {
     setHelperText("LLene los datos correctamente");
   };
 
-  const [openTareas, setTareasOpen] = useState(false);
-  const handleTareasClickOpen = () => {
-    setTareasOpen(true);
+  const [abrirMaterias, setMateriasOpen] = useState(false);
+  const handleMateriasClickOpen = () => {
+    setMateriasOpen(true);
   };
 
   const handleChange = (event, newValue) => {
@@ -168,7 +171,7 @@ function ListaTabs() {
               container
               sx={{ justifyContent: "space-between", columnGap: 1, rowGap: 1 }}
             >
-              <MateriasEstilo tareas={tareas} materia={tab.titulo} />
+              <MateriasEstilo tareas={materias} materia={tab.titulo} />
               <Grid item sx={{ display: "flex", minWidth: "80em" }}>
                 {/* Inicio Card del boton + (agregar)*/}
                 <Card
@@ -186,7 +189,7 @@ function ListaTabs() {
                       height: "100%",
                       alignItems: "flex-start",
                     }}
-                    onClick={handleTareasClickOpen}
+                    onClick={handleMateriasClickOpen}
                   >
                     <CardContent
                       sx={{
@@ -209,7 +212,7 @@ function ListaTabs() {
       </Box>
 
       <Dialog
-        open={openTareas}
+        open={abrirMaterias}
         onClose={handleMateriaClose}
         maxWidth="false"
         fullWidth
@@ -234,13 +237,14 @@ function ListaTabs() {
               display: "flex",
               justifyContent: "space-between",
               flexWrap: "wrap",
+              marginTop: "1.5em"
             }}
           >
             <DialogContentText>
               Inserta el grupo de la materia
             </DialogContentText>
             <TextField
-              inputRef={tabTituloRef}
+              inputRef={materiaTituloRef}
               autoFocus
               margin="dense"
               id="grupo"
@@ -257,13 +261,14 @@ function ListaTabs() {
               display: "flex",
               justifyContent: "space-between",
               flexWrap: "wrap",
+              marginTop: "1.5em"
             }}
           >
             <DialogContentText>
               Inserta la clave de la materia
             </DialogContentText>
             <TextField
-              inputRef={tabTituloRef}
+              inputRef={materiaClaveRef}
               autoFocus
               margin="dense"
               id="grupo"
@@ -280,11 +285,12 @@ function ListaTabs() {
               display: "flex",
               justifyContent: "space-between",
               flexWrap: "wrap",
+              marginTop: "1.5em"
             }}
           >
             <DialogContentText>Inserta el nombre del docente</DialogContentText>
             <TextField
-              inputRef={tabTituloRef}
+              inputRef={materiaDocenteRef}
               autoFocus
               margin="dense"
               id="docente"
@@ -301,13 +307,14 @@ function ListaTabs() {
               display: "flex",
               justifyContent: "space-between",
               flexWrap: "wrap",
+              marginTop: "1.5em"
             }}
           >
             <DialogContentText>
               Inserta el semestre al que pertenece la materia
             </DialogContentText>
             <TextField
-              inputRef={tabTituloRef}
+              inputRef={materiaSemestreRef}
               autoFocus
               margin="dense"
               id="semestre"
@@ -324,13 +331,14 @@ function ListaTabs() {
               display: "flex",
               justifyContent: "space-between",
               flexWrap: "wrap",
+              marginTop: "1.5em"
             }}
           >
             <DialogContentText>
               Inserta la oportunidad en la que aprobaste la materia
             </DialogContentText>
             <TextField
-              inputRef={tabTituloRef}
+              inputRef={materiaOportunidadRef}
               autoFocus
               margin="dense"
               id="oportunidad"
@@ -347,11 +355,12 @@ function ListaTabs() {
               display: "flex",
               justifyContent: "space-between",
               flexWrap: "wrap",
+              marginTop: "1.5em"
             }}
           >
             <DialogContentText>Inserta tu calificación</DialogContentText>
             <TextField
-              inputRef={tabTituloRef}
+              inputRef={materiaCalificacionRef}
               autoFocus
               margin="dense"
               id="calificacion"
