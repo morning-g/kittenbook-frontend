@@ -15,7 +15,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
-import Button from "@mui/material/Button";
 
 export default function MenuAppBarLogeado(props) {
     Axios.defaults.withCredentials = true;
@@ -65,7 +64,7 @@ export default function MenuAppBarLogeado(props) {
                                 sx={{my: 1, mx: 1.5}}
                                 underline="none"
                             >
-                                <img src={logo} style={{width: "27%", float: "initial"}} className="unselectable"/>
+                                <img src={logo} style={{width: "29%", float: "initial", className: "unselectable"}}/>
                             </Link>
                         </Typography>
                         <div>
@@ -97,7 +96,6 @@ export default function MenuAppBarLogeado(props) {
                                 <MenuItem divider={true}>{props.username}</MenuItem>
                                 <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
                             </Menu>
-
                         </div>
                     </Toolbar>
                 </Container>

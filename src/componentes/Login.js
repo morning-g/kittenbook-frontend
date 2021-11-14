@@ -12,11 +12,10 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import {useState} from "react";
-import { Redirect } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 export default function Login(props) {
     const [usuario, setUsuario] = useState("");
@@ -24,10 +23,6 @@ export default function Login(props) {
     const [estatus, setEstatus] = useState(0);
     const [ingresado, setIngresado] = useState(false);
     let esValido = usuario === "" || password === "";
-
-    const sleep = () => {
-        return new Promise(resolve => setTimeout(() => resolve(), 3000));
-    };
 
     Axios.defaults.withCredentials = true;
 
@@ -45,7 +40,6 @@ export default function Login(props) {
             setEstatus(response.status);
             if (estatus == 200) {
                 setIngresado(true);
-                sleep().then()
             }
         }).catch(function (error) {
             console.log(error);
@@ -103,7 +97,6 @@ export default function Login(props) {
                                 id="username"
                                 label="Nombre de usuario"
                                 name="username"
-                                autoComplete="email"
                                 autoFocus
                                 onChange={(e) => {
                                     setUsuario(e.target.value);
@@ -117,7 +110,6 @@ export default function Login(props) {
                                 label="Contraseña"
                                 type="password"
                                 id="password"
-                                autoComplete="current-password"
                                 onChange={(e) => {
                                     setPassword(e.target.value);
                                 }}
@@ -149,11 +141,6 @@ export default function Login(props) {
                                 variant="contained"
                                 disabled={esValido ? true : false}
                                 sx={{mt: 3, mb: 2}}
-                                onClick={() => {
-                                    sleep().then(() => {
-                                        setIngresado(true)
-                                    })
-                                }}
                             >
                                 Iniciar sesión
                             </Button>

@@ -26,6 +26,8 @@ import {useTheme, ThemeProvider, createTheme} from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import IconButton from '@mui/material/IconButton';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import Axios from "axios";
@@ -59,17 +61,20 @@ function App() {
     if (authenticated) {
         return (
             <div className="App">
-                {theme.palette.mode} mode
-                <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit">
-                    {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
-                </IconButton>
+                <Container maxWidth={true}>
+                    <Box sx={{ mx: "auto", width: 55}}>
+                        <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit" align="center">
+                            {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
+                        </IconButton>
+                    </Box>
+                </Container>
                 <MenuAppBarLogeado username={username} position="fixed"/>
                 <Navegacion/>
                 <BrowserRouter>
                     <Switch>
                         <Route exact path="/" component={Inicio}/>
                         <Route exact path="/inicio"
-                               render={(props) => <Dashboard {...props} username={username}/>}/>
+                               render={(props) => <Dashboard {...props} username={username} theme={theme}/>}/>
                         <Route exact path="/notas" component={Notas}/>
                         <Route exact path="/horario" component={Horario}/>
                         <Route exact path="/tareas" component={Tareas}/>
@@ -100,9 +105,13 @@ function App() {
 
     return (
         <div className="App">
-            <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit">
-                {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
-            </IconButton>
+            <Container maxWidth={true}>
+                    <Box sx={{ mx: "auto", width: 55}}>
+                        <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit" align="center">
+                            {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
+                        </IconButton>
+                    </Box>
+                </Container>
             <MenuAppBar position="fixed"/>
             <BrowserRouter>
                 <Switch>

@@ -11,7 +11,7 @@ export default function AcercaDe(props) {
     <Container maxWidth="md">
       <div>
         <br />
-        <h1 align="center">Acerca de OmegaWare</h1>
+        <h3 align="center">Acerca de OmegaWare</h3>
 
         <div style={EstiloLogo}>
           <p className="aligncenter">

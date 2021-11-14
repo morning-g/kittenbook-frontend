@@ -6,7 +6,7 @@ export default function Ubicaciones(props) {
   return (
     <Container maxWidth="sm">
       <br />
-        <h1 align="center">Nuestras ubicaciones</h1>
+        <h3 align="center">Nuestras ubicaciones</h3>
       <div class="mapouter">
         <div class="gmap_canvas">
           <iframe
