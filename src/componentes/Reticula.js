@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Grid";
 import Tab from "@mui/material/Tab";
@@ -28,7 +28,7 @@ function TabPanel(props) {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
-      style={{width:"100%"}}
+      style={{ width: "100%" }}
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
@@ -59,52 +59,61 @@ function ListaTabs() {
     { titulo: "Materias aprobadas", value: 0 },
     { titulo: "Materias en curso", value: 1 },
     { titulo: "Materias reprobadas", value: 2 },
-    { titulo: "Reticula", value: 3 },]);
+    { titulo: "Reticula", value: 3 },
+  ]);
 
-  const [tareas, setTareas] = useState([
+  const [materias, setMaterias] = useState([
     {
       id: 0,
       titulo: "Fundamentos de programación",
-      contenido: "Profesor: Juan Perez",
+      grupo: 1,
+      clave: "A15",
+      docente: "Profesor: Juan Perez",
+      semestre: 1,
+      oportunidad: 1,
+      calificacion: 80,
       tab: "Materias aprobadas",
-      categoria: "Individual",
-      actual: new Date(),
-      limite: new Date(2021, 10, 7, 23, 59)
     },
- ]);
+  ]);
 
   // Refs para datos de materia
   const tabTituloRef = useRef();
-  const materiaTituloRef = useRef ();
-  const materiaGrupoRef = useRef ();
-  const materiaDocenteRef = useRef ();
-  const materiaSemestreRef = useRef ();
-  const materiaOportunidadRef = useRef ();
-  const materiaCalificacionRef = useRef ();
-  const tareaContenidoRef = useRef ();
-  const tareaCategoriaRef = useRef ();
+  const materiaTituloRef = useRef();
+  const materiaGrupoRef = useRef();
+  const materiaClaveRef = useRef();
+  const materiaDocenteRef = useRef();
+  const materiaSemestreRef = useRef();
+  const materiaOportunidadRef = useRef();
+  const materiaCalificacionRef = useRef();
 
   const handleMateriaClose = () => {
-    setTareasOpen(false);
-  }
+    setMateriasOpen(false);
+  };
 
   const agregarMateria = () => {
-    const titulo       = materiaTituloRef.current.value;
-    const contenido    = tareaContenidoRef.current.value;
-    const categoria    = tareaCategoriaRef.current.value;
-    if ( titulo === "" ) {
+    const titulo = materiaTituloRef.current.value;
+    const grupo = materiaGrupoRef.current.value;
+    const clave = materiaClaveRef.current.value;
+    const docente = materiaDocenteRef.current.value;
+    const semestre = materiaSemestreRef.current.value;
+    const oportunidad = materiaOportunidadRef.current.value;
+    const calificacion = materiaCalificacionRef.current.value;
+    if (titulo === "") {
       handleError();
       handlehelperText();
       return;
     }
 
-    setTareas ((prevTareas) => { 
-      return [ ...prevTareas, { id: prevTareas.length, titulo,
-         contenido, tab : value, categoria}]
-    })
+    setMaterias((materias) => {
+      return [
+        ...materias,
+        { id: materias.length, titulo, grupo, clave, docente, semestre, oportunidad,
+          calificacion,tab: value},
+      ];
+    });
     handleMateriaClose();
-  }
-  
+  };
+
   // Estado de error en input del dialog
   const [error, setError] = useState(false);
   const handleError = () => {
@@ -116,10 +125,10 @@ function ListaTabs() {
   const handlehelperText = () => {
     setHelperText("LLene los datos correctamente");
   };
- 
-  const [openTareas, setTareasOpen] = useState(false);
-  const handleTareasClickOpen = () => {
-    setTareasOpen(true);
+
+  const [abrirMaterias, setMateriasOpen] = useState(false);
+  const handleMateriasClickOpen = () => {
+    setMateriasOpen(true);
   };
 
   const handleChange = (event, newValue) => {
@@ -148,48 +157,69 @@ function ListaTabs() {
           ))}
         </Tabs>
       </Box>
-      <Box sx={{
+      <Box
+        sx={{
           width: "100%",
           maxWidth: 1000,
           margin: "0 auto",
           display: "flex",
-        }}>
+        }}
+      >
         {tabs.map((tab) => (
           <TabPanel index={tab.value} value={value}>
-            <Grid container sx={{ justifyContent:"space-between", columnGap:1, rowGap:1}}>
-              <MateriasEstilo tareas={tareas} materia={tab.titulo} />
-              <Grid item sx={{ display: "flex", minWidth:"80em"}}>
+            <Grid
+              container
+              sx={{ justifyContent: "space-between", columnGap: 1, rowGap: 1 }}
+            >
+              <MateriasEstilo tareas={materias} materia={tab.titulo} />
+              <Grid item sx={{ display: "flex", minWidth: "80em" }}>
                 {/* Inicio Card del boton + (agregar)*/}
                 <Card
                   sx={{
-                      width: "100%",
-                      maxWidth: 952,
-                      display: "flex",
-                      flexDirection: "column",
+                    width: "100%",
+                    borderRadius: "20px",
+                    maxWidth: 952,
+                    display: "flex",
+                    flexDirection: "column",
                   }}
+                >
+                  <CardActionArea
+                    sx={{
+                      display: "flex",
+                      height: "100%",
+                      alignItems: "flex-start",
+                    }}
+                    onClick={handleMateriasClickOpen}
                   >
-                  <CardActionArea 
-                  sx={{ display: "flex", height: "100%", alignItems: "flex-start" }}
-                  onClick={handleTareasClickOpen} >
-                      <CardContent sx={{ display: "flex", height: "100%", alignItems: "center" }}>
-                      <AddCircleOutlineIcon sx={{fontSize: 100, color:"#1976d2"}}/>
-                      </CardContent>
+                    <CardContent
+                      sx={{
+                        display: "flex",
+                        height: "100%",
+                        alignItems: "center",
+                      }}
+                    >
+                      <AddCircleOutlineIcon
+                        sx={{ fontSize: 100, color: "#1976d2" }}
+                      />
+                    </CardContent>
                   </CardActionArea>
-                  </Card>
-                  {/*Fin Card del boton + (agregar)*/}
+                </Card>
+                {/*Fin Card del boton + (agregar)*/}
               </Grid>
             </Grid>
           </TabPanel>
         ))}
       </Box>
 
-
-      <Dialog open={openTareas} onClose={handleMateriaClose} maxWidth="false" fullWidth>
+      <Dialog
+        open={abrirMaterias}
+        onClose={handleMateriaClose}
+        maxWidth="false"
+        fullWidth
+      >
         <DialogTitle>Agregar materia aprobada</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Inserta el nombre de la materia
-          </DialogContentText>
+          <DialogContentText>Inserta el nombre de la materia</DialogContentText>
           <TextField
             inputRef={tabTituloRef}
             autoFocus
@@ -202,90 +232,145 @@ function ListaTabs() {
             variant="standard"
             error={error}
           />
-          <Box sx={{display:"flex", justifyContent:"space-between", flexWrap:"wrap"}}>
-          <DialogContentText>
-            Inserta el grupo de la materia
-          </DialogContentText>
-          <TextField
-            inputRef={tabTituloRef}
-            autoFocus
-            margin="dense"
-            id="grupo"
-            label="Grupo: A"
-            type="text"
-            fullWidth
-            helperText={helpertext}
-            variant="standard"
-            error={error}
-          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              marginTop: "1.5em"
+            }}
+          >
+            <DialogContentText>
+              Inserta el grupo de la materia
+            </DialogContentText>
+            <TextField
+              inputRef={materiaTituloRef}
+              autoFocus
+              margin="dense"
+              id="grupo"
+              label="1"
+              type="number"
+              fullWidth
+              helperText={helpertext}
+              variant="standard"
+              error={error}
+            />
           </Box>
-          <Box sx={{display:"flex", justifyContent:"space-between", flexWrap:"wrap"}}>
-          <DialogContentText>
-            Inserta el nombre del docente
-          </DialogContentText>
-          <TextField
-            inputRef={tabTituloRef}
-            autoFocus
-            margin="dense"
-            id="docente"
-            label="Juan perez"
-            type="text"
-            fullWidth
-            helperText={helpertext}
-            variant="standard"
-            error={error}
-          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              marginTop: "1.5em"
+            }}
+          >
+            <DialogContentText>
+              Inserta la clave de la materia
+            </DialogContentText>
+            <TextField
+              inputRef={materiaClaveRef}
+              autoFocus
+              margin="dense"
+              id="grupo"
+              label="A15"
+              type="text"
+              fullWidth
+              helperText={helpertext}
+              variant="standard"
+              error={error}
+            />
           </Box>
-          <Box sx={{display:"flex", justifyContent:"space-between", flexWrap:"wrap"}}>
-          <DialogContentText>
-            Inserta el semestre al que pertenece la materia
-          </DialogContentText>
-          <TextField
-            inputRef={tabTituloRef}
-            autoFocus
-            margin="dense"
-            id="semestre"
-            label="1"
-            type="number"
-            fullWidth
-            helperText={helpertext}
-            variant="standard"
-            error={error}
-          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              marginTop: "1.5em"
+            }}
+          >
+            <DialogContentText>Inserta el nombre del docente</DialogContentText>
+            <TextField
+              inputRef={materiaDocenteRef}
+              autoFocus
+              margin="dense"
+              id="docente"
+              label="Juan perez"
+              type="text"
+              fullWidth
+              helperText={helpertext}
+              variant="standard"
+              error={error}
+            />
           </Box>
-          <Box sx={{display:"flex", justifyContent:"space-between", flexWrap:"wrap"}}>
-          <DialogContentText>
-            Inserta la oportunidad en la que aprobaste la materia
-          </DialogContentText>
-          <TextField
-            inputRef={tabTituloRef}
-            autoFocus
-            margin="dense"
-            id="oportunidad"
-            label="2"
-            type="number"
-            fullWidth
-            helperText={helpertext}
-            variant="standard"
-            error={error}
-          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              marginTop: "1.5em"
+            }}
+          >
+            <DialogContentText>
+              Inserta el semestre al que pertenece la materia
+            </DialogContentText>
+            <TextField
+              inputRef={materiaSemestreRef}
+              autoFocus
+              margin="dense"
+              id="semestre"
+              label="1"
+              type="number"
+              fullWidth
+              helperText={helpertext}
+              variant="standard"
+              error={error}
+            />
           </Box>
-          <Box sx={{display:"flex", justifyContent:"space-between", flexWrap:"wrap"}}>
-          <DialogContentText>
-            Inserta tu calificación
-          </DialogContentText>
-          <TextField
-            inputRef={tabTituloRef}
-            autoFocus
-            margin="dense"
-            id="calificacion"
-            label="75"
-            type="number"
-            fullWidth
-            helperText={helpertext}
-            variant="standard"
-            error={error}
-          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              marginTop: "1.5em"
+            }}
+          >
+            <DialogContentText>
+              Inserta la oportunidad en la que aprobaste la materia
+            </DialogContentText>
+            <TextField
+              inputRef={materiaOportunidadRef}
+              autoFocus
+              margin="dense"
+              id="oportunidad"
+              label="2"
+              type="number"
+              fullWidth
+              helperText={helpertext}
+              variant="standard"
+              error={error}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              marginTop: "1.5em"
+            }}
+          >
+            <DialogContentText>Inserta tu calificación</DialogContentText>
+            <TextField
+              inputRef={materiaCalificacionRef}
+              autoFocus
+              margin="dense"
+              id="calificacion"
+              label="75"
+              type="number"
+              fullWidth
+              helperText={helpertext}
+              variant="standard"
+              error={error}
+            />
           </Box>
         </DialogContent>
         <DialogActions>
