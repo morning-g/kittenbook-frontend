@@ -8,6 +8,7 @@ export default function PoliticaPrivacidad(props) {
     <Container maxWidth="md">
       <div>
         <br />
+        <h1 align="center">Política de privacidad del servicio</h1>
         <br />
         <p>Última actualización: (12/10/2021)</p>
         <p>

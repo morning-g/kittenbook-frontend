@@ -10,6 +10,7 @@ export default function AcercaDe(props) {
   const mision = { fontSize: "1.2rem" };
   return (
     <Container maxWidth="md">
+      <br />
       <div>
       <h1 align ="center">Contacto</h1>
         <br />
@@ -19,33 +20,30 @@ export default function AcercaDe(props) {
           </p>
           <p style={mision}>
             <br/>
-            En este espacio encontrara los correos electronicos 
+            En este espacio encontrará los correos electrónicos
             para cualquier duda o sugerencia sobre la aplicación, 
-            también puede contactarnos si necesita ayuda tecnica y de proyectos.
+            también puede contactarnos si necesita ayuda técnica y de proyectos.
             <br />
             <br />
             <br />
-            <h3>Contactenos en los siguientes correos</h3>
+            <h3>Contáctanos en los siguientes correo:</h3>
             <br />
-            contacto.kittenbook@gmail.com
+            <ol>
+              <li>contacto.kittenbook@gmail.com</li>
+              <li>programacion.kittenbook@gmail.com</li>
+            </ol>
+            <br />
+            <br />
+            <br />
+            <h3>Contáctanos en los siguientes teléfonos:</h3>
             <br/>
-            <br />
-            programacion.kittenbook@gmail.com
-            <br />
-            <br />
-            <br />
-            <h3>Telefonos en los que nos puede contactar.</h3>
-            <br/>
-            (872) 1373963
-            <br/>
-            <br />
-            (871) 4839795
+            <ol>
+              <li>+(872) 1373963</li>
+              <li>+(871) 4839795</li>
+            </ol>
           </p>
           <br />
         </div>
-        <br />
-        <br />
-        <br />
         <div style={EstiloLogo}>
           <p className="aligncenter">
             <img src={logo} width="20%" />

@@ -81,7 +81,6 @@ export default function Reticula() {
           <Card
             sx={{
               minWidth: 100,
-              backgroundColor: "white",
               borderRadius: "20px",
               border: "solid .1px",
               borderColor: "divider",
@@ -123,7 +122,6 @@ export default function Reticula() {
                   padding: "20px",
                   display: "inline-block",
                   position: "relative",
-                  backgroundColor: "#67FF25",
                   border: "solid .1px",
                   borderColor: "divider",
                   flexDirection: "column",
@@ -153,7 +151,6 @@ export default function Reticula() {
           <Card
             sx={{
               minWidth: 100,
-              backgroundColor: "white",
               borderRadius: "20px",
               border: "solid .1px",
               borderColor: "divider",
@@ -196,7 +193,6 @@ export default function Reticula() {
                   display: "inline-block",
                   position: "relative",
                   border: "solid .1px",
-                  backgroundColor: "#5D86FA",
                   borderColor: "divider",
                   flexDirection: "column",
                   borderRadius: "20px",
@@ -225,7 +221,6 @@ export default function Reticula() {
           <Card
             sx={{
               minWidth: 100,
-              backgroundColor: "white",
               borderRadius: "20px",
               border: "solid .1px",
               borderColor: "divider",
@@ -396,7 +391,6 @@ export default function Reticula() {
                   sm={10}
                   md={1.3}
                   borderBottom="6"
-                  borderColor="black"
                 >
                   <Card
                     sx={{
@@ -404,7 +398,6 @@ export default function Reticula() {
                       marginLeft: "-5px",
                       marginRight: "-25px",
                       display: "flex",
-                      backgroundColor: "#F5F6F9",
                       border: "solid .1px",
                       borderColor: "divider",
                       borderRadius: "10px",

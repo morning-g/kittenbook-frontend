@@ -22,11 +22,23 @@ import PoliticaPrivacidad from "./componentes/PoliticaPrivacidad";
 import ToS from "./componentes/ToS";
 import Componente404 from "./componentes/404";
 import React, {useEffect, useState} from "react";
+import {useTheme, ThemeProvider, createTheme} from '@mui/material/styles';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import IconButton from '@mui/material/IconButton';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import Axios from "axios";
 
+const ColorModeContext = React.createContext({
+    toggleColorMode: () => {
+    }
+});
+
 function App() {
+    const theme = useTheme();
+    const colorMode = React.useContext(ColorModeContext);
+
     Axios.defaults.withCredentials = true;
 
     const [username, setUsername] = useState("");
@@ -47,6 +59,10 @@ function App() {
     if (authenticated) {
         return (
             <div className="App">
+                {theme.palette.mode} mode
+                <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit">
+                    {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
+                </IconButton>
                 <MenuAppBarLogeado username={username} position="fixed"/>
                 <Navegacion/>
                 <BrowserRouter>
@@ -84,6 +100,9 @@ function App() {
 
     return (
         <div className="App">
+            <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit">
+                {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
+            </IconButton>
             <MenuAppBar position="fixed"/>
             <BrowserRouter>
                 <Switch>
@@ -120,4 +139,34 @@ function App() {
     );
 }
 
-export default App;
+function ToggleColorMode() {
+    const [mode, setMode] = React.useState('light');
+    const colorMode = React.useMemo(
+        () => ({
+            toggleColorMode: () => {
+                setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+            },
+        }),
+        [],
+    );
+
+    const theme = React.useMemo(
+        () =>
+            createTheme({
+                palette: {
+                    mode,
+                },
+            }),
+        [mode],
+    );
+
+    return (
+        <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+                <App/>
+            </ThemeProvider>
+        </ColorModeContext.Provider>
+    );
+}
+
+export default ToggleColorMode;

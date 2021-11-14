@@ -18,8 +18,6 @@ import AlertTitle from '@mui/material/AlertTitle';
 import {useState} from "react";
 import { Redirect } from "react-router-dom";
 
-const theme = createTheme();
-
 export default function Login(props) {
     const [usuario, setUsuario] = useState("");
     const [password, setPassword] = useState("");
@@ -56,7 +54,7 @@ export default function Login(props) {
     };
 
     return (
-        <ThemeProvider theme={theme}>
+        <React.Fragment>
             <Grid container component="main" sx={{height: "100vh"}}>
                 <CssBaseline/>
                 <Grid
@@ -176,6 +174,6 @@ export default function Login(props) {
                     </Box>
                 </Grid>
             </Grid>
-        </ThemeProvider>
+        </React.Fragment>
     );
 }

@@ -23,8 +23,6 @@ import TitleIcon from '@mui/icons-material/Title';
 import Axios from "axios";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-const theme = createTheme();
-
 export default function Notas() {
     Axios.defaults.withCredentials = true;
     const headers = {
@@ -98,7 +96,7 @@ export default function Notas() {
     };
 
     return (
-        <ThemeProvider theme={theme}>
+        <React.Fragment>
             <CssBaseline/>
             <main>
                 <br/>
@@ -283,6 +281,6 @@ export default function Notas() {
                     </DialogActions>
                 </Dialog>
             </main>
-        </ThemeProvider>
+        </React.Fragment>
     );
 }

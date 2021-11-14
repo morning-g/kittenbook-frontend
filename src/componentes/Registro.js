@@ -17,8 +17,6 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 
-const theme = createTheme();
-
 export default function Registro() {
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
@@ -54,7 +52,7 @@ export default function Registro() {
     };
 
     return (
-        <ThemeProvider theme={theme}>
+        <React.Fragment>
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box
@@ -183,6 +181,6 @@ export default function Registro() {
                     </Box>
                 </Box>
             </Container>
-        </ThemeProvider>
+        </React.Fragment>
     );
 }
