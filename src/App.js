@@ -45,6 +45,7 @@ function App() {
 
     const [username, setUsername] = useState("");
     const [authenticated, setAuthenticated] = useState(false);
+    const [darkState, setDarkState] = useState(true);
 
     useEffect(() => {
         Axios.get('http://localhost:3005/api/usuarios/autenticado').then((res) => {
@@ -55,14 +56,31 @@ function App() {
         }).catch((err) => {
             console.log(err);
         });
+        const existingPreference = localStorage.getItem("darkState");
+        if (existingPreference === "dark") {
+            colorMode.toggleColorMode();
+            setItemLS();
+        }
     }, []);
+
+    const setItemLS = () => {
+        setDarkState(!darkState);
+        if (darkState) {
+            localStorage.setItem("darkState", "dark");
+        } else {
+            localStorage.setItem("darkState", "light");
+        }
+    };
 
     if (authenticated) {
         return (
             <div className="App">
                 <Container>
                     <Box sx={{mx: "auto", width: 55}}>
-                        <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit" align="center">
+                        <IconButton sx={{ml: 1}} onClick={() => {
+                            colorMode.toggleColorMode();
+                            setItemLS();
+                        }} color="inherit" align="center">
                             {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
                         </IconButton>
                     </Box>
@@ -106,7 +124,10 @@ function App() {
         <div className="App">
             <Container>
                 <Box sx={{mx: "auto", width: 55}}>
-                    <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit" align="center">
+                    <IconButton sx={{ml: 1}} onClick={() => {
+                        colorMode.toggleColorMode();
+                        setItemLS();
+                    }} color="inherit" align="center">
                         {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
                     </IconButton>
                 </Box>
