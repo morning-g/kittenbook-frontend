@@ -1,6 +1,6 @@
 import Axios from "axios";
-import React, {useEffect, useState} from "react";
-import {Redirect} from "react-router-dom";
+import React, { useEffect, useState} from "react";
+// import {Redirect} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,7 +13,6 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 
@@ -166,7 +165,7 @@ export default function Registro() {
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
-                            disabled={esValido || estatusCheckbox == false ? true : false}
+                            disabled={esValido || estatusCheckbox === false ? true : false}
                             onClick={enviarRegistro}
                         >
                             Crear cuenta

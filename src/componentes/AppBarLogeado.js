@@ -64,7 +64,7 @@ export default function MenuAppBarLogeado(props) {
                                 sx={{my: 1, mx: 1.5}}
                                 underline="none"
                             >
-                                <img src={logo} style={{width: "29%", float: "initial", className: "unselectable"}}/>
+                                <img alt={"Un gato."} src={logo} style={{width: "29%", float: "initial", className: "unselectable"}}/>
                             </Link>
                         </Typography>
                         <div>

@@ -48,7 +48,6 @@ function App() {
 
     useEffect(() => {
         Axios.get('http://localhost:3005/api/usuarios/autenticado').then((res) => {
-            console.log(res.data);
             if (res.data.username !== undefined && res.data.authenticated !== undefined) {
                 setUsername(res.data.username);
                 setAuthenticated(res.data.authenticated === "true" ? true : false);
@@ -61,8 +60,8 @@ function App() {
     if (authenticated) {
         return (
             <div className="App">
-                <Container maxWidth={true}>
-                    <Box sx={{ mx: "auto", width: 55}}>
+                <Container>
+                    <Box sx={{mx: "auto", width: 55}}>
                         <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit" align="center">
                             {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
                         </IconButton>
@@ -105,13 +104,13 @@ function App() {
 
     return (
         <div className="App">
-            <Container maxWidth={true}>
-                    <Box sx={{ mx: "auto", width: 55}}>
-                        <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit" align="center">
-                            {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
-                        </IconButton>
-                    </Box>
-                </Container>
+            <Container>
+                <Box sx={{mx: "auto", width: 55}}>
+                    <IconButton sx={{ml: 1}} onClick={colorMode.toggleColorMode} color="inherit" align="center">
+                        {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
+                    </IconButton>
+                </Box>
+            </Container>
             <MenuAppBar position="fixed"/>
             <BrowserRouter>
                 <Switch>

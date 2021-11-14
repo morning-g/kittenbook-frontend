@@ -16,8 +16,10 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import {useState} from "react";
 import {Redirect} from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 export default function Login(props) {
+    const history = useHistory();
     const [usuario, setUsuario] = useState("");
     const [password, setPassword] = useState("");
     const [estatus, setEstatus] = useState(0);
@@ -38,9 +40,8 @@ export default function Login(props) {
         }, {headers}).then(function (response) {
             console.log(response);
             setEstatus(response.status);
-            if (estatus == 200) {
-                setIngresado(true);
-            }
+            // setTimeout(() => history.push('/'), 4000);
+            setIngresado(true);
         }).catch(function (error) {
             console.log(error);
             setEstatus(error.response.status);

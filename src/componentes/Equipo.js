@@ -13,7 +13,7 @@ export default function Equipo(props) {
 
         <div style={EstiloLogo}>
           <p className="aligncenter">
-            <img src={logo} width="25%" position="center"/>
+            <img alt={"Logo de la empresa."} src={logo} width="25%" position="center"/>
           </p>
           <p style={equipo}>
             Somos una empresa que busca la mejora de los estudiantes en la 

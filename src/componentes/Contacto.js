@@ -1,7 +1,6 @@
 import React from "react";
 import Container from "@mui/material/Container";
 import logo from "../owlogo.png";
-import logoKitten from "../bookish.png";
 import caraGato from "../CaradeGato.PNG";
 import "./image.css";
 
@@ -16,7 +15,7 @@ export default function AcercaDe(props) {
         <br />
         <div style={EstiloLogo}>
           <p className="aligncenter">
-            <img src={caraGato} width="40%" position="center"/>
+            <img alt={"Un gato."} src={caraGato} width="40%" position="center"/>
           </p>
           <p style={mision}>
             <br/>
@@ -46,7 +45,7 @@ export default function AcercaDe(props) {
         </div>
         <div style={EstiloLogo}>
           <p className="aligncenter">
-            <img src={logo} width="20%" />
+            <img alt={"Logo de la empresa."} src={logo} width="20%" />
           </p>
         </div>
       </div>

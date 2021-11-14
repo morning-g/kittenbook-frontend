@@ -40,7 +40,7 @@ export default function MenuAppBar(props) {
                                 sx={{my: 1, mx: 1.5}}
                                 underline="none"
                             >
-                                <img src={logo} style={{width: "42%", float: "initial", className: "unselectable"}}/>
+                                <img alt={"Un gato."} src={logo} style={{width: "42%", float: "initial", className: "unselectable"}}/>
                             </Link>
                         </Typography>
                         <div>

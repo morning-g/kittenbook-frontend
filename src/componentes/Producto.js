@@ -13,7 +13,7 @@ export default function Producto(props) {
 
             <div style={EstiloLogo}>
                 <p className="aligncenter">
-                    <img src={logoKitten} width="60%"/>
+                    <img alt={"Un gato."} src={logoKitten} width="60%"/>
                 </p>
                 <p style={producto}>
                     Kittenbook es un software orientado a mejorar la organización de
