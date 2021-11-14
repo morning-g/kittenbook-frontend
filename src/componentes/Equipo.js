@@ -9,7 +9,7 @@ export default function Equipo(props) {
   return <Container maxWidth="md">
       <div>
         <br />
-        <h1 align="center">Equipo OmegaWare</h1>
+        <h3 align="center">Equipo OmegaWare</h3>
 
         <div style={EstiloLogo}>
           <p className="aligncenter">

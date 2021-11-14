@@ -6,7 +6,7 @@ export default function Componente404 () {
         <Container maxWidth="md">
             <br />
             <br />
-            <h2>Página no encontrada 😪</h2>
+            <h3>Página no encontrada 😪</h3>
         </Container>
     )
 }

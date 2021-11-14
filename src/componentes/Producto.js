@@ -9,7 +9,7 @@ export default function Producto(props) {
     return <Container maxWidth="md">
         <div>
             <br/>
-            <h1 align="center">¿Qué es?</h1>
+            <h3 align="center">¿Qué es?</h3>
 
             <div style={EstiloLogo}>
                 <p className="aligncenter">

@@ -12,7 +12,7 @@ export default function AcercaDe(props) {
     <Container maxWidth="md">
       <br />
       <div>
-      <h1 align ="center">Contacto</h1>
+      <h3 align ="center">Contacto</h3>
         <br />
         <div style={EstiloLogo}>
           <p className="aligncenter">

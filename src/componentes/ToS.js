@@ -7,7 +7,7 @@ export default function ToS(props) {
     <Container maxWidth="md">
       <div>
         <br />
-        <h1 align="center">Términos y condiciones del servicio</h1>
+        <h3 align="center">Términos y condiciones del servicio</h3>
         <br />
         <h5>Qué cubren estas condiciones</h5>
         <p>
