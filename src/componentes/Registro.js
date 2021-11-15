@@ -39,7 +39,6 @@ export default function Registro() {
             lastName: data.get("lastName"),
             password: data.get("password")
         }, {headers}).then(function (response) {
-            console.log(response);
             setEstatus(response.status);
         }).catch(function (error) {
             console.log(error);

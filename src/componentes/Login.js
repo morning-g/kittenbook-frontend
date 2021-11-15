@@ -14,7 +14,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Redirect} from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 
@@ -38,15 +38,19 @@ export default function Login(props) {
             username: data.get("username"),
             password: data.get("password")
         }, {headers}).then(function (response) {
-            console.log(response);
             setEstatus(response.status);
-            // setTimeout(() => history.push('/'), 4000);
             setIngresado(true);
         }).catch(function (error) {
             console.log(error);
             setEstatus(error.response.status);
         });
     };
+
+    useEffect(() => {
+        if (ingresado) {
+            setTimeout(() => {history.push('/')}, 2000);
+        }
+    }, [ingresado]);
 
     return (
         <React.Fragment>
@@ -145,7 +149,7 @@ export default function Login(props) {
                             >
                                 Iniciar sesión
                             </Button>
-                            {ingresado ? <Redirect to="/"/> : null}
+                            {/*{ingresado ? <Redirect to="/"/> : null}*/}
                             <Grid container>
                                 <Grid item xs>
                                     <Link href="/olvidopassword" variant="body2">

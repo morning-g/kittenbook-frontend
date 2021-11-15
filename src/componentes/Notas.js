@@ -45,7 +45,7 @@ export default function Notas() {
         }).catch((err) => {
             console.log(err);
         });
-    }, []);
+    }, [notas]);
 
     const handleEditarAbierto = () => {
         setDialogoEditarAbierto(true);
@@ -71,7 +71,7 @@ export default function Notas() {
         setDialogoAgregarAbierto(false);
     };
 
-    const enviarNuevaNota = () => {
+    const enviarNota = () => {
         Axios.post('http://localhost:3005/api/notas', {
             titulo: titulo,
             contenido: contenido
@@ -112,7 +112,7 @@ export default function Notas() {
                 <br/>
                 <Container sx={{py: 1}} maxWidth="md">
                     <Grid container spacing={4}>
-                        {notas.length === 0 ? <Grid item sx={{display: "flex", minWidth: "80em"}}>
+                        {notas.length === 0 ? <Grid item sx={{display: "flex", width: "90em"}}>
                             {/* Inicio Card del boton + (agregar)*/}
                             <Card
                                 sx={{
@@ -172,9 +172,11 @@ export default function Notas() {
                                     }}
                                 >
                                     <CardActionArea onClick={() => {
-                                        setDialogoEditarAbierto(true);
+                                        handleEditarAbierto();
                                         setNotaActiva(nota);
                                         setIdNota(nota.id_nota);
+                                        setTitulo(nota.titulo);
+                                        setContenido(nota.contenido);
                                     }}>
                                         <CardContent sx={{flexGrow: 1}}>
                                             <Typography gutterBottom variant="h5" component="h2">
@@ -244,7 +246,7 @@ export default function Notas() {
                         <Button onClick={handleAgregarCerrado}>Cancelar</Button>
                         <Button disabled={titulo === "" || contenido === "" ? true : false}
                                 onClick={() => {
-                                    enviarNuevaNota();
+                                    enviarNota();
                                     setDialogoAgregarAbierto(false)
                                 }}>Agregar</Button>
                     </DialogActions>
@@ -303,7 +305,7 @@ export default function Notas() {
                     <DialogActions>
                         <Button onClick={handleEditarCerrado}>Cancelar</Button>
                         <Button onClick={() => {
-                            setDialogoEliminarAbierto(true)
+                            handleEliminarAbierto();
                         }}>Eliminar nota</Button>
                         <Button onClick={() => {
                             editarNota(idNota);
