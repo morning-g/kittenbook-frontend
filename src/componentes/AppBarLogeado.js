@@ -2,6 +2,7 @@ import React from "react";
 import Axios from "axios";
 
 import logo from "../bookish.png";
+import logoDark from "../bookishDark.png";
 import "./image.css";
 
 import Container from "@mui/material/Container";
@@ -64,7 +65,12 @@ export default function MenuAppBarLogeado(props) {
                                 sx={{my: 1, mx: 1.5}}
                                 underline="none"
                             >
-                                <img alt={"Un gato."} src={logo} style={{width: "29%", float: "initial", className: "unselectable"}}/>
+                                {!props.dark ? <img alt={"Un gato."} src={logoDark} style={{
+                                    width: "42%",
+                                    float: "initial",
+                                    className: "unselectable"
+                                }}/> : <img alt={"Un gato."} src={logo}
+                                            style={{width: "42%", float: "initial", className: "unselectable"}}/>}
                             </Link>
                         </Typography>
                         <div>

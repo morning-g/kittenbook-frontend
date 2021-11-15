@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import logo from "../bookish.png";
+import logoDark from "../bookishDark.png";
 import "./image.css";
 
 import Container from "@mui/material/Container";
@@ -40,21 +41,63 @@ export default function MenuAppBar(props) {
                                 sx={{my: 1, mx: 1.5}}
                                 underline="none"
                             >
-                                <img alt={"Un gato."} src={logo} style={{width: "42%", float: "initial", className: "unselectable"}}/>
+                                {!props.dark ? <img alt={"Un gato."} src={logoDark} style={{
+                                    width: "42%",
+                                    float: "initial",
+                                    className: "unselectable"
+                                }}/> : <img alt={"Un gato."} src={logo}
+                                            style={{width: "42%", float: "initial", className: "unselectable"}}/>}
                             </Link>
                         </Typography>
-                        <div>
-                            <Button href="/login" variant="outlined" sx={{my: 1, mx: 1.5}}>
+                        {props.dark ? <div>
+                            <Button href="/login" variant="outlined"
+                                    sx={{
+                                        my: 1, mx: 1.5, borderColor: '#000000', color: 'black', '&:hover': {
+                                            backgroundColor: '#000000',
+                                            borderColor: '#000000',
+                                            color: 'white',
+                                        }
+                                    }}>
                                 Iniciar sesión
                             </Button>
                             <Button
                                 href="/registro"
                                 variant="contained"
-                                sx={{my: 1, mx: 1.5}}
+                                sx={{
+                                    my: 1, mx: 1.5, backgroundColor: '#141414', '&:hover': {
+                                        backgroundColor: '#FFFFFF',
+                                        borderColor: '#FFFFFF',
+                                        color: 'black',
+                                    }
+                                }}
                             >
                                 Registro
                             </Button>
-                        </div>
+                        </div> : <div>
+                            <Button href="/login" variant="outlined"
+                                    sx={{
+                                        my: 1, mx: 1.5, borderColor: '#FFFFFF', color: '#FFFFFF', '&:hover': {
+                                            backgroundColor: '#FFFFFF',
+                                            borderColor: '#FFFFFF',
+                                            color: 'black',
+                                        }
+                                    }}>
+                                Iniciar sesión
+                            </Button>
+                            <Button
+                                href="/registro"
+                                variant="contained"
+                                sx={{
+                                    my: 1, mx: 1.5, backgroundColor: '#FFFFFF', '&:hover': {
+                                        backgroundColor: '#000000',
+                                        borderColor: '#000000',
+                                        color: 'white',
+                                    }
+                                }}
+                            >
+                                Registro
+                            </Button>
+                        </div>}
                     </Toolbar>
                 </Container>
             </AppBar>

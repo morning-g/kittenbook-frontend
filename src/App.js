@@ -85,7 +85,7 @@ function App() {
                         </IconButton>
                     </Box>
                 </Container>
-                <MenuAppBarLogeado username={username} position="fixed"/>
+                <MenuAppBarLogeado username={username} dark={darkState} position="fixed"/>
                 <Navegacion/>
                 <BrowserRouter>
                     <Switch>
@@ -132,7 +132,7 @@ function App() {
                     </IconButton>
                 </Box>
             </Container>
-            <MenuAppBar position="fixed"/>
+            <MenuAppBar dark={darkState} position="fixed"/>
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={Inicio}/>
