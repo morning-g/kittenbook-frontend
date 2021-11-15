@@ -35,6 +35,8 @@ export default function Notas() {
     const [dialogoAgregarAbierto, setDialogoAgregarAbierto] = useState(false);
     const [dialogoEditarAbierto, setDialogoEditarAbierto] = useState(false);
     const [dialogoEliminarAbierto, setDialogoEliminarAbierto] = useState(false);
+    const [idNota, setIdNota] = useState(0);
+    const [notaActiva, setNotaActiva] = useState({});
 
     useEffect(() => {
         Axios.get('http://localhost:3005/api/notas').then((res) => {
@@ -80,14 +82,22 @@ export default function Notas() {
         });
     };
 
-    const editarNota = () => {
-
-    };
-
-    const eliminarNota = () => {
-        Axios.post('http://localhost:3005/api/notas', {
+    const editarNota = (id_nota) => {
+        Axios.post('http://localhost:3005/api/notas/actualizar', {
+            id_nota: id_nota,
             titulo: titulo,
             contenido: contenido
+        }, {headers}).then((res) => {
+
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
+
+    const eliminarNota = (id_nota) => {
+        Axios.delete('http://localhost:3005/api/notas', { data: {
+                id_nota: id_nota
+            }
         }, {headers}).then((res) => {
             console.log(res.data);
         }).catch((err) => {
@@ -102,7 +112,39 @@ export default function Notas() {
                 <br/>
                 <Container sx={{py: 1}} maxWidth="md">
                     <Grid container spacing={4}>
-                        <Grid item xs={12} sm={6} md={4}>
+                        {notas.length === 0 ? <Grid item sx={{display: "flex", minWidth: "80em"}}>
+                            {/* Inicio Card del boton + (agregar)*/}
+                            <Card
+                                sx={{
+                                    width: "100%",
+                                    borderRadius: "20px",
+                                    maxWidth: 952,
+                                    display: "flex",
+                                    flexDirection: "column",
+                                }}
+                            >
+                                <CardActionArea
+                                    sx={{
+                                        display: "flex",
+                                        height: "100%",
+                                        alignItems: "flex-start",
+                                    }}
+                                    onClick={handleAgregarAbierto}
+                                >
+                                    <CardContent
+                                        sx={{
+                                            display: "flex",
+                                            height: "100%",
+                                            alignItems: "center",
+                                        }}
+                                    >
+                                        <AddCircleOutlineIcon
+                                            sx={{fontSize: 100, color: "#1976d2"}}
+                                        />
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                        </Grid> : <Grid item xs={12} sm={6} md={4}>
                             <Card sx={{
                                 height: "100%",
                                 display: "flex",
@@ -119,9 +161,10 @@ export default function Notas() {
                                     </CardContent>
                                 </CardActionArea>
                             </Card>
-                        </Grid>
+                        </Grid>}
+
                         {notas.map((nota) => (
-                            <Grid item key={nota} xs={12} sm={6} md={4}>
+                            <Grid item key={nota.id_nota} xs={12} sm={6} md={4}>
                                 <Card
                                     sx={{
                                         height: "100%",
@@ -129,7 +172,9 @@ export default function Notas() {
                                     }}
                                 >
                                     <CardActionArea onClick={() => {
-                                        setDialogoEditarAbierto(true)
+                                        setDialogoEditarAbierto(true);
+                                        setNotaActiva(nota);
+                                        setIdNota(nota.id_nota);
                                     }}>
                                         <CardContent sx={{flexGrow: 1}}>
                                             <Typography gutterBottom variant="h5" component="h2">
@@ -198,7 +243,10 @@ export default function Notas() {
                     <DialogActions>
                         <Button onClick={handleAgregarCerrado}>Cancelar</Button>
                         <Button disabled={titulo === "" || contenido === "" ? true : false}
-                                onClick={() => {enviarNuevaNota(); setDialogoAgregarAbierto(false)}}>Agregar</Button>
+                                onClick={() => {
+                                    enviarNuevaNota();
+                                    setDialogoAgregarAbierto(false)
+                                }}>Agregar</Button>
                     </DialogActions>
                 </Dialog>
                 {/*VER O EDITAR NOTA*/}
@@ -215,6 +263,7 @@ export default function Notas() {
                                 fullWidth
                                 variant="outlined"
                                 required
+                                defaultValue={notaActiva.titulo}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -237,6 +286,7 @@ export default function Notas() {
                                 multiline
                                 rows={15}
                                 required
+                                defaultValue={notaActiva.contenido}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -255,7 +305,10 @@ export default function Notas() {
                         <Button onClick={() => {
                             setDialogoEliminarAbierto(true)
                         }}>Eliminar nota</Button>
-                        <Button onClick={editarNota}>Aceptar</Button>
+                        <Button onClick={() => {
+                            editarNota(idNota);
+                            handleEditarCerrado();
+                        }}>Aceptar</Button>
                     </DialogActions>
                 </Dialog>
                 {/*CONFIRMAR ELIMINAR NOTA*/}
@@ -274,8 +327,14 @@ export default function Notas() {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => {handleEliminarCerrado()}}>No</Button>
-                        <Button onClick={() => {handleEliminarCerrado(); eliminarNota();}} autoFocus>
+                        <Button onClick={() => {
+                            handleEliminarCerrado()
+                        }}>No</Button>
+                        <Button onClick={() => {
+                            eliminarNota(idNota);
+                            handleEliminarCerrado();
+                            handleEditarCerrado();
+                        }} autoFocus>
                             Sí
                         </Button>
                     </DialogActions>
