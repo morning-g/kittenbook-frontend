@@ -66,11 +66,11 @@ export default function MenuAppBarLogeado(props) {
                                 underline="none"
                             >
                                 {!props.dark ? <img alt={"Un gato."} src={logoDark} style={{
-                                    width: "42%",
+                                    width: "31%",
                                     float: "initial",
                                     className: "unselectable"
                                 }}/> : <img alt={"Un gato."} src={logo}
-                                            style={{width: "42%", float: "initial", className: "unselectable"}}/>}
+                                            style={{width: "33%", float: "initial", className: "unselectable"}}/>}
                             </Link>
                         </Typography>
                         <div>

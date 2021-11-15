@@ -42,11 +42,11 @@ export default function MenuAppBar(props) {
                                 underline="none"
                             >
                                 {!props.dark ? <img alt={"Un gato."} src={logoDark} style={{
-                                    width: "42%",
+                                    width: "45%",
                                     float: "initial",
                                     className: "unselectable"
                                 }}/> : <img alt={"Un gato."} src={logo}
-                                            style={{width: "42%", float: "initial", className: "unselectable"}}/>}
+                                            style={{width: "45%", float: "initial", className: "unselectable"}}/>}
                             </Link>
                         </Typography>
                         {props.dark ? <div>
