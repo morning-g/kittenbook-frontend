@@ -164,16 +164,27 @@ function ListaTabs() {
             <Tab value={tab.value} label={tab.titulo} />
           ))}
            {/*Tab reticula */}
-           <Tab label="Reticula" {...a11yProps(4)} />
+           <Tab label="Reticula"/>
            {/*Tab reticula */}
         </Tabs>
       </Box>
       {/*Contenido de la reticula*/}
       <Box sx={{marginLeft: "100px"}}>
-      <TabPanel value={value} index={3}>
-      <img alt={"Logo de la empresa."} src={reticula1Tec} width="100%" />
-      </TabPanel>
       </Box>
+
+      <TabPanel value={value} index={3}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="Ing. Sistemas" {...a11yProps(0)}/>
+          <Tab label="Ing. Industrial" {...a11yProps(1)} />
+          <Tab label="Ing. Quimica" {...a11yProps(2)} />
+        </Tabs>
+        </Box>
+        <img alt={"Logo de la empresa."} src={reticula1Tec} width="100%" />
+      </TabPanel>
+      <TabPanel value="0" index={2}>
+        asdad
+      </TabPanel>
       {/*Contenido de la reticula*/}
       <Box
         sx={{
