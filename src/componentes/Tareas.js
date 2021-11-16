@@ -372,6 +372,7 @@ function ListaTabs() {
               id="outlined-multiline-static"
               multiline
               rows={4}
+              inputRef={tareaContenidoRef}
             />
           </FormControl>
         </DialogContent>
