@@ -8,6 +8,8 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Grid";
 import Tab from "@mui/material/Tab";
 import Button from "@mui/material/Button";
+import DateMomentUtils from "@date-io/moment";
+import { DateTimePicker, MuiPickersUtilsProvider  } from "@material-ui/pickers";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -18,9 +20,8 @@ import Add from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import ListadoTareas from "./ListadoTareas";
-import { InputLabel, OutlinedInput, Select } from "@mui/material";
+import { OutlinedInput, Select } from "@mui/material";
 import FormControl from "@mui/material/FormControl"
-import { DateTimePicker } from "@mui/lab";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -123,6 +124,14 @@ function ListaTabs() {
       notificacion: false,
     },
   ]);
+
+  // Time picker
+const [timePick, setTime] = React.useState(new Date('2021-12-25T23:11:54'));
+
+const handleTimeChange = (newValue) => {
+  setTime(newValue);
+};
+/*********************/
 
   // Ref al input del Dialog para insertar categoría
   const tabTituloRef = useRef();
@@ -330,7 +339,7 @@ function ListaTabs() {
             variant="standard"
             error={error}
           />
-          <Box sx={{display:"flex", justifyContent:"space-between", flexWrap:"wrap"}}>
+          <Box sx={{display:"flex", justifyContent:"space-between", flexWrap:"wrap", margin:"5px 0"}}>
             <div>
               <DialogContentText>
                 inserta una categoria.
@@ -341,6 +350,7 @@ function ListaTabs() {
                     value={category}
                     onChange = {CategoriaChange}
                     input={<OutlinedInput inputRef={tareaCategoriaRef} label="Category" id="demo-dialog-native" />}
+                    sx={{padding:"10px"}}
                     >
                     <option value={"idividual"}>Individual</option>
                     <option value={"En equipo"}>En equipo</option>
@@ -357,6 +367,7 @@ function ListaTabs() {
                     value={notificaciones}
                     onChange = {NotificacionesChange}
                     input={<OutlinedInput inputRef={tareaNotificacionRef} label="notificaciones"/>}
+                    sx={{padding:"10px"}}
                     >
                     <option value={true}>Activadas</option>
                     <option value={false}>Desactivadas</option>
@@ -375,6 +386,20 @@ function ListaTabs() {
               inputRef={tareaContenidoRef}
             />
           </FormControl>
+          <Box sx={{float:"right", marginTop:"5px"}}>
+            <DialogContentText>
+              Fecha y hora límite
+            </DialogContentText>
+            <MuiPickersUtilsProvider utils={DateMomentUtils}>
+              <DateTimePicker
+              format="MM/DD/yyyy --- h:mm"
+              value={timePick}
+              onChange={handleTimeChange}
+              renderInput={(params) => <TextField inputRef={tareaLimiteRef} />}
+              ></DateTimePicker>
+            </MuiPickersUtilsProvider>
+          </Box>
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleTareaClose}>Cancelar</Button>

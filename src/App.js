@@ -29,6 +29,7 @@ import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import MuiPickersUtilsProviders from "@material-ui/pickers/MuiPickersUtilsProvider"
 
 import Axios from "axios";
 
@@ -168,13 +169,13 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Inicio}/>
 
-                    {/*<Route exact path="/inicio"*/}
-                    {/*       render={(props) => <Dashboard {...props} username="usuario"/>}/>*/}
-                    {/*<Route exact path="/notas" component={Notas}/>*/}
-                    {/*<Route exact path="/horario" component={Horario}/>*/}
-                    {/*<Route exact path="/tareas" component={Tareas}/>*/}
-                    {/*<Route exact path="/reticula" component={Reticula}/>*/}
-                    {/*<Route exact path="/creditos" component={Creditos}/>*/}
+                    {/* {<Route exact path="/inicio"
+                         render={(props) => <Dashboard {...props} username="usuario"/>}/>}
+                    {<Route exact path="/notas" component={Notas}/>}
+                    {<Route exact path="/horario" component={Horario}/>}
+                    {<Route exact path="/tareas" component={Tareas}/>}
+                    {<Route exact path="/reticula" component={Reticula}/>}
+                    {<Route exact path="/creditos" component={Creditos}/>} */}
 
                     <Route exact path="/login" render={(props) => <Acceso estatus={estatus} login={login}/>}/>
                     <Route exact path="/registro" component={Registro}/>
