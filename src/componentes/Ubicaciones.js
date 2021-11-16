@@ -4,8 +4,9 @@ import Container from "@mui/material/Container";
 
 export default function Ubicaciones(props) {
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="sm">
       <br />
+        <h3 align="center">Nuestras ubicaciones</h3>
       <div class="mapouter">
         <div class="gmap_canvas">
           <iframe

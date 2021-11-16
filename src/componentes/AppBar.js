@@ -1,8 +1,9 @@
 import * as React from "react";
 
 import logo from "../bookish.png";
+import logoDark from "../bookishDark.png";
+import "./image.css";
 
-import ImageListItem from "@mui/material/ImageListItem";
 import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,76 +14,93 @@ import GlobalStyles from "@mui/material/GlobalStyles";
 import Button from "@mui/material/Button";
 
 export default function MenuAppBar(props) {
-  return (
-    <React.Fragment>
-      <GlobalStyles
-        styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
-      />
-      <CssBaseline />
+    return (
+        <React.Fragment>
+            <GlobalStyles
+                styles={{ul: {margin: 0, padding: 0, listStyle: "none"}}}
+            />
+            <CssBaseline/>
 
-      <AppBar
-        position="sticky"
-        color="default"
-        elevation={0}
-        sx={{ borderBottom: (theme) => `2px solid ${theme.palette.divider}` }}
-      >
-        <Container maxWidth="md">
-          <Toolbar sx={{ flexWrap: "wrap" }}>
-            {/* <img src={logo} style={{width: "27%"}}/> */}
-            <Typography
-              variant="h4"
-              color="inherit"
-              width="60%"
-              sx={{ flexGrow: 1 }}
+            <AppBar
+                position="sticky"
+                color="default"
+                elevation={0}
+                sx={{borderBottom: (theme) => `2px solid ${theme.palette.divider}`}}
             >
-              <Link
-                color="#125394"
-                href="/"
-                sx={{ my: 1, mx: 1.5 }}
-                underline="none"
-              >
-                <img src={logo} style={{ width: "27%", float: "initial", unselectable: "on" }} />
-              </Link>
-            </Typography>
-            {/* <nav>
-              <Link
-                variant="button"
-                color="text.primary"
-                href="#"
-                sx={{ my: 1, mx: 1.5 }}
-              >
-                Features
-              </Link>
-              <Link
-                variant="button"
-                color="text.primary"
-                href="#"
-                sx={{ my: 1, mx: 1.5 }}
-              >
-                Enterprise
-              </Link>
-              <Link
-                variant="button"
-                color="text.primary"
-                href="#"
-                sx={{ my: 1, mx: 1.5 }}
-              >
-                Soporte
-              </Link>
-            </nav> */}
-            <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-              Iniciar sesión
-            </Button>
-            <Button
-              href="/registro"
-              variant="contained"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Registro
-            </Button>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </React.Fragment>
-  );
+                <Container maxWidth="md">
+                    <Toolbar sx={{flexWrap: "wrap"}}>
+                        <Typography
+                            variant="h4"
+                            color="inherit"
+                            width="60%"
+                            sx={{flexGrow: 1}}
+                        >
+                            <Link
+                                color="#125394"
+                                href="/"
+                                sx={{my: 1, mx: 1.5}}
+                                underline="none"
+                            >
+                                {!props.dark ? <img alt={"Un gato."} src={logoDark} style={{
+                                    width: "45%",
+                                    float: "initial",
+                                    className: "unselectable"
+                                }}/> : <img alt={"Un gato."} src={logo}
+                                            style={{width: "45%", float: "initial", className: "unselectable"}}/>}
+                            </Link>
+                        </Typography>
+                        {props.dark ? <div>
+                            <Button href="/login" variant="outlined"
+                                    sx={{
+                                        my: 1, mx: 1.5, borderColor: '#000000', color: 'black', '&:hover': {
+                                            backgroundColor: '#000000',
+                                            borderColor: '#000000',
+                                            color: 'white',
+                                        }
+                                    }}>
+                                Iniciar sesión
+                            </Button>
+                            <Button
+                                href="/registro"
+                                variant="contained"
+                                sx={{
+                                    my: 1, mx: 1.5, backgroundColor: '#141414', '&:hover': {
+                                        backgroundColor: '#FFFFFF',
+                                        borderColor: '#FFFFFF',
+                                        color: 'black',
+                                    }
+                                }}
+                            >
+                                Registro
+                            </Button>
+                        </div> : <div>
+                            <Button href="/login" variant="outlined"
+                                    sx={{
+                                        my: 1, mx: 1.5, borderColor: '#FFFFFF', color: '#FFFFFF', '&:hover': {
+                                            backgroundColor: '#FFFFFF',
+                                            borderColor: '#FFFFFF',
+                                            color: 'black',
+                                        }
+                                    }}>
+                                Iniciar sesión
+                            </Button>
+                            <Button
+                                href="/registro"
+                                variant="contained"
+                                sx={{
+                                    my: 1, mx: 1.5, backgroundColor: '#FFFFFF', '&:hover': {
+                                        backgroundColor: '#000000',
+                                        borderColor: '#000000',
+                                        color: 'white',
+                                    }
+                                }}
+                            >
+                                Registro
+                            </Button>
+                        </div>}
+                    </Toolbar>
+                </Container>
+            </AppBar>
+        </React.Fragment>
+    );
 }

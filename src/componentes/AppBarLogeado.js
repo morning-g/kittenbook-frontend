@@ -2,6 +2,7 @@ import React from "react";
 import Axios from "axios";
 
 import logo from "../bookish.png";
+import logoDark from "../bookishDark.png";
 import "./image.css";
 
 import Container from "@mui/material/Container";
@@ -15,11 +16,12 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
-import Button from "@mui/material/Button";
+import {Redirect} from "react-router-dom";
 
 export default function MenuAppBarLogeado(props) {
     Axios.defaults.withCredentials = true;
 
+    const [toHome, setToHome] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleMenu = (event) => {
@@ -30,22 +32,13 @@ export default function MenuAppBarLogeado(props) {
         setAnchorEl(null);
     };
 
-    const logout = (e) => {
-        Axios.get("http://localhost:3005/api/usuarios/logout").then((res) => {
-            console.log("request made");
-        }).catch((err) => {
-            console.log(err);
-        });
-        // window.location.href = '/';
-    };
-
     return (
         <React.Fragment>
+            {toHome ? <Redirect to="/"/> : null}
             <GlobalStyles
                 styles={{ul: {margin: 0, padding: 0, listStyle: "none"}}}
             />
             <CssBaseline/>
-
             <AppBar
                 position="sticky"
                 color="default"
@@ -54,7 +47,6 @@ export default function MenuAppBarLogeado(props) {
             >
                 <Container maxWidth="md">
                     <Toolbar sx={{flexWrap: "wrap"}}>
-                        {/* <img src={logo} style={{width: "27%"}}/> */}
                         <Typography
                             variant="h4"
                             color="inherit"
@@ -67,7 +59,12 @@ export default function MenuAppBarLogeado(props) {
                                 sx={{my: 1, mx: 1.5}}
                                 underline="none"
                             >
-                                <img src={logo} style={{width: "27%", float: "initial"}} className="unselectable"/>
+                                {!props.dark ? <img alt={"Un gato."} src={logoDark} style={{
+                                    width: "31%",
+                                    float: "initial",
+                                    className: "unselectable"
+                                }}/> : <img alt={"Un gato."} src={logo}
+                                            style={{width: "33%", float: "initial", className: "unselectable"}}/>}
                             </Link>
                         </Typography>
                         <div>
@@ -97,9 +94,11 @@ export default function MenuAppBarLogeado(props) {
                                 onClose={handleClose}
                             >
                                 <MenuItem divider={true}>{props.username}</MenuItem>
-                                <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
+                                <MenuItem onClick={() => {
+                                    props.handleLogout();
+                                    props.logout();
+                                }}>Cerrar sesión</MenuItem>
                             </Menu>
-
                         </div>
                     </Toolbar>
                 </Container>

@@ -11,11 +11,11 @@ export default function AcercaDe(props) {
     <Container maxWidth="md">
       <div>
         <br />
-        <h3>Acerca de OmegaWare</h3>
+        <h3 align="center">Acerca de OmegaWare</h3>
 
         <div style={EstiloLogo}>
           <p className="aligncenter">
-            <img src={logo} width="25%" position="center"/>
+            <img alt={"Logo de la empresa."} src={logo} width="25%" position="center"/>
           </p>
           <p style={mision}>
             OmegaWare es una empresa dedicada a la creación de programas
@@ -39,7 +39,7 @@ export default function AcercaDe(props) {
         <br />
         <div style={EstiloLogo}>
           <p className="aligncenter">
-            <img src={logoKitten} width="60%" />
+            <img alt={"Un gato."} src={logoKitten} width="60%" />
           </p>
           <p style={mision}>
             Nuestra primera app y con la que se pretende crear un mercado de

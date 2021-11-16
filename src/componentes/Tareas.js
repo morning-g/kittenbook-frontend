@@ -272,9 +272,6 @@ function ListaTabs() {
                       display: "flex",
                       flexDirection: "column",
                       position: "relative",
-                      background: "white",
-                      boxShadow:"none",
-                      backgroundColor:"transparent"
                   }}
                   >
                   <CardActionArea 

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import Container from "@mui/material/Container";
 
@@ -7,120 +7,147 @@ import ImageListItem from "@mui/material/ImageListItem";
 
 import Carousel from "react-bootstrap/Carousel";
 
+function srcset(image, size, rows = 1, cols = 1) {
+    return {
+        src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+        srcSet: `${image}?w=${size * cols}&h=${
+            size * rows
+        }&fit=crop&auto=format&dpr=2 2x`,
+    };
+}
+
 function StandardImageList() {
-  return (
-    <ImageList sx={{ width: 700, height: 1000 }} cols={3} rowHeight={164}>
-      {itemData.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-            srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-            alt={item.title}
-            loading="lazy"
-          />
-        </ImageListItem>
-      ))}
-    </ImageList>
-  );
+    return (
+        <ImageList
+            variant="quilted"
+            cols={4}
+            rowHeight={121}>
+            {itemData.map((item) => (
+                <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
+                    <img
+                        {...srcset(item.img, 121, item.rows, item.cols)}
+                        alt={item.title}
+                        loading="lazy"
+                    />
+                </ImageListItem>
+            ))}
+        </ImageList>
+    );
 }
 
 const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    title: "Fern",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    title: "Mushrooms",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    title: "Tomato basil",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
-    title: "Sea star",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
-    title: "Bike",
-  },
+    {
+        img: 'https://s3.amazonaws.com/petcentral.com/wp-content/uploads/2016/09/01160419/black-cat-1.jpg',
+        title: 'Breakfast',
+        rows: 2,
+        cols: 2,
+    },
+    {
+        img: 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555295760/shape/mentalfloss/istock_70404513_small.jpg',
+        title: 'Burger',
+    },
+    {
+        img: 'https://1.bp.blogspot.com/-uRzGQMQMT3c/XboZEzxfAYI/AAAAAAAAAW8/x5ih3hNW9xcIjdu-RxftDnd4QGIgwK69QCEwYBhgL/s1600/0.jpg',
+        title: 'Camera',
+    },
+    {
+        img: 'https://myminipanther.com/wp-content/uploads/2020/09/117638244_1186002988430051_1773905469144139956_o.jpg',
+        title: 'Coffee',
+        cols: 2,
+    },
+    {
+        img: 'https://www.guideposts.org/sites/default/files/styles/bynder_webimage/public/story/blackcat_marquee_0.jpg',
+        title: 'Hats',
+        cols: 2,
+    },
+    {
+        img: 'http://cdn0.wideopenpets.com/wp-content/uploads/2018/02/AdobeStock_137892129.jpeg',
+        title: 'Honey',
+        author: '@arwinneil',
+        rows: 2,
+        cols: 2,
+    },
+    {
+        img: 'https://www.petmoo.com/wp-content/uploads/2018/07/Black-Cat-Breed-990x556.jpg',
+        title: 'Basketball',
+    },
+    {
+        img: 'http://cdn0.wideopenpets.com/wp-content/uploads/2018/02/bigstock-Cute-Black-Cat-Under-A-Newspap-5003454.jpg',
+        title: 'Fern',
+    },
+    {
+        img: 'https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/VhMpQkPilil163b9e/young-black-cat-is-resting-in-the-forest_vogteh1pig_thumbnail-1080_01.png',
+        title: 'Mushrooms',
+        rows: 2,
+        cols: 2,
+    },
+    {
+        img: 'https://fthmb.tqn.com/Ltj-tDlYoAgVB_IAI43_ORK75mc=/1920x1277/filters:fill(auto,1)/egypt-59b7224c6f53ba00114fa958-59bae4346f53ba0010439047.jpg',
+        title: 'Tomato basil',
+    },
+    {
+        img: 'https://1.bp.blogspot.com/-oEKOysdY6R8/UPO89obgTaI/AAAAAAAAAhU/a-TTBiptDXA/s1600/back+cat+06.jpg',
+        title: 'Sea star',
+    },
+    {
+        img: 'https://www.rover.com/blog/wp-content/uploads/2019/12/black-cat-outside-unsplash-min.jpg',
+        title: 'Bike',
+        cols: 2,
+    },
 ];
 
 export default function Inicio(props) {
-  return (
-    <Container maxWidth="md">
-      <br />
-      <Carousel>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://wallpapercave.com/wp/1WXEEWF.jpg"
-            alt="First slide"
-          />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://i.redd.it/vpfzenk5rac31.jpg"
-            alt="Second slide"
-          />
+    return (
+        <React.Fragment>
+            <Container maxWidth="md">
+                <br/>
+                <Carousel>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://wallpapercave.com/wp/1WXEEWF.jpg"
+                            alt="First slide"
+                        />
+                        <Carousel.Caption>
+                            <h3>1</h3>
+                            <p>Hay más de 500 millones de gatos domésticos en el mundo, con aproximadamente 40 razas
+                                reconocidas.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://i.redd.it/vpfzenk5rac31.jpg"
+                            alt="Second slide"
+                        />
 
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://wallpaperfx.com/view_image/black-and-white-cat-1920x1080-wallpaper-16598.jpg"
-            alt="Third slide"
-          />
+                        <Carousel.Caption>
+                            <h3>2</h3>
+                            <p>Un gato no puede bajar de cabeza de un árbol porque todas las garras de un gato apuntan
+                                en la
+                                misma dirección. Para bajar de un árbol, un gato debe retroceder.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://wallpaperfx.com/view_image/black-and-white-cat-1920x1080-wallpaper-16598.jpg"
+                            alt="Third slide"
+                        />
 
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
-
-      <br />
-      <StandardImageList />
-    </Container>
-  );
+                        <Carousel.Caption>
+                            <h3>3</h3>
+                            <p>
+                                A diferencia de los perros, los gatos no son golosos. Los científicos creen que esto se
+                                debe
+                                a una mutación en un receptor gustativo clave.
+                            </p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                </Carousel>
+                <br/>
+                <StandardImageList/>
+            </Container>
+        </React.Fragment>
+    );
 }

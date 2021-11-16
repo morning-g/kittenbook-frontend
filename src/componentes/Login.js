@@ -1,4 +1,3 @@
-import Axios from "axios";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -12,43 +11,18 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import {useState} from "react";
-import {Redirect} from "react-router-dom";
+import {useEffect, useState} from "react";
 
-const theme = createTheme();
-
-export default function Login() {
+export default function Login(props) {
     const [usuario, setUsuario] = useState("");
     const [password, setPassword] = useState("");
-    const [estatus, setEstatus] = useState(0);
-    const [ingresado, setIngresado] = useState(false);
+
     let esValido = usuario === "" || password === "";
 
-    Axios.defaults.withCredentials = true;
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const headers = {
-            'Content-Type': 'application/json'
-        };
-        const data = new FormData(event.currentTarget);
-        Axios.post("http://localhost:3005/api/usuarios/login", {
-            username: data.get("username"),
-            password: data.get("password")
-        }, {headers}).then(function (response) {
-            console.log(response);
-            setEstatus(response.status);
-        }).catch(function (error) {
-            console.log(error);
-            setEstatus(error.response.status);
-        });
-    };
-
     return (
-        <ThemeProvider theme={theme}>
+        <React.Fragment>
             <Grid container component="main" sx={{height: "100vh"}}>
                 <CssBaseline/>
                 <Grid
@@ -87,7 +61,7 @@ export default function Login() {
                         <Box
                             component="form"
                             noValidate
-                            onSubmit={handleSubmit}
+                            onSubmit={props.login}
                             sx={{mt: 1}}
                         >
                             <TextField
@@ -97,7 +71,6 @@ export default function Login() {
                                 id="username"
                                 label="Nombre de usuario"
                                 name="username"
-                                autoComplete="email"
                                 autoFocus
                                 onChange={(e) => {
                                     setUsuario(e.target.value);
@@ -111,26 +84,26 @@ export default function Login() {
                                 label="Contraseña"
                                 type="password"
                                 id="password"
-                                autoComplete="current-password"
                                 onChange={(e) => {
                                     setPassword(e.target.value);
                                 }}
                             />
-                            {estatus === 401 ? <Alert severity="warning">
+                            {props.estatus === 401 ? <Alert severity="warning">
                                 <AlertTitle>Alerta</AlertTitle>
                                 El nombre de usuario dado no existe.
                             </Alert> : null}
-                            {estatus === 402 ? <Alert severity="warning">
+                            {props.estatus === 402 ? <Alert severity="warning">
                                 <AlertTitle>Alerta</AlertTitle>
                                 El nombre de usuario y/o la contraseña no son correctos.
                             </Alert> : null}
-                            {estatus === 200 ? <Alert severity="success">
+                            {props.estatus === 200 ? <Alert severity="success">
                                 <AlertTitle>Éxito</AlertTitle>
                                 Ingresando...
                             </Alert> : null}
-                            {estatus !== 0 && estatus !== 401 && estatus !== 402 && estatus !== 200 ? <Alert severity="warning">
-                                <AlertTitle>Error</AlertTitle>
-                                Ocurrió un error al procesar la solicitud.
+                            {props.estatus !== 0 && props.estatus !== 401 && props.estatus !== 402 && props.estatus !== 200 ?
+                                <Alert severity="warning">
+                                    <AlertTitle>Error</AlertTitle>
+                                    Ocurrió un error al procesar la solicitud.
                                 </Alert> : null}
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary"/>}
@@ -142,7 +115,6 @@ export default function Login() {
                                 variant="contained"
                                 disabled={esValido ? true : false}
                                 sx={{mt: 3, mb: 2}}
-                                // onClick={() => { setTimeout(setIngresado(true), 3000) }}
                             >
                                 Iniciar sesión
                             </Button>
@@ -163,6 +135,6 @@ export default function Login() {
                     </Box>
                 </Grid>
             </Grid>
-        </ThemeProvider>
+        </React.Fragment>
     );
 }

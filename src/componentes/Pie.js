@@ -74,6 +74,7 @@ export default function Pie() {
                       href={rutasDiccionario[item]}
                       variant="subtitle1"
                       color="text.secondary"
+                      underline={"none"}
                     >
                       {item}
                     </Link>
