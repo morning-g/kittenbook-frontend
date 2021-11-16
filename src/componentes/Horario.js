@@ -89,14 +89,14 @@ export default function Horario() {
     const [jueves, setJueves] = useState(true);
     const [viernes, setViernes] = useState(true);
 
-    useEffect(() => {
-        Axios.get('http://localhost:3005/api/horario').then((res) => {
-            console.log(res.data);
-            // setNotas(res.data);
-        }).catch((err) => {
-            console.log(err);
-        });
-    }, []);
+    // useEffect(() => {
+    //     Axios.get('http://localhost:3005/api/horario').then((res) => {
+    //         console.log(res.data);
+    //         // setNotas(res.data);
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     });
+    // }, []);
 
     const handleEditarAbierto = () => {
         setDialogoEditarAbierto(true);
@@ -127,6 +127,14 @@ export default function Horario() {
     };
 
     const agregarClase = () => {
+
+    };
+
+    const editarClase = () => {
+
+    };
+
+    const eliminarClase = () => {
 
     };
 

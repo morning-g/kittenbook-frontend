@@ -13,7 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import {useEffect, useState} from "react";
+import { useState} from "react";
 
 export default function Login(props) {
     const [usuario, setUsuario] = useState("");
