@@ -260,7 +260,7 @@ export default function Notas() {
                         <Button disabled={titulo === "" || contenido === ""}
                                 onClick={() => {
                                     enviarNota();
-                                    setDialogoAgregarAbierto(false)
+                                    handleAgregarCerrado();
                                 }}>Agregar</Button>
                     </DialogActions>
                 </Dialog>
