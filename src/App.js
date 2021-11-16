@@ -46,6 +46,7 @@ function App() {
     const [username, setUsername] = useState("");
     const [authenticated, setAuthenticated] = useState(false);
     const [darkState, setDarkState] = useState(true);
+    const [estatus, setEstatus] = useState(0);
 
     useEffect(() => {
         Axios.get('http://localhost:3005/api/usuarios/autenticado').then((res) => {
@@ -62,6 +63,36 @@ function App() {
             setItemLS();
         }
     }, []);
+
+    const handleLogout = () => {
+        setAuthenticated(false);
+    };
+
+    const login = (e) => {
+        e.preventDefault();
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        const data = new FormData(e.currentTarget);
+        Axios.post("http://localhost:3005/api/usuarios/login", {
+            username: data.get("username"),
+            password: data.get("password")
+        }, {headers}).then(function (response) {
+            setEstatus(response.status);
+            setAuthenticated(true);
+        }).catch(function (error) {
+            console.log(error);
+            setEstatus(error.response.status);
+        });
+    };
+
+    const logout = (e) => {
+        Axios.get("http://localhost:3005/api/usuarios/logout").then((res) => {
+            console.log("Logout successful.");
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
 
     const setItemLS = () => {
         setDarkState(!darkState);
@@ -85,7 +116,7 @@ function App() {
                         </IconButton>
                     </Box>
                 </Container>
-                <MenuAppBarLogeado username={username} dark={darkState} position="fixed"/>
+                <MenuAppBarLogeado username={username} dark={darkState} logout={logout} handleLogout={handleLogout} position="fixed"/>
                 <Navegacion/>
                 <BrowserRouter>
                     <Switch>
@@ -97,7 +128,7 @@ function App() {
                         <Route exact path="/tareas" component={Tareas}/>
                         <Route exact path="/reticula" component={Reticula}/>
                         <Route exact path="/creditos" component={Creditos}/>
-                        <Route exact path="/login" component={Acceso}/>
+                        <Route exact path="/login" render={(props) => <Acceso estatus={estatus} login={login}/>}/>
                         <Route exact path="/registro" component={Registro}/>
                         <Route exact path="/precios" component={Precios}/>
                         <Route exact path="/tos" component={ToS}/>
@@ -145,7 +176,7 @@ function App() {
                     {/*<Route exact path="/reticula" component={Reticula}/>*/}
                     {/*<Route exact path="/creditos" component={Creditos}/>*/}
 
-                    <Route exact path="/login" component={Acceso}/>
+                    <Route exact path="/login" render={(props) => <Acceso estatus={estatus} login={login}/>}/>
                     <Route exact path="/registro" component={Registro}/>
                     <Route exact path="/precios" component={Precios}/>
                     <Route exact path="/tos" component={ToS}/>

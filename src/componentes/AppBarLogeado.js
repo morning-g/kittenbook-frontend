@@ -16,10 +16,12 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
+import {Redirect} from "react-router-dom";
 
 export default function MenuAppBarLogeado(props) {
     Axios.defaults.withCredentials = true;
 
+    const [toHome, setToHome] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleMenu = (event) => {
@@ -30,21 +32,13 @@ export default function MenuAppBarLogeado(props) {
         setAnchorEl(null);
     };
 
-    const logout = (e) => {
-        Axios.get("http://localhost:3005/api/usuarios/logout").then((res) => {
-            console.log("request made");
-        }).catch((err) => {
-            console.log(err);
-        });
-    };
-
     return (
         <React.Fragment>
+            {toHome ? <Redirect to="/"/> : null}
             <GlobalStyles
                 styles={{ul: {margin: 0, padding: 0, listStyle: "none"}}}
             />
             <CssBaseline/>
-
             <AppBar
                 position="sticky"
                 color="default"
@@ -100,7 +94,10 @@ export default function MenuAppBarLogeado(props) {
                                 onClose={handleClose}
                             >
                                 <MenuItem divider={true}>{props.username}</MenuItem>
-                                <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
+                                <MenuItem onClick={() => {
+                                    props.handleLogout();
+                                    props.logout();
+                                }}>Cerrar sesión</MenuItem>
                             </Menu>
                         </div>
                     </Toolbar>
