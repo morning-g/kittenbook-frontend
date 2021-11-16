@@ -44,6 +44,10 @@ export default function Notas() {
         }).catch((err) => {
             console.log(err);
         });
+        return () => {
+            setTitulo("");
+            setContenido("");
+        };
     }, [accionUsuario]);
 
     const handleEditarAbierto = () => {
@@ -80,6 +84,8 @@ export default function Notas() {
         }).catch((err) => {
             console.log(err);
         });
+        setTitulo("");
+        setContenido("");
     };
 
     const editarNota = (id_nota) => {
@@ -93,6 +99,8 @@ export default function Notas() {
         }).catch((err) => {
             console.log(err);
         });
+        setTitulo("");
+        setContenido("");
     };
 
     const eliminarNota = (id_nota) => {
@@ -106,6 +114,8 @@ export default function Notas() {
         }).catch((err) => {
             console.log(err);
         });
+        setTitulo("");
+        setContenido("");
     };
 
     return (
@@ -247,7 +257,7 @@ export default function Notas() {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleAgregarCerrado}>Cancelar</Button>
-                        <Button disabled={titulo === "" || contenido === "" ? true : false}
+                        <Button disabled={titulo === "" || contenido === ""}
                                 onClick={() => {
                                     enviarNota();
                                     setDialogoAgregarAbierto(false)
