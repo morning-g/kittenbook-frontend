@@ -16,12 +16,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
-import {Redirect} from "react-router-dom";
 
 export default function MenuAppBarLogeado(props) {
     Axios.defaults.withCredentials = true;
 
-    const [toHome, setToHome] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleMenu = (event) => {
@@ -34,7 +32,6 @@ export default function MenuAppBarLogeado(props) {
 
     return (
         <React.Fragment>
-            {toHome ? <Redirect to="/"/> : null}
             <GlobalStyles
                 styles={{ul: {margin: 0, padding: 0, listStyle: "none"}}}
             />

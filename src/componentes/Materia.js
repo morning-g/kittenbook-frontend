@@ -84,6 +84,7 @@ export default function Materia({ tarea, materia }) {
                 <EditIcon />
             </IconButton>*/}
         </Card>
+        
       </Grid>
     );
   } else {

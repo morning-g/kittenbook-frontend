@@ -27,6 +27,7 @@ export default function Notas() {
         'Content-Type': 'application/json'
     };
 
+    const [accionUsuario, setAccionUsuario] = useState(false);
     const [notas, setNotas] = useState([]);
     const [titulo, setTitulo] = useState("");
     const [contenido, setContenido] = useState("");
@@ -43,7 +44,11 @@ export default function Notas() {
         }).catch((err) => {
             console.log(err);
         });
-    }, [notas]);
+        return () => {
+            setTitulo("");
+            setContenido("");
+        };
+    }, [accionUsuario]);
 
     const handleEditarAbierto = () => {
         setDialogoEditarAbierto(true);
@@ -70,6 +75,7 @@ export default function Notas() {
     };
 
     const enviarNota = () => {
+        setAccionUsuario(!accionUsuario);
         Axios.post('http://localhost:3005/api/notas', {
             titulo: titulo,
             contenido: contenido
@@ -78,9 +84,12 @@ export default function Notas() {
         }).catch((err) => {
             console.log(err);
         });
+        setTitulo("");
+        setContenido("");
     };
 
     const editarNota = (id_nota) => {
+        setAccionUsuario(!accionUsuario);
         Axios.post('http://localhost:3005/api/notas/actualizar', {
             id_nota: id_nota,
             titulo: titulo,
@@ -90,10 +99,14 @@ export default function Notas() {
         }).catch((err) => {
             console.log(err);
         });
+        setTitulo("");
+        setContenido("");
     };
 
     const eliminarNota = (id_nota) => {
-        Axios.delete('http://localhost:3005/api/notas', { data: {
+        setAccionUsuario(!accionUsuario);
+        Axios.delete('http://localhost:3005/api/notas', {
+            data: {
                 id_nota: id_nota
             }
         }, {headers}).then((res) => {
@@ -101,6 +114,8 @@ export default function Notas() {
         }).catch((err) => {
             console.log(err);
         });
+        setTitulo("");
+        setContenido("");
     };
 
     return (
@@ -242,10 +257,10 @@ export default function Notas() {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleAgregarCerrado}>Cancelar</Button>
-                        <Button disabled={titulo === "" || contenido === "" ? true : false}
+                        <Button disabled={titulo === "" || contenido === ""}
                                 onClick={() => {
                                     enviarNota();
-                                    setDialogoAgregarAbierto(false)
+                                    handleAgregarCerrado();
                                 }}>Agregar</Button>
                     </DialogActions>
                 </Dialog>

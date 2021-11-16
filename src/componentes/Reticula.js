@@ -17,6 +17,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import MateriasEstilo from "./MateriasEstilo";
+import reticula1Tec from "../ret1.png"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,7 +60,6 @@ function ListaTabs() {
     { titulo: "Materias aprobadas", value: 0 },
     { titulo: "Materias en curso", value: 1 },
     { titulo: "Materias reprobadas", value: 2 },
-    { titulo: "Reticula", value: 3 },
   ]);
 
   const [materias, setMaterias] = useState([
@@ -135,6 +135,13 @@ function ListaTabs() {
     setValue(newValue);
   };
 
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
+
   const [value, setValue] = React.useState(0);
   return (
     <div>
@@ -152,11 +159,33 @@ function ListaTabs() {
           aria-label="scrollable auto tabs example"
           variant="scrollable"
         >
+         
           {tabs.map((tab) => (
             <Tab value={tab.value} label={tab.titulo} />
           ))}
+           {/*Tab reticula */}
+           <Tab label="Reticula"/>
+           {/*Tab reticula */}
         </Tabs>
       </Box>
+      {/*Contenido de la reticula*/}
+      <Box sx={{marginLeft: "100px"}}>
+      </Box>
+
+      <TabPanel value={value} index={3}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="Ing. Sistemas" {...a11yProps(0)}/>
+          <Tab label="Ing. Industrial" {...a11yProps(1)} />
+          <Tab label="Ing. Quimica" {...a11yProps(2)} />
+        </Tabs>
+        </Box>
+        <img alt={"Logo de la empresa."} src={reticula1Tec} width="100%" />
+      </TabPanel>
+      <TabPanel value="0" index={2}>
+        asdad
+      </TabPanel>
+      {/*Contenido de la reticula*/}
       <Box
         sx={{
           width: "100%",
@@ -164,7 +193,7 @@ function ListaTabs() {
           margin: "0 auto",
           display: "flex",
         }}
-      >
+      > 
         {tabs.map((tab) => (
           <TabPanel index={tab.value} value={value}>
             <Grid
@@ -172,6 +201,7 @@ function ListaTabs() {
               sx={{ justifyContent: "space-between", columnGap: 1, rowGap: 1 }}
             >
               <MateriasEstilo tareas={materias} materia={tab.titulo} />
+              
               <Grid item sx={{ display: "flex", minWidth: "80em" }}>
                 {/* Inicio Card del boton + (agregar)*/}
                 <Card

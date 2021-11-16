@@ -12,7 +12,7 @@ export default function Dashboard(props) {
                 display: "block",
                 marginLeft: "auto",
                 marginRight: "auto",
-                width: "50%"}} src={"http://media1.giphy.com/media/c54YHGDH63jJC/giphy.gif"}/>
+                width: "50%"}} alt={"Un gato."} src={"http://media1.giphy.com/media/c54YHGDH63jJC/giphy.gif"}/>
         </Container>
     )
 }
