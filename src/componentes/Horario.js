@@ -799,7 +799,7 @@ export default function Horario() {
                             <DialogContentText>Hora de inicio</DialogContentText>
                             <Slider
                                 aria-label="Temperature"
-                                defaultValue={parseInt(claseActiva.hora_inicio.slice(0, 3))}
+                                defaultValue={claseActiva.hora_inicio !== undefined ? parseInt(claseActiva.hora_inicio.slice(0, 3)) : 0}
                                 // getAriaValueText={valuetext}
                                 valueLabelDisplay="auto"
                                 step={1}
@@ -815,7 +815,7 @@ export default function Horario() {
                             <DialogContentText>Hora de término</DialogContentText>
                             <Slider
                                 aria-label="Temperature"
-                                defaultValue={parseInt(claseActiva.hora_termino.slice(0, 3))}
+                                defaultValue={claseActiva.hora_termino !== undefined ? parseInt(claseActiva.hora_termino.slice(0, 3)) : 0}
                                 // getAriaValueText={valuetext}
                                 valueLabelDisplay="auto"
                                 step={1}
