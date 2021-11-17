@@ -86,8 +86,8 @@ export default function Horario() {
     const [grupo, setGrupo] = useState("");
     const [docente, setDocente] = useState("");
     const [aula, setAula] = useState("");
-    const [horaInicio, setHoraInicio] = useState(0);
-    const [horaTermino, setHoraTermino] = useState(0);
+    const [horaInicio, setHoraInicio] = useState(12);
+    const [horaTermino, setHoraTermino] = useState(12);
     const [lunes, setLunes] = useState(true);
     const [martes, setMartes] = useState(true);
     const [miercoles, setMiercoles] = useState(true);
@@ -119,6 +119,16 @@ export default function Horario() {
             console.log(err);
         });
     }, [accionUsuario]);
+
+    const getCarreraMateria = (clave_materia) => {
+        let result;
+        materias.forEach((materia) => {
+            if (materia.clave_materia === clave_materia) {
+                result = materia.carrera_materia;
+            }
+        });
+        return result;
+    };
 
     const getNombreMateria = (clave_materia) => {
         let result;
@@ -238,6 +248,7 @@ export default function Horario() {
     const editarClase = () => {
         setAccionUsuario(!accionUsuario);
         Axios.post('http://localhost:3005/api/horario/actualizar', {
+            id_clase: idClase,
             clave_materia: claveMateria,
             grupo: grupo,
             docente: docente,
@@ -288,11 +299,25 @@ export default function Horario() {
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
+                    {clases.length === 0 ? <div><br/><h4>No hay ninguna clase en lunes. ¡Hurrah!</h4><br/></div> : null}
                     {horarioPartido[0] !== undefined ? (horarioPartido[0].length !== 0 ? horarioPartido[0].map((clase) => (
-                        <Card sx={{minWidth: 100}}>
+                        <div><Card sx={{minWidth: 100}}>
                             <CardActionArea onClick={() => {
                                 handleEditarAbierto();
-                                setClaseActiva(clase.id_clase)
+                                setClaseActiva(clase);
+                                setIdClase(clase.id_clase);
+                                setClaveMateria(clase.clave_materia);
+                                setGrupo(clase.grupo);
+                                setDocente(clase.docente);
+                                setAula(clase.aula);
+                                setHoraInicio(clase.hora_inicio);
+                                setHoraTermino(clase.hora_termino);
+                                setLunes(clase.lunes === 1);
+                                setMartes(clase.martes === 1);
+                                setMiercoles(clase.miercoles === 1);
+                                setJueves(clase.jueves === 1);
+                                setViernes(clase.viernes === 1);
+                                console.log(claseActiva.hora_inicio);
                             }}>
                                 <CardContent>
                                     <Typography
@@ -300,7 +325,8 @@ export default function Horario() {
                                         color="text.secondary"
                                         gutterBottom
                                     >
-                                        Grupo {clase.grupo}, Clave: {clase.clave_materia}, Aula {clase.aula}
+                                        Grupo: {clase.grupo}, Clave: {clase.clave_materia},
+                                        Aula: {clase.aula} Carrera: {getCarreraMateria(clase.clave_materia)}
                                     </Typography>
                                     <Typography variant="h5" component="div">
                                         {getNombreMateria(clase.clave_materia)}
@@ -309,17 +335,32 @@ export default function Horario() {
                                         Docente: {clase.docente}
                                     </Typography>
                                     <Typography
-                                        variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
+                                        variant="body2">Horario:
+                                        de {clase.hora_inicio.slice(0, 5)} a {clase.hora_termino.slice(0, 5)}</Typography>
                                 </CardContent>
                             </CardActionArea>
-                        </Card>)) : null) : null}
+                        </Card><br/></div>)) : null) : null}
                 </TabPanel>
                 <TabPanel value={value} index={1}>
+                    {clases.length === 0 ?
+                        <div><br/><h4>No hay ninguna clase en martes. ¡Hurrah!</h4><br/></div> : null}
                     {horarioPartido[1] !== undefined ? (horarioPartido[1].length !== 0 ? horarioPartido[1].map((clase) => (
-                        <Card sx={{minWidth: 100}}>
+                        <div><Card sx={{minWidth: 100}}>
                             <CardActionArea onClick={() => {
                                 handleEditarAbierto();
-                                setClaseActiva(clase.id_clase)
+                                setClaseActiva(clase);
+                                setIdClase(clase.id_clase);
+                                setClaveMateria(clase.clave_materia);
+                                setGrupo(clase.grupo);
+                                setDocente(clase.docente);
+                                setAula(clase.aula);
+                                setHoraInicio(clase.hora_inicio);
+                                setHoraTermino(clase.hora_termino);
+                                setLunes(clase.lunes === 1);
+                                setMartes(clase.martes === 1);
+                                setMiercoles(clase.miercoles === 1);
+                                setJueves(clase.jueves === 1);
+                                setViernes(clase.viernes === 1);
                             }}>
                                 <CardContent>
                                     <Typography
@@ -327,7 +368,8 @@ export default function Horario() {
                                         color="text.secondary"
                                         gutterBottom
                                     >
-                                        Grupo {clase.grupo}, Clave: {clase.clave_materia}, Aula {clase.aula}
+                                        Grupo: {clase.grupo}, Clave: {clase.clave_materia},
+                                        Aula: {clase.aula} Carrera: {getCarreraMateria(clase.clave_materia)}
                                     </Typography>
                                     <Typography variant="h5" component="div">
                                         {getNombreMateria(clase.clave_materia)}
@@ -336,17 +378,32 @@ export default function Horario() {
                                         Docente: {clase.docente}
                                     </Typography>
                                     <Typography
-                                        variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
+                                        variant="body2">Horario:
+                                        de {clase.hora_inicio.slice(0, 5)} a {clase.hora_termino.slice(0, 5)}</Typography>
                                 </CardContent>
                             </CardActionArea>
-                        </Card>)) : null) : null}
+                        </Card><br/></div>)) : null) : null}
                 </TabPanel>
                 <TabPanel value={value} index={2}>
+                    {clases.length === 0 ?
+                        <div><br/><h4>No hay ninguna clase en miércoles. ¡Hurrah!</h4><br/></div> : null}
                     {horarioPartido[2] !== undefined ? (horarioPartido[2].length !== 0 ? horarioPartido[2].map((clase) => (
-                        <Card sx={{minWidth: 100}}>
+                        <div><Card sx={{minWidth: 100}}>
                             <CardActionArea onClick={() => {
                                 handleEditarAbierto();
-                                setClaseActiva(clase.id_clase)
+                                setClaseActiva(clase);
+                                setIdClase(clase.id_clase);
+                                setClaveMateria(clase.clave_materia);
+                                setGrupo(clase.grupo);
+                                setDocente(clase.docente);
+                                setAula(clase.aula);
+                                setHoraInicio(clase.hora_inicio);
+                                setHoraTermino(clase.hora_termino);
+                                setLunes(clase.lunes === 1);
+                                setMartes(clase.martes === 1);
+                                setMiercoles(clase.miercoles === 1);
+                                setJueves(clase.jueves === 1);
+                                setViernes(clase.viernes === 1);
                             }}>
                                 <CardContent>
                                     <Typography
@@ -354,7 +411,8 @@ export default function Horario() {
                                         color="text.secondary"
                                         gutterBottom
                                     >
-                                        Grupo {clase.grupo}, Clave: {clase.clave_materia}, Aula {clase.aula}
+                                        Grupo: {clase.grupo}, Clave: {clase.clave_materia},
+                                        Aula: {clase.aula} Carrera: {getCarreraMateria(clase.clave_materia)}
                                     </Typography>
                                     <Typography variant="h5" component="div">
                                         {getNombreMateria(clase.clave_materia)}
@@ -363,17 +421,32 @@ export default function Horario() {
                                         Docente: {clase.docente}
                                     </Typography>
                                     <Typography
-                                        variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
+                                        variant="body2">Horario:
+                                        de {clase.hora_inicio.slice(0, 5)} a {clase.hora_termino.slice(0, 5)}</Typography>
                                 </CardContent>
                             </CardActionArea>
-                        </Card>)) : null) : null}
+                        </Card><br/></div>)) : null) : null}
                 </TabPanel>
                 <TabPanel value={value} index={3}>
+                    {clases.length === 0 ?
+                        <div><br/><h4>No hay ninguna clase en jueves. ¡Hurrah!</h4><br/></div> : null}
                     {horarioPartido[3] !== undefined ? (horarioPartido[3].length !== 0 ? horarioPartido[3].map((clase) => (
-                        <Card sx={{minWidth: 100}}>
+                        <div><Card sx={{minWidth: 100}}>
                             <CardActionArea onClick={() => {
                                 handleEditarAbierto();
-                                setClaseActiva(clase.id_clase)
+                                setClaseActiva(clase);
+                                setIdClase(clase.id_clase);
+                                setClaveMateria(clase.clave_materia);
+                                setGrupo(clase.grupo);
+                                setDocente(clase.docente);
+                                setAula(clase.aula);
+                                setHoraInicio(clase.hora_inicio);
+                                setHoraTermino(clase.hora_termino);
+                                setLunes(clase.lunes === 1);
+                                setMartes(clase.martes === 1);
+                                setMiercoles(clase.miercoles === 1);
+                                setJueves(clase.jueves === 1);
+                                setViernes(clase.viernes === 1);
                             }}>
                                 <CardContent>
                                     <Typography
@@ -381,7 +454,8 @@ export default function Horario() {
                                         color="text.secondary"
                                         gutterBottom
                                     >
-                                        Grupo {clase.grupo}, Clave: {clase.clave_materia}, Aula {clase.aula}
+                                        Grupo: {clase.grupo}, Clave: {clase.clave_materia},
+                                        Aula: {clase.aula} Carrera: {getCarreraMateria(clase.clave_materia)}
                                     </Typography>
                                     <Typography variant="h5" component="div">
                                         {getNombreMateria(clase.clave_materia)}
@@ -390,17 +464,32 @@ export default function Horario() {
                                         Docente: {clase.docente}
                                     </Typography>
                                     <Typography
-                                        variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
+                                        variant="body2">Horario:
+                                        de {clase.hora_inicio.slice(0, 5)} a {clase.hora_termino.slice(0, 5)}</Typography>
                                 </CardContent>
                             </CardActionArea>
-                        </Card>)) : null) : null}
+                        </Card><br/></div>)) : null) : null}
                 </TabPanel>
                 <TabPanel value={value} index={4}>
+                    {clases.length === 0 ?
+                        <div><br/><h4>No hay ninguna clase en viernes. ¡Hurrah!</h4><br/></div> : null}
                     {horarioPartido[4] !== undefined ? (horarioPartido[4].length !== 0 ? horarioPartido[4].map((clase) => (
-                        <Card sx={{minWidth: 100}}>
+                        <div><Card sx={{minWidth: 100}}>
                             <CardActionArea onClick={() => {
                                 handleEditarAbierto();
-                                setClaseActiva(clase.id_clase)
+                                setClaseActiva(clase);
+                                setIdClase(clase.id_clase);
+                                setClaveMateria(clase.clave_materia);
+                                setGrupo(clase.grupo);
+                                setDocente(clase.docente);
+                                setAula(clase.aula);
+                                setHoraInicio(clase.hora_inicio);
+                                setHoraTermino(clase.hora_termino);
+                                setLunes(clase.lunes === 1);
+                                setMartes(clase.martes === 1);
+                                setMiercoles(clase.miercoles === 1);
+                                setJueves(clase.jueves === 1);
+                                setViernes(clase.viernes === 1);
                             }}>
                                 <CardContent>
                                     <Typography
@@ -408,7 +497,8 @@ export default function Horario() {
                                         color="text.secondary"
                                         gutterBottom
                                     >
-                                        Grupo {clase.grupo}, Clave: {clase.clave_materia}, Aula {clase.aula}
+                                        Grupo: {clase.grupo}, Clave: {clase.clave_materia},
+                                        Aula: {clase.aula} Carrera: {getCarreraMateria(clase.clave_materia)}
                                     </Typography>
                                     <Typography variant="h5" component="div">
                                         {getNombreMateria(clase.clave_materia)}
@@ -417,10 +507,11 @@ export default function Horario() {
                                         Docente: {clase.docente}
                                     </Typography>
                                     <Typography
-                                        variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
+                                        variant="body2">Horario:
+                                        de {clase.hora_inicio.slice(0, 5)} a {clase.hora_termino.slice(0, 5)}</Typography>
                                 </CardContent>
                             </CardActionArea>
-                        </Card>)) : null) : null}
+                        </Card><br/></div>)) : null) : null}
                 </TabPanel>
                 <br/>
                 {/*Boton agregar*/}
@@ -480,9 +571,11 @@ export default function Horario() {
                                     }}
                                 >
                                     {historialPartido[1] !== undefined ? historialPartido[1].length === 0 ?
-                                        <MenuItem>Aún no estás cursando ninguna materia.</MenuItem> : null : null}
-                                    {historialPartido[1] !== undefined ? historialPartido[1].map((materia) => (<MenuItem
-                                        value={materia.clave_materia}>{materia.clave_materia}</MenuItem>)) : null}
+                                        <MenuItem>Aún no estás cursando ninguna
+                                            materia.</MenuItem> : null : null}
+                                    {historialPartido[1] !== undefined ? historialPartido[1].map((materia) => (
+                                        <MenuItem
+                                            value={materia.clave_materia}>{materia.clave_materia + ": " + getNombreMateria(materia.clave_materia)}</MenuItem>)) : null}
                                 </Select>
                             </FormControl>
                             <br/>
@@ -625,13 +718,11 @@ export default function Horario() {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    // value={age}
+                                    value={claveMateria}
                                     label="Clave de la materia"
                                     // onChange={handleChange}
                                 >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    <MenuItem value={claseActiva.clave_materia}>{claseActiva.clave_materia}</MenuItem>
                                 </Select>
                             </FormControl>
                             <br/>
@@ -642,6 +733,7 @@ export default function Horario() {
                                 size='small'
                                 id="titulo"
                                 type="text"
+                                defaultValue={claseActiva.grupo}
                                 fullWidth
                                 variant="outlined"
                                 required
@@ -652,9 +744,9 @@ export default function Horario() {
                                         </InputAdornment>
                                     ),
                                 }}
-                                // onChange={(e) => {
-                                //     setTitulo(e.target.value)
-                                // }}
+                                onChange={(e) => {
+                                    setGrupo(e.target.value)
+                                }}
                             />
                             <br/>
                             <br/>
@@ -664,6 +756,7 @@ export default function Horario() {
                                 size='small'
                                 id="titulo"
                                 type="text"
+                                defaultValue={claseActiva.docente}
                                 fullWidth
                                 variant="outlined"
                                 required
@@ -674,9 +767,9 @@ export default function Horario() {
                                         </InputAdornment>
                                     ),
                                 }}
-                                // onChange={(e) => {
-                                //     setTitulo(e.target.value)
-                                // }}
+                                onChange={(e) => {
+                                    setDocente(e.target.value)
+                                }}
                             />
                             <br/>
                             <br/>
@@ -686,6 +779,7 @@ export default function Horario() {
                                 size='small'
                                 id="titulo"
                                 type="text"
+                                defaultValue={claseActiva.aula}
                                 fullWidth
                                 variant="outlined"
                                 required
@@ -696,45 +790,62 @@ export default function Horario() {
                                         </InputAdornment>
                                     ),
                                 }}
-                                // onChange={(e) => {
-                                //     setTitulo(e.target.value)
-                                // }}
+                                onChange={(e) => {
+                                    setAula(e.target.value)
+                                }}
                             />
                             <br/>
                             <br/>
                             <DialogContentText>Hora de inicio</DialogContentText>
                             <Slider
                                 aria-label="Temperature"
-                                defaultValue={30}
+                                defaultValue={parseInt(claseActiva.hora_inicio.slice(0, 3))}
                                 // getAriaValueText={valuetext}
                                 valueLabelDisplay="auto"
                                 step={1}
                                 marks
                                 min={0}
                                 max={23}
+                                onChange={(e) => {
+                                    setHoraInicio(e.target.value);
+                                }}
                             />
                             <br/>
                             <br/>
                             <DialogContentText>Hora de término</DialogContentText>
                             <Slider
                                 aria-label="Temperature"
-                                defaultValue={30}
+                                defaultValue={parseInt(claseActiva.hora_termino.slice(0, 3))}
                                 // getAriaValueText={valuetext}
                                 valueLabelDisplay="auto"
                                 step={1}
                                 marks
                                 min={0}
                                 max={23}
+                                onChange={(e) => {
+                                    setHoraTermino(e.target.value);
+                                }}
                             />
                             <br/>
                             <br/>
                             <DialogContentText>Días</DialogContentText>
                             <FormGroup>
-                                <FormControlLabel control={<Checkbox defaultChecked/>} label="Lunes"/>
-                                <FormControlLabel control={<Checkbox defaultChecked/>} label="Martes"/>
-                                <FormControlLabel control={<Checkbox defaultChecked/>} label="Miércoles"/>
-                                <FormControlLabel control={<Checkbox defaultChecked/>} label="Jueves"/>
-                                <FormControlLabel control={<Checkbox defaultChecked/>} label="Viernes"/>
+                                <FormControlLabel control={<Checkbox checked={claseActiva.lunes} onChange={(e) => {
+                                    setLunes(!lunes);
+                                }}/>} label="Lunes"/>
+                                <FormControlLabel control={<Checkbox checked={claseActiva.martes} onChange={(e) => {
+                                    setMartes(!martes);
+                                }}/>} label="Martes"/>
+                                <FormControlLabel control={<Checkbox checked={claseActiva.miercoles} onChange={(e) => {
+                                    setMiercoles(!miercoles);
+                                }}/>}
+                                                  label="Miércoles"/>
+                                <FormControlLabel control={<Checkbox checked={claseActiva.jueves} onChange={(e) => {
+                                    setJueves(!jueves);
+                                }}/>} label="Jueves"/>
+                                <FormControlLabel control={<Checkbox checked={claseActiva.viernes} onChange={(e) => {
+                                    setViernes(!viernes);
+                                }}/>} label="Viernes"/>
                             </FormGroup>
                         </Box>
                     </DialogContent>
