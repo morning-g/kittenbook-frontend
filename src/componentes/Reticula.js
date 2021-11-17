@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import React, { useRef, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Tabs from "@mui/material/Tabs";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -16,398 +16,687 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContentText from "@mui/material/DialogContentText";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
-import MateriasEstilo from "./MateriasEstilo";
-import reticula1Tec from "../ret1.png"
+import Container from "@mui/material/Container";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputAdornment from "@mui/material/InputAdornment";
+import Slider from '@mui/material/Slider';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ReticulaSistemasEspTecnologiasWeb from "../ReticulaSistemasEspTecnologiasWeb.png"
+import Axios from "axios";
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-      style={{ width: "100%" }}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+            style={{width: "100%"}}
+        >
+            {value === index && (
+                <Box sx={{p: 3}}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
 }
 
 TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
 };
 
 export default function Reticula() {
-  return (
-    <Box sx={{ width: "100%" }}>
-      <ListaTabs />
-    </Box>
-  );
+    return (
+        <Box sx={{width: "100%"}}>
+            <ListaTabs/>
+        </Box>
+    );
 }
 
 function ListaTabs() {
-  // Arreglo de objetos tabs
-  const [tabs] = useState([
-    { titulo: "Materias aprobadas", value: 0 },
-    { titulo: "Materias en curso", value: 1 },
-    { titulo: "Materias reprobadas", value: 2 },
-  ]);
+    Axios.defaults.withCredentials = true;
+    const headers = {
+        'Content-Type': 'application/json'
+    };
 
-  const [materias, setMaterias] = useState([
-    {
-      id: 0,
-      titulo: "Fundamentos de programación",
-      grupo: 1,
-      clave: "A15",
-      docente: "Profesor: Juan Perez",
-      semestre: 1,
-      oportunidad: 1,
-      calificacion: 80,
-      tab: "Materias aprobadas",
-    },
-  ]);
-
-  // Refs para datos de materia
-  const tabTituloRef = useRef();
-  const materiaTituloRef = useRef();
-  const materiaGrupoRef = useRef();
-  const materiaClaveRef = useRef();
-  const materiaDocenteRef = useRef();
-  const materiaSemestreRef = useRef();
-  const materiaOportunidadRef = useRef();
-  const materiaCalificacionRef = useRef();
-
-  const handleMateriaClose = () => {
-    setMateriasOpen(false);
-  };
-
-  const agregarMateria = () => {
-    const titulo = materiaTituloRef.current.value;
-    const grupo = materiaGrupoRef.current.value;
-    const clave = materiaClaveRef.current.value;
-    const docente = materiaDocenteRef.current.value;
-    const semestre = materiaSemestreRef.current.value;
-    const oportunidad = materiaOportunidadRef.current.value;
-    const calificacion = materiaCalificacionRef.current.value;
-    if (titulo === "") {
-      handleError();
-      handlehelperText();
-      return;
+    const [accionUsuario, setAccionUsuario] = useState(false);
+    const [reticula, setReticula] = useState([]);
+    const [materias, setMaterias] = useState([]);
+    const [materiasPartidas, setMateriasPartidas] = useState([]);
+    const [idCurso, setIdCurso] = useState("");
+    const [claveMateria, setClaveMateria] = useState("");
+    const [estadoMateria, setEstadoMateria] = useState("");
+    const [semestreMateria, setSemestreMateria] = useState(0);
+    const [calificacionMateria, setCalificacionMateria] = useState(0);
+    const [periodoMateria, setPeriodo] = useState("");
+    const [anoMateria, setAnoMateria] = useState(0);
+    const [tabValue, setTabValue] = useState(0);
+    const [dialogoAgregarAbierto, setDialogoAgregarAbierto] = useState(false);
+    const [dialogoEditarAbierto, setDialogoEditarAbierto] = useState(false);
+    const [dialogoEliminarAbierto, setDialogoEliminarAbierto] = useState(false);
+    const [presionoAprobada, setPresionoAprobada] = useState(false);
+    let condicion;
+    if (presionoAprobada) {
+        condicion = claveMateria === "" || estadoMateria === "" || semestreMateria === 0 || periodoMateria === "" || anoMateria === 0;
+    } else {
+        condicion = claveMateria === "" || estadoMateria === "";
     }
 
-    setMaterias((materias) => {
-      return [
-        ...materias,
-        { id: materias.length, titulo, grupo, clave, docente, semestre, oportunidad,
-          calificacion,tab: value},
-      ];
-    });
-    handleMateriaClose();
-  };
+    useEffect(() => {
+        Axios.get('http://localhost:3005/api/materias').then((res) => {
+            console.log(res.data);
+            setMaterias(res.data);
+        }).catch((err) => {
+            console.log(err);
+        });
+        Axios.get('http://localhost:3005/api/historial').then((res) => {
+            console.log(res.data);
+            setReticula(res.data);
+            setMateriasPartidas(partirReticula(res.data));
+            console.log(partirReticula(res.data));
+        }).catch((err) => {
+            console.log(err);
+        });
+    }, [accionUsuario]);
 
-  // Estado de error en input del dialog
-  const [error, setError] = useState(false);
-  const handleError = () => {
-    setError(true);
-  };
-
-  //Texto de error en input del dialog
-  const [helpertext, setHelperText] = useState("");
-  const handlehelperText = () => {
-    setHelperText("LLene los datos correctamente");
-  };
-
-  const [abrirMaterias, setMateriasOpen] = useState(false);
-  const handleMateriasClickOpen = () => {
-    setMateriasOpen(true);
-  };
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
+    const limpiar = () => {
+        setClaveMateria("");
+        setEstadoMateria("");
+        setSemestreMateria(0);
+        setCalificacionMateria(0);
+        setPeriodo("");
+        setAnoMateria(0);
     };
-  }
 
-  const [value, setValue] = React.useState(0);
-  return (
-    <div>
-      <Box
-        sx={{
-          width: "100%",
-          justifyContent: "center",
-          display: "flex",
-        }}
-      >
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          textColor="primary"
-          aria-label="scrollable auto tabs example"
-          variant="scrollable"
-        >
-         
-          {tabs.map((tab) => (
-            <Tab value={tab.value} label={tab.titulo} />
-          ))}
-           {/*Tab reticula */}
-           <Tab label="Reticula"/>
-           {/*Tab reticula */}
-        </Tabs>
-      </Box>
-      {/*Contenido de la reticula*/}
-      <Box sx={{marginLeft: "100px"}}>
-      </Box>
+    const partirReticula = (reticula) => {
+        let aprobadasReticula = [];
+        let encursoReticula = [];
+        let porcursarReticula = [];
+        reticula.forEach((materiaReticula) => {
+            if (materiaReticula.estado === "Aprobada") {
+                aprobadasReticula.push(materiaReticula);
+            } else if (materiaReticula.estado === "En curso") {
+                encursoReticula.push(materiaReticula);
+            } else if (materiaReticula.estado === "Por cursar") {
+                porcursarReticula.push(materiaReticula);
+            }
+        })
+        return [aprobadasReticula, encursoReticula, porcursarReticula];
+    };
 
-      <TabPanel value={value} index={3}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Ing. Sistemas" {...a11yProps(0)}/>
-          <Tab label="Ing. Industrial" {...a11yProps(1)} />
-          <Tab label="Ing. Quimica" {...a11yProps(2)} />
-        </Tabs>
-        </Box>
-        <img alt={"Logo de la empresa."} src={reticula1Tec} width="100%" />
-      </TabPanel>
-      <TabPanel value="0" index={2}>
-        asdad
-      </TabPanel>
-      {/*Contenido de la reticula*/}
-      <Box
-        sx={{
-          width: "100%",
-          maxWidth: 1000,
-          margin: "0 auto",
-          display: "flex",
-        }}
-      > 
-        {tabs.map((tab) => (
-          <TabPanel index={tab.value} value={value}>
-            <Grid
-              container
-              sx={{ justifyContent: "space-between", columnGap: 1, rowGap: 1 }}
-            >
-              <MateriasEstilo tareas={materias} materia={tab.titulo} />
-              
-              <Grid item sx={{ display: "flex", minWidth: "80em" }}>
-                {/* Inicio Card del boton + (agregar)*/}
-                <Card
-                  sx={{
+    const handleEliminarAbierto = () => {
+        setDialogoEliminarAbierto(true);
+    };
+
+    const handleEliminarCerrado = () => {
+        setDialogoEliminarAbierto(false);
+    };
+
+    const handleAgregarAbierto = () => {
+        setDialogoAgregarAbierto(true);
+    };
+
+    const handleAgregarCerrado = () => {
+        setDialogoAgregarAbierto(false);
+    };
+
+    const handleChange = (event, newValue) => {
+        setTabValue(newValue);
+    };
+
+    const getNombreMateria = (clave_materia) => {
+        let result;
+        materias.forEach((materia) => {
+            if (materia.clave_materia === clave_materia) {
+                result = materia.nombre_materia;
+            }
+        });
+        return result;
+    };
+
+    const getCreditosMateria = (ClaveMateria) => {
+        let creditos;
+        materias.forEach((materia) => {
+            if (materia.clave_materia === ClaveMateria) {
+                creditos = materia.creditos_materia;
+            }
+        });
+        return creditos;
+    };
+
+    const getCreditos = (materiasAprobadas) => {
+        let suma = 0;
+        materiasAprobadas.forEach((materia) => {
+            suma += getCreditosMateria(materia.clave_materia);
+        });
+        return suma;
+    };
+
+    const getPromedio = (materiasAprobadas) => {
+        let suma = 0;
+        let i;
+        for (i = 0; i < materiasAprobadas.length; i++) {
+            suma += materiasAprobadas[i]["calificacion"];
+        }
+        return suma / i;
+    };
+
+    // const getMaterias = () => {
+    //     Axios.get('http://localhost:3005/api/materias').then((res) => {
+    //         console.log(res.data);
+    //         setMaterias(res.data);
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     });
+    // };
+
+    const agregarMateria = () => {
+        // getMaterias();
+        setAccionUsuario(!accionUsuario);
+        Axios.post('http://localhost:3005/api/historial', {
+            clave_materia: claveMateria,
+            estado: estadoMateria,
+            semestre_cursada: semestreMateria,
+            calificacion: calificacionMateria,
+            periodo_cursada: periodoMateria + " " + anoMateria
+        }, {headers}).then((res) => {
+            console.log(res.data);
+        }).catch((err) => {
+            console.log(err);
+        });
+        limpiar();
+    };
+
+    const eliminarMateria = (idCurso) => {
+        setAccionUsuario(!accionUsuario);
+        Axios.delete('http://localhost:3005/api/historial', {
+            data: {
+                id_curso: idCurso
+            }
+        }, {headers}).then((res) => {
+            console.log(res.data);
+        }).catch((err) => {
+            console.log(err);
+        });
+        limpiar();
+    };
+
+    function a11yProps(index) {
+        return {
+            id: `simple-tab-${index}`,
+            'aria-controls': `simple-tabpanel-${index}`,
+        };
+    }
+
+    return (
+        <div>
+            <Box
+                sx={{
                     width: "100%",
-                    borderRadius: "20px",
-                    maxWidth: 952,
+                    justifyContent: "center",
                     display: "flex",
-                    flexDirection: "column",
-                  }}
+                }}
+            >
+                {/*TABS*/}
+                <Tabs
+                    value={tabValue}
+                    onChange={handleChange}
+                    textColor="primary"
+                    variant="scrollable"
                 >
-                  <CardActionArea
-                    sx={{
-                      display: "flex",
-                      height: "100%",
-                      alignItems: "flex-start",
-                    }}
-                    onClick={handleMateriasClickOpen}
-                  >
-                    <CardContent
-                      sx={{
-                        display: "flex",
-                        height: "100%",
-                        alignItems: "center",
-                      }}
-                    >
-                      <AddCircleOutlineIcon
-                        sx={{ fontSize: 100, color: "#1976d2" }}
-                      />
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-                {/*Fin Card del boton + (agregar)*/}
-              </Grid>
-            </Grid>
-          </TabPanel>
-        ))}
-      </Box>
+                    <Tab label="Materias aprobadas" {...a11yProps(0)}/>
+                    <Tab label="Materias en curso" {...a11yProps(1)}/>
+                    <Tab label="Materias por cursar" {...a11yProps(2)}/>
+                    <Tab label="Retículas por carrera" {...a11yProps(3)}/>
 
-      <Dialog
-        open={abrirMaterias}
-        onClose={handleMateriaClose}
-        maxWidth="false"
-        fullWidth
-      >
-        <DialogTitle>Agregar materia aprobada</DialogTitle>
-        <DialogContent>
-          <DialogContentText>Inserta el nombre de la materia</DialogContentText>
-          <TextField
-            inputRef={tabTituloRef}
-            autoFocus
-            margin="dense"
-            id="titulo"
-            label="Fundamentos de programacion"
-            type="text"
-            fullWidth
-            helperText={helpertext}
-            variant="standard"
-            error={error}
-          />
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              marginTop: "1.5em"
-            }}
-          >
-            <DialogContentText>
-              Inserta el grupo de la materia
-            </DialogContentText>
-            <TextField
-              inputRef={materiaTituloRef}
-              autoFocus
-              margin="dense"
-              id="grupo"
-              label="1"
-              type="number"
-              fullWidth
-              helperText={helpertext}
-              variant="standard"
-              error={error}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              marginTop: "1.5em"
-            }}
-          >
-            <DialogContentText>
-              Inserta la clave de la materia
-            </DialogContentText>
-            <TextField
-              inputRef={materiaClaveRef}
-              autoFocus
-              margin="dense"
-              id="grupo"
-              label="A15"
-              type="text"
-              fullWidth
-              helperText={helpertext}
-              variant="standard"
-              error={error}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              marginTop: "1.5em"
-            }}
-          >
-            <DialogContentText>Inserta el nombre del docente</DialogContentText>
-            <TextField
-              inputRef={materiaDocenteRef}
-              autoFocus
-              margin="dense"
-              id="docente"
-              label="Juan perez"
-              type="text"
-              fullWidth
-              helperText={helpertext}
-              variant="standard"
-              error={error}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              marginTop: "1.5em"
-            }}
-          >
-            <DialogContentText>
-              Inserta el semestre al que pertenece la materia
-            </DialogContentText>
-            <TextField
-              inputRef={materiaSemestreRef}
-              autoFocus
-              margin="dense"
-              id="semestre"
-              label="1"
-              type="number"
-              fullWidth
-              helperText={helpertext}
-              variant="standard"
-              error={error}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              marginTop: "1.5em"
-            }}
-          >
-            <DialogContentText>
-              Inserta la oportunidad en la que aprobaste la materia
-            </DialogContentText>
-            <TextField
-              inputRef={materiaOportunidadRef}
-              autoFocus
-              margin="dense"
-              id="oportunidad"
-              label="2"
-              type="number"
-              fullWidth
-              helperText={helpertext}
-              variant="standard"
-              error={error}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              marginTop: "1.5em"
-            }}
-          >
-            <DialogContentText>Inserta tu calificación</DialogContentText>
-            <TextField
-              inputRef={materiaCalificacionRef}
-              autoFocus
-              margin="dense"
-              id="calificacion"
-              label="75"
-              type="number"
-              fullWidth
-              helperText={helpertext}
-              variant="standard"
-              error={error}
-            />
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleMateriaClose}>Cancelar</Button>
-          <Button onClick={agregarMateria}>Agregar</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+                </Tabs>
+            </Box>
+            {/*Contenido de la reticula*/}
+            <Box
+                sx={{
+                    width: "100%",
+                    maxWidth: 1000,
+                    margin: "0 auto",
+                    display: "flex",
+                }}
+            >
+                <TabPanel index={0} value={tabValue}>
+                    <Grid
+                        container
+                        sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
+                    >
+                        {materiasPartidas[0] !== undefined ? materiasPartidas[0].length !== 0 ? materiasPartidas[0].map((materiaReticula) => (
+                                <React.Fragment>
+                                    <Grid container sx={{display: "block"}}>
+                                        <Grid item sx={{display: "block", position: "relative"}}>
+                                            <Card
+                                                sx={{
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    position: "relative",
+                                                    borderRadius: "20px",
+                                                }}
+                                            >
+                                                <CardActionArea
+                                                    sx={{
+                                                        display: "flex",
+                                                        height: "100%",
+                                                        "&:hover": {
+                                                            "background-color": "rgba(255, 0, 0, 0.2)",
+                                                            "transform": "scale3d(1.05, 1.05, 1)"
+                                                        }
+                                                    }}
+                                                    onClick={() => {
+                                                        setIdCurso(materiaReticula.id_curso);
+                                                        handleEliminarAbierto();
+                                                    }}>
+                                                    <CardContent>
+                                                        <Typography
+                                                            sx={{fontSize: 14}}
+                                                            color="text.secondary"
+                                                            gutterBottom
+                                                        >
+                                                            {"Clave: " + materiaReticula.clave_materia}
+                                                        </Typography>
+                                                        <Typography
+                                                            gutterBottom
+                                                            variant="h5"
+                                                        >
+                                                            {getNombreMateria(materiaReticula.clave_materia)}
+                                                        </Typography>
+                                                        <Typography
+                                                            color="text.secondary">{"Cursada: " + materiaReticula.periodo_cursada}</Typography>
+                                                        <Typography
+                                                            color="text.secondary">{"Semestre " + materiaReticula.semestre_cursada}</Typography>
+                                                    </CardContent>
+                                                    {/*Formato para la calificacion */}
+                                                    <CardContent>
+                                                        <Typography
+                                                            sx={{
+                                                                float: "right",
+                                                                height: "100%",
+                                                                marginTop: "-20px",
+                                                                marginLeft: "300px",
+                                                                marginRight: "20px",
+                                                                width: "20%",
+                                                                padding: "20px",
+                                                                display: "inline-block",
+                                                                position: "relative",
+                                                                border: "solid .1px",
+                                                                borderColor: "divider",
+                                                                flexDirection: "column",
+                                                                borderRadius: "20px",
+                                                            }}
+                                                            align="center"
+                                                        >{materiaReticula.calificacion}</Typography>
+                                                    </CardContent>
+                                                </CardActionArea>
+                                            </Card>
+                                        </Grid></Grid></React.Fragment>)) :
+                            <h4>Aún no tienes materias aprobadas agregadas.</h4> : null}
+                    </Grid>
+                </TabPanel>
+                <TabPanel index={1} value={tabValue}>
+                    <Grid
+                        container
+                        sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
+                    >
+                        {materiasPartidas[1] !== undefined ? materiasPartidas[1].length !== 0 ? materiasPartidas[1].map((materiaReticula) => (
+                                <React.Fragment>
+                                    <Grid container sx={{display: "block"}}>
+                                        <Grid item sx={{display: "block", position: "relative"}}>
+                                            <Card
+                                                sx={{
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    position: "relative",
+                                                    borderRadius: "20px",
+                                                }}
+                                            >
+                                                <CardActionArea sx={{
+                                                    display: "flex",
+                                                    height: "100%",
+                                                    "&:hover": {
+                                                        "background-color": "rgba(255, 0, 0, 0.2)",
+                                                        "transform": "scale3d(1.05, 1.05, 1)"
+                                                    }
+                                                }} onClick={() => {
+                                                    setIdCurso(materiaReticula.id_curso);
+                                                    handleEliminarAbierto();
+                                                }}>
+                                                    <CardContent>
+                                                        <Typography
+                                                            sx={{fontSize: 14}}
+                                                            color="text.secondary"
+                                                            gutterBottom
+                                                        >
+                                                            {"Clave: " + materiaReticula.clave_materia}
+                                                        </Typography>
+                                                        <Typography
+                                                            gutterBottom
+                                                            variant="h5"
+                                                        >
+                                                            {getNombreMateria(materiaReticula.clave_materia)}
+                                                        </Typography>
+                                                    </CardContent>
+                                                </CardActionArea>
+                                            </Card>
+                                        </Grid></Grid></React.Fragment>)) :
+                            <h4>Aún no tienes materias en curso agregadas.</h4> : null}
+                    </Grid>
+                </TabPanel>
+                <TabPanel index={2} value={tabValue}>
+                    <Grid
+                        container
+                        sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
+                    >
+                        {materiasPartidas[2] !== undefined ? materiasPartidas[2].length !== 0 ? materiasPartidas[2].map((materiaReticula) => (
+                                <React.Fragment>
+                                    <Grid container sx={{display: "block"}}>
+                                        <Grid item sx={{display: "block", position: "relative"}}>
+                                            <Card
+                                                sx={{
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    position: "relative",
+                                                    borderRadius: "20px",
+                                                }}
+                                            >
+                                                <CardActionArea sx={{
+                                                    display: "flex",
+                                                    height: "100%",
+                                                    "&:hover": {
+                                                        "background-color": "rgba(255, 0, 0, 0.2)",
+                                                        "transform": "scale3d(1.05, 1.05, 1)"
+                                                    }
+                                                }} onClick={() => {
+                                                    setIdCurso(materiaReticula.id_curso);
+                                                    handleEliminarAbierto();
+                                                }}>
+                                                    <CardContent>
+                                                        <Typography
+                                                            sx={{fontSize: 14}}
+                                                            color="text.secondary"
+                                                            gutterBottom
+                                                        >
+                                                            {"Clave: " + materiaReticula.clave_materia}
+                                                        </Typography>
+                                                        <Typography
+                                                            gutterBottom
+                                                            variant="h5"
+                                                        >
+                                                            {getNombreMateria(materiaReticula.clave_materia)}
+                                                        </Typography>
+                                                    </CardContent>
+                                                </CardActionArea>
+                                            </Card>
+                                        </Grid></Grid></React.Fragment>)) :
+                            <h4>Aún no tienes materias por cursar agregadas.</h4> : null}
+                    </Grid>
+                </TabPanel>
+                <TabPanel index={3} value={tabValue}>
+                    <Grid
+                        container
+                        sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
+                    >
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography>Ing. Sistemas (especialidad tecnologías de la información y la comunicación)</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <img src={ReticulaSistemasEspTecnologiasWeb} width={"100%"}/>
+                            </AccordionDetails>
+                        </Accordion>
+                    </Grid>
+                </TabPanel>
+            </Box>
+            <br/>
+            {materiasPartidas[0] !== undefined ?
+                materiasPartidas[0].length !== 0 ?
+                    <h5 style={{textAlign: "center"}}>{"Promedio: " + getPromedio(materiasPartidas[0])}</h5> :
+                    <h5 style={{textAlign: "center"}}>Promedio: n/a</h5>
+                : null}
+            {materiasPartidas[0] !== undefined ?
+                materiasPartidas[0].length !== 0 ?
+                    <h5 style={{textAlign: "center"}}>{"Créditos completados: " + getCreditos(materiasPartidas[0])}</h5> :
+                    <h5 style={{textAlign: "center"}}>Créditos completados: n/a</h5>
+                : null}
+            <br/>
+            {/*Boton agregar*/}
+            <Container sx={{py: 1}} maxWidth="md">
+                <Grid container spacing={4}>
+                    <Grid item sx={{display: "flex", width: "90em"}}>
+                        {/* Inicio Card del boton + (agregar)*/}
+                        <Card
+                            sx={{
+                                width: "100%",
+                                borderRadius: "20px",
+                                maxWidth: 952,
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <CardActionArea
+                                sx={{
+                                    display: "flex",
+                                    height: "100%",
+                                    alignItems: "flex-start",
+                                }}
+                                onClick={handleAgregarAbierto}
+                            >
+                                <CardContent
+                                    sx={{
+                                        display: "flex",
+                                        height: "100%",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <AddCircleOutlineIcon
+                                        sx={{fontSize: 100, color: "#1976d2"}}
+                                    />
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                </Grid>
+            </Container>
+            {/* Dialogo agregar materia*/}
+            <Dialog
+                open={dialogoAgregarAbierto}
+                onClose={handleAgregarCerrado}
+                maxWidth="false"
+                fullWidth
+            >
+                <DialogTitle>Agregar materia a tu historial académico</DialogTitle>
+                <DialogContent>
+                    <Box m={1} sx={{justifyContent: "space-between"}}>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Clave de la materia</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={claveMateria}
+                                label="Clave de la materia"
+                                onChange={(e) => {
+                                    setClaveMateria(e.target.value);
+                                }}
+                            >
+                                {materias.map((materiaReticula) => (
+                                    <MenuItem
+                                        value={materiaReticula.clave_materia}>{materiaReticula.clave_materia + ": " + materiaReticula.nombre_materia} </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <br/>
+                        <br/>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Estado de la materia</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={estadoMateria}
+                                label="Estado de la materia"
+                                onChange={(e) => {
+                                    setEstadoMateria(e.target.value)
+                                }}
+                            >
+                                <MenuItem value={"Aprobada"} onClick={() => {
+                                    setPresionoAprobada(true)
+                                }}>Aprobada</MenuItem>
+                                <MenuItem value={"En curso"} onClick={() => {
+                                    setPresionoAprobada(false)
+                                }}>En curso</MenuItem>
+                                <MenuItem value={"Por cursar"} onClick={() => {
+                                    setPresionoAprobada(false)
+                                }}>Por cursar</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <br/>
+                        {presionoAprobada ?
+                            <div>
+                                <br/>
+                                <DialogContentText>Semestre (en número arábigo)</DialogContentText>
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    size='small'
+                                    id="titulo"
+                                    type="text"
+                                    fullWidth
+                                    variant="outlined"
+                                    required
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <CalendarTodayIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                    onChange={(e) => {
+                                        setSemestreMateria(parseInt(e.target.value))
+                                    }}
+                                />
+                                <br/>
+                                <br/>
+                                <DialogContentText>Calificación</DialogContentText>
+                                <Slider
+                                    aria-label="Calificación"
+                                    defaultValue={70}
+                                    // getAriaValueText={valuetext}
+                                    valueLabelDisplay="auto"
+                                    step={1}
+                                    marks
+                                    min={70}
+                                    max={100}
+                                    onChange={(e) => {
+                                        setCalificacionMateria(e.target.value)
+                                    }}
+                                />
+                                <br/>
+                                <br/>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Periodo</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={periodoMateria}
+                                        label="Clave de la materia"
+                                        onChange={(e) => {
+                                            setPeriodo(e.target.value)
+                                        }}
+                                    >
+                                        <MenuItem value={"Enero-junio"}>Enero-junio</MenuItem>
+                                        <MenuItem value={"Agosto-diciembre"}>Agosto-diciembre</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <br/>
+                                <br/>
+                                <DialogContentText>Año (en número arábigo)</DialogContentText>
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    size='small'
+                                    id="titulo"
+                                    type="text"
+                                    fullWidth
+                                    variant="outlined"
+                                    required
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <DateRangeIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                    onChange={(e) => {
+                                        setAnoMateria(parseInt(e.target.value))
+                                    }}
+                                />
+                                <br/>
+                            </div> : null
+                        }
+                    </Box>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => {
+                        handleAgregarCerrado();
+                        setTabValue(0);
+                        setPresionoAprobada(false);
+                    }}>Cancelar</Button>
+                    <Button
+                        disabled={condicion}
+                        onClick={() => {
+                            agregarMateria();
+                            setPresionoAprobada(false);
+                            handleAgregarCerrado();
+                        }}>Agregar</Button>
+                </DialogActions>
+            </Dialog>
+            {/*Dialogo eliminar*/}
+            <Dialog
+                open={dialogoEliminarAbierto}
+                onClose={handleEliminarCerrado}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"¿Estás segur@ que quieres eliminar el curso?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Esta acción es permanente y no se puede revertir.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => {
+                        handleEliminarCerrado()
+                    }}>No</Button>
+                    <Button onClick={() => {
+                        eliminarMateria(idCurso);
+                        handleEliminarCerrado();
+                    }} autoFocus>
+                        Sí
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
+    );
 }

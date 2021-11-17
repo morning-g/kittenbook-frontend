@@ -204,30 +204,6 @@ export default function Horario() {
                 </Box>
                 <TabPanel value={value} index={0}>
                     <Card sx={{minWidth: 100}}>
-                        <CardContent>
-                            <Typography
-                                sx={{fontSize: 14}}
-                                color="text.secondary"
-                                gutterBottom
-                            >
-                                Grupo 1, Clave: MPA1
-                            </Typography>
-                            <Typography variant="h5" component="div">
-                                Fundamentos de programación
-                            </Typography>
-                            <Typography sx={{mb: 1.5}} color="text.secondary">
-                                Profesor: Juan Escutia
-                            </Typography>
-                            <Typography variant="body2">Horario: 8am a 9am</Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Link to="/notas">
-                                <Button size="small">Apuntes de la materia</Button>
-                            </Link>
-                        </CardActions>
-                    </Card>
-                    <Divider variant="inset" component=""/>
-                    <Card sx={{minWidth: 100}}>
                         <CardActionArea onClick={handleEditarAbierto}>
                             <CardContent>
                                 <Typography
@@ -235,15 +211,15 @@ export default function Horario() {
                                     color="text.secondary"
                                     gutterBottom
                                 >
-                                    Grupo 1, Clave: MPA1
+                                    Grupo X, Clave: XXX-XXXX, Aula XXX
                                 </Typography>
                                 <Typography variant="h5" component="div">
-                                    Estadística
+                                    Nombre materia
                                 </Typography>
                                 <Typography sx={{mb: 1.5}} color="text.secondary">
-                                    Profesor: Juan Escutia
+                                    Docente
                                 </Typography>
-                                <Typography variant="body2">Horario: 8am a 9am</Typography>
+                                <Typography variant="body2">Horario: X a X</Typography>
                             </CardContent>
                         </CardActionArea>
                     </Card>
@@ -307,9 +283,9 @@ export default function Horario() {
                                 </Select>
                             </FormControl>
                             <br/>
+                            <br/>
                             <DialogContentText>Grupo</DialogContentText>
                             <TextField
-                                autoFocus
                                 margin="dense"
                                 size='small'
                                 id="titulo"
@@ -329,9 +305,9 @@ export default function Horario() {
                                 // }}
                             />
                             <br/>
+                            <br/>
                             <DialogContentText>Docente</DialogContentText>
                             <TextField
-                                autoFocus
                                 margin="dense"
                                 size='small'
                                 id="titulo"
@@ -351,9 +327,9 @@ export default function Horario() {
                                 // }}
                             />
                             <br/>
+                            <br/>
                             <DialogContentText>Aula</DialogContentText>
                             <TextField
-                                autoFocus
                                 margin="dense"
                                 size='small'
                                 id="titulo"
@@ -373,6 +349,7 @@ export default function Horario() {
                                 // }}
                             />
                             <br/>
+                            <br/>
                             <DialogContentText>Hora de inicio</DialogContentText>
                             <Slider
                                 aria-label="Temperature"
@@ -385,6 +362,7 @@ export default function Horario() {
                                 max={23}
                             />
                             <br/>
+                            <br/>
                             <DialogContentText>Hora de término</DialogContentText>
                             <Slider
                                 aria-label="Temperature"
@@ -396,6 +374,8 @@ export default function Horario() {
                                 min={0}
                                 max={23}
                             />
+                            <br/>
+                            <br/>
                             <DialogContentText>Días</DialogContentText>
                             <FormGroup>
                                 <FormControlLabel control={<Checkbox defaultChecked/>} label="Lunes"/>
@@ -436,9 +416,9 @@ export default function Horario() {
                                 </Select>
                             </FormControl>
                             <br/>
+                            <br/>
                             <DialogContentText>Grupo</DialogContentText>
                             <TextField
-                                autoFocus
                                 margin="dense"
                                 size='small'
                                 id="titulo"
@@ -458,9 +438,9 @@ export default function Horario() {
                                 // }}
                             />
                             <br/>
+                            <br/>
                             <DialogContentText>Docente</DialogContentText>
                             <TextField
-                                autoFocus
                                 margin="dense"
                                 size='small'
                                 id="titulo"
@@ -480,9 +460,9 @@ export default function Horario() {
                                 // }}
                             />
                             <br/>
+                            <br/>
                             <DialogContentText>Aula</DialogContentText>
                             <TextField
-                                autoFocus
                                 margin="dense"
                                 size='small'
                                 id="titulo"
@@ -502,6 +482,7 @@ export default function Horario() {
                                 // }}
                             />
                             <br/>
+                            <br/>
                             <DialogContentText>Hora de inicio</DialogContentText>
                             <Slider
                                 aria-label="Temperature"
@@ -514,6 +495,7 @@ export default function Horario() {
                                 max={23}
                             />
                             <br/>
+                            <br/>
                             <DialogContentText>Hora de término</DialogContentText>
                             <Slider
                                 aria-label="Temperature"
@@ -525,6 +507,8 @@ export default function Horario() {
                                 min={0}
                                 max={23}
                             />
+                            <br/>
+                            <br/>
                             <DialogContentText>Días</DialogContentText>
                             <FormGroup>
                                 <FormControlLabel control={<Checkbox defaultChecked/>} label="Lunes"/>
@@ -541,7 +525,7 @@ export default function Horario() {
                         }}>Cancelar</Button>
                         <Button onClick={() => {
                             handleEliminarAbierto();
-                        }}>Eliminar nota</Button>
+                        }}>Eliminar clase</Button>
                         <Button
                             // disabled={titulo === "" || contenido === "" ? true : false}
                             onClick={() => {
