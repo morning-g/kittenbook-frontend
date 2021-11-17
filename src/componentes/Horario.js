@@ -9,8 +9,6 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import {Link} from "react-router-dom";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -22,8 +20,6 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import TitleIcon from "@mui/icons-material/Title";
-import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -31,8 +27,6 @@ import Select from '@mui/material/Select';
 import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
 import RoomIcon from '@mui/icons-material/Room';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import TimerIcon from '@mui/icons-material/Timer';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -78,7 +72,11 @@ export default function Horario() {
     };
 
     const [accionUsuario, setAccionUsuario] = useState(false);
-    const [value, setValue] = React.useState(0);
+    const [reticula, setReticula] = useState([]);
+    const [materias, setMaterias] = useState([]);
+    const [historialPartido, setHistorialPartido] = useState([]);
+    const [horarioPartido, setHorarioPartido] = useState([]);
+    const [value, setValue] = useState(0);
     const [dialogoAgregarAbierto, setDialogoAgregarAbierto] = useState(false);
     const [dialogoEditarAbierto, setDialogoEditarAbierto] = useState(false);
     const [dialogoEliminarAbierto, setDialogoEliminarAbierto] = useState(false);
@@ -86,23 +84,83 @@ export default function Horario() {
     const [idClase, setIdClase] = useState(0);
     const [claveMateria, setClaveMateria] = useState("");
     const [grupo, setGrupo] = useState("");
+    const [docente, setDocente] = useState("");
     const [aula, setAula] = useState("");
-    const [horaInicio, setHoraInicio] = useState("");
-    const [horaTermino, setHoraTermino] = useState("");
+    const [horaInicio, setHoraInicio] = useState(0);
+    const [horaTermino, setHoraTermino] = useState(0);
     const [lunes, setLunes] = useState(true);
     const [martes, setMartes] = useState(true);
     const [miercoles, setMiercoles] = useState(true);
     const [jueves, setJueves] = useState(true);
     const [viernes, setViernes] = useState(true);
+    const [claseActiva, setClaseActiva] = useState({});
+    let condicion = claveMateria === "" || grupo === "" || docente === "" || aula === "";
 
-    // useEffect(() => {
-    //     Axios.get('http://localhost:3005/api/horario').then((res) => {
-    //         console.log(res.data);
-    //         // setNotas(res.data);
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     });
-    // }, []);
+    useEffect(() => {
+        Axios.get('http://localhost:3005/api/materias').then((res) => {
+            console.log(res.data);
+            setMaterias(res.data);
+        }).catch((err) => {
+            console.log(err);
+        });
+        Axios.get('http://localhost:3005/api/historial').then((res) => {
+            console.log(res.data);
+            setReticula(res.data);
+            setHistorialPartido(partirReticula(res.data));
+            console.log(partirReticula(res.data));
+        }).catch((err) => {
+            console.log(err);
+        });
+        Axios.get('http://localhost:3005/api/horario').then((res) => {
+            console.log(res.data);
+            setClases(res.data);
+            setHorarioPartido(partirHorario(res.data));
+        }).catch((err) => {
+            console.log(err);
+        });
+    }, [accionUsuario]);
+
+    const partirReticula = (reticula) => {
+        let aprobadasReticula = [];
+        let encursoReticula = [];
+        let porcursarReticula = [];
+        reticula.forEach((materiaReticula) => {
+            if (materiaReticula.estado === "Aprobada") {
+                aprobadasReticula.push(materiaReticula);
+            } else if (materiaReticula.estado === "En curso") {
+                encursoReticula.push(materiaReticula);
+            } else if (materiaReticula.estado === "Por cursar") {
+                porcursarReticula.push(materiaReticula);
+            }
+        });
+        return [aprobadasReticula, encursoReticula, porcursarReticula];
+    };
+
+    const partirHorario = (horario) => {
+        let lunesHorario = [];
+        let martesHorario = [];
+        let miercolesHorario = [];
+        let juevesHorario = [];
+        let viernesHorario = [];
+        horario.forEach((clase) => {
+            if (clase.lunes === 1) {
+                lunesHorario.push(clase);
+            }
+            if (clase.martes === 1) {
+                martesHorario.push(clase);
+            }
+            if (clase.miercoles === 1) {
+                miercolesHorario.push(clase);
+            }
+            if (clase.jueves === 1) {
+                juevesHorario.push(clase);
+            }
+            if (clase.viernes === 1) {
+                viernesHorario.push(clase);
+            }
+        });
+        return [lunesHorario, martesHorario, miercolesHorario, juevesHorario, viernesHorario];
+    };
 
     const handleEditarAbierto = () => {
         setDialogoEditarAbierto(true);
@@ -148,8 +206,17 @@ export default function Horario() {
     const agregarClase = () => {
         setAccionUsuario(!accionUsuario);
         Axios.post('http://localhost:3005/api/horario', {
-            // titulo: titulo,
-            // contenido: contenido
+            clave_materia: claveMateria,
+            grupo: grupo,
+            docente: docente,
+            aula: aula,
+            hora_inicio: horaInicio,
+            hora_termino: horaTermino,
+            lunes: lunes,
+            martes: martes,
+            miercoles: miercoles,
+            jueves: jueves,
+            viernes: viernes
         }, {headers}).then((res) => {
             console.log(res.data);
         }).catch((err) => {
@@ -161,11 +228,19 @@ export default function Horario() {
     const editarClase = () => {
         setAccionUsuario(!accionUsuario);
         Axios.post('http://localhost:3005/api/horario/actualizar', {
-            // id_nota: id_nota,
-            // titulo: titulo,
-            // contenido: contenido
+            clave_materia: claveMateria,
+            grupo: grupo,
+            docente: docente,
+            aula: aula,
+            hora_inicio: horaInicio,
+            hora_termino: horaTermino,
+            lunes: lunes,
+            martes: martes,
+            miercoles: miercoles,
+            jueves: jueves,
+            viernes: viernes
         }, {headers}).then((res) => {
-
+            console.log(res.data);
         }).catch((err) => {
             console.log(err);
         });
@@ -176,7 +251,7 @@ export default function Horario() {
         setAccionUsuario(!accionUsuario);
         Axios.delete('http://localhost:3005/api/horario', {
             data: {
-                // id_nota: id_nota
+                id_clase: idClase
             }
         }, {headers}).then((res) => {
             console.log(res.data);
@@ -203,6 +278,95 @@ export default function Horario() {
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
+                    {horarioPartido[0] !== undefined ? (horarioPartido[0].length !== 0 ? horarioPartido[0].map((clase) => (
+                        <Card sx={{minWidth: 100}}>
+                            <CardActionArea onClick={handleEditarAbierto}>
+                                <CardContent>
+                                    <Typography
+                                        sx={{fontSize: 14}}
+                                        color="text.secondary"
+                                        gutterBottom
+                                    >
+                                        Grupo {clase.grupo}, Clave: {clase.clave_materia}, Aula {clase.aula}
+                                    </Typography>
+                                    <Typography variant="h5" component="div">
+                                        Nombre materia
+                                    </Typography>
+                                    <Typography sx={{mb: 1.5}} color="text.secondary">
+                                        Docente: {clase.docente}
+                                    </Typography>
+                                    <Typography variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>)) : null) : null}
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <Card sx={{minWidth: 100}}>
+                        <CardActionArea onClick={handleEditarAbierto}>
+                            <CardContent>
+                                <Typography
+                                    sx={{fontSize: 14}}
+                                    color="text.secondary"
+                                    gutterBottom
+                                >
+                                    Grupo X, Clave: XXX-XXXX, Aula XXX
+                                </Typography>
+                                <Typography variant="h5" component="div">
+                                    Nombre materia
+                                </Typography>
+                                <Typography sx={{mb: 1.5}} color="text.secondary">
+                                    Docente
+                                </Typography>
+                                <Typography variant="body2">Horario: X a X</Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    <Card sx={{minWidth: 100}}>
+                        <CardActionArea onClick={handleEditarAbierto}>
+                            <CardContent>
+                                <Typography
+                                    sx={{fontSize: 14}}
+                                    color="text.secondary"
+                                    gutterBottom
+                                >
+                                    Grupo X, Clave: XXX-XXXX, Aula XXX
+                                </Typography>
+                                <Typography variant="h5" component="div">
+                                    Nombre materia
+                                </Typography>
+                                <Typography sx={{mb: 1.5}} color="text.secondary">
+                                    Docente
+                                </Typography>
+                                <Typography variant="body2">Horario: X a X</Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                    <Card sx={{minWidth: 100}}>
+                        <CardActionArea onClick={handleEditarAbierto}>
+                            <CardContent>
+                                <Typography
+                                    sx={{fontSize: 14}}
+                                    color="text.secondary"
+                                    gutterBottom
+                                >
+                                    Grupo X, Clave: XXX-XXXX, Aula XXX
+                                </Typography>
+                                <Typography variant="h5" component="div">
+                                    Nombre materia
+                                </Typography>
+                                <Typography sx={{mb: 1.5}} color="text.secondary">
+                                    Docente
+                                </Typography>
+                                <Typography variant="body2">Horario: X a X</Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </TabPanel>
+                <TabPanel value={value} index={4}>
                     <Card sx={{minWidth: 100}}>
                         <CardActionArea onClick={handleEditarAbierto}>
                             <CardContent>
@@ -273,13 +437,16 @@ export default function Horario() {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    // value={age}
+                                    value={claveMateria}
                                     label="Clave de la materia"
-                                    onChange={handleChange}
+                                    onChange={(e) => {
+                                        // handleChange();
+                                        setClaveMateria(e.target.value);
+                                        setValue(0);
+                                    }}
                                 >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    {historialPartido[1] !== undefined ? historialPartido[1].map((materia) => (<MenuItem
+                                        value={materia.clave_materia}>{materia.clave_materia}</MenuItem>)) : null}
                                 </Select>
                             </FormControl>
                             <br/>
@@ -300,9 +467,9 @@ export default function Horario() {
                                         </InputAdornment>
                                     ),
                                 }}
-                                // onChange={(e) => {
-                                //     setTitulo(e.target.value)
-                                // }}
+                                onChange={(e) => {
+                                    setGrupo(e.target.value)
+                                }}
                             />
                             <br/>
                             <br/>
@@ -322,9 +489,9 @@ export default function Horario() {
                                         </InputAdornment>
                                     ),
                                 }}
-                                // onChange={(e) => {
-                                //     setTitulo(e.target.value)
-                                // }}
+                                onChange={(e) => {
+                                    setDocente(e.target.value);
+                                }}
                             />
                             <br/>
                             <br/>
@@ -344,55 +511,71 @@ export default function Horario() {
                                         </InputAdornment>
                                     ),
                                 }}
-                                // onChange={(e) => {
-                                //     setTitulo(e.target.value)
-                                // }}
+                                onChange={(e) => {
+                                    setAula(e.target.value)
+                                }}
                             />
                             <br/>
                             <br/>
                             <DialogContentText>Hora de inicio</DialogContentText>
                             <Slider
                                 aria-label="Temperature"
-                                defaultValue={30}
+                                defaultValue={12}
                                 // getAriaValueText={valuetext}
                                 valueLabelDisplay="auto"
                                 step={1}
                                 marks
                                 min={0}
                                 max={23}
+                                onChange={(e) => {
+                                    setHoraInicio(e.target.value);
+                                }}
                             />
                             <br/>
                             <br/>
                             <DialogContentText>Hora de término</DialogContentText>
                             <Slider
                                 aria-label="Temperature"
-                                defaultValue={30}
+                                defaultValue={12}
                                 // getAriaValueText={valuetext}
                                 valueLabelDisplay="auto"
                                 step={1}
                                 marks
                                 min={0}
                                 max={23}
+                                onChange={(e) => {
+                                    setHoraTermino(e.target.value);
+                                }}
                             />
                             <br/>
                             <br/>
                             <DialogContentText>Días</DialogContentText>
                             <FormGroup>
-                                <FormControlLabel control={<Checkbox defaultChecked/>} label="Lunes"/>
-                                <FormControlLabel control={<Checkbox defaultChecked/>} label="Martes"/>
-                                <FormControlLabel control={<Checkbox defaultChecked/>} label="Miércoles"/>
-                                <FormControlLabel control={<Checkbox defaultChecked/>} label="Jueves"/>
-                                <FormControlLabel control={<Checkbox defaultChecked/>} label="Viernes"/>
+                                <FormControlLabel control={<Checkbox defaultChecked onChange={(e) => {
+                                    setLunes(!lunes);
+                                }}/>} label="Lunes"/>
+                                <FormControlLabel control={<Checkbox defaultChecked onChange={(e) => {
+                                    setMartes(!martes);
+                                }}/>} label="Martes"/>
+                                <FormControlLabel control={<Checkbox defaultChecked onChange={(e) => {
+                                    setMiercoles(!miercoles);
+                                }}/>} label="Miércoles"/>
+                                <FormControlLabel control={<Checkbox defaultChecked onChange={(e) => {
+                                    setJueves(!jueves);
+                                }}/>} label="Jueves"/>
+                                <FormControlLabel control={<Checkbox defaultChecked onChange={(e) => {
+                                    setViernes(!viernes);
+                                }}/>} label="Viernes"/>
                             </FormGroup>
                         </Box>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleAgregarCerrado}>Cancelar</Button>
                         <Button
-                            // disabled={titulo === "" || contenido === "" ? true : false}
+                            disabled={condicion}
                             onClick={() => {
                                 agregarClase();
-                                setDialogoAgregarAbierto(false)
+                                setDialogoAgregarAbierto(false);
                             }}>Agregar</Button>
                     </DialogActions>
                 </Dialog>
@@ -408,7 +591,7 @@ export default function Horario() {
                                     id="demo-simple-select"
                                     // value={age}
                                     label="Clave de la materia"
-                                    onChange={handleChange}
+                                    // onChange={handleChange}
                                 >
                                     <MenuItem value={10}>Ten</MenuItem>
                                     <MenuItem value={20}>Twenty</MenuItem>
@@ -527,7 +710,7 @@ export default function Horario() {
                             handleEliminarAbierto();
                         }}>Eliminar clase</Button>
                         <Button
-                            // disabled={titulo === "" || contenido === "" ? true : false}
+                            disabled={condicion}
                             onClick={() => {
                                 editarClase();
                                 handleEditarCerrado();

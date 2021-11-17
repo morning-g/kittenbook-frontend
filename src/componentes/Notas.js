@@ -125,56 +125,60 @@ export default function Notas() {
                 <br/>
                 <Container sx={{py: 1}} maxWidth="md">
                     <Grid container spacing={4}>
-                        {notas.length === 0 ? <Grid item sx={{display: "flex", width: "90em"}}>
-                            {/* Inicio Card del boton + (agregar)*/}
-                            <Card
-                                sx={{
-                                    width: "100%",
-                                    borderRadius: "20px",
-                                    maxWidth: 952,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <CardActionArea
+                        {notas.length === 0 ?
+                            <div><br/><h4>Aún no tienes ninguna nota.</h4><br/><Grid item sx={{
+                                display: "flex",
+                                width: "90em"
+                            }}>
+                                {/* Inicio Card del boton + (agregar)*/}
+                                <Card
                                     sx={{
+                                        width: "100%",
+                                        borderRadius: "20px",
+                                        maxWidth: 952,
                                         display: "flex",
-                                        height: "100%",
-                                        alignItems: "flex-start",
+                                        flexDirection: "column",
                                     }}
-                                    onClick={handleAgregarAbierto}
                                 >
-                                    <CardContent
+                                    <CardActionArea
                                         sx={{
                                             display: "flex",
                                             height: "100%",
-                                            alignItems: "center",
+                                            alignItems: "flex-start",
                                         }}
+                                        onClick={handleAgregarAbierto}
                                     >
-                                        <AddCircleOutlineIcon
-                                            sx={{fontSize: 100, color: "#1976d2"}}
-                                        />
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Grid> : <Grid item xs={12} sm={6} md={4}>
-                            <Card sx={{
-                                height: "100%",
-                                display: "flex",
-                                flexDirection: "column",
-                                backgroundColor: "transparent",
-                                boxShadow: "none",
-                                position: "relative",
-                            }}
-                            >
-                                <CardActionArea sx={{display: "flex", height: "100%", alignItems: "flex-start"}}
-                                                onClick={handleAgregarAbierto}>
-                                    <CardContent sx={{display: "flex", height: "100%", alignItems: "center"}}>
-                                        <AddCircleOutlineIcon sx={{fontSize: 100, color: "#1976d2"}}/>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>}
+                                        <CardContent
+                                            sx={{
+                                                display: "flex",
+                                                height: "100%",
+                                                alignItems: "center",
+                                            }}
+                                        >
+                                            <AddCircleOutlineIcon
+                                                sx={{fontSize: 100, color: "#1976d2"}}
+                                            />
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid></div> : <Grid item xs={12} sm={6} md={4}>
+                                <Card sx={{
+                                    height: "100%",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    backgroundColor: "transparent",
+                                    boxShadow: "none",
+                                    position: "relative",
+                                }}
+                                >
+                                    <CardActionArea sx={{display: "flex", height: "100%", alignItems: "flex-start"}}
+                                                    onClick={handleAgregarAbierto}>
+                                        <CardContent sx={{display: "flex", height: "100%", alignItems: "center"}}>
+                                            <AddCircleOutlineIcon sx={{fontSize: 100, color: "#1976d2"}}/>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>}
 
                         {notas.map((nota) => (
                             <Grid item key={nota.id_nota} xs={12} sm={6} md={4}>

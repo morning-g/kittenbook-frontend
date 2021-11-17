@@ -29,7 +29,16 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ReticulaSistemasEspTecnologiasWeb from "../ReticulaSistemasEspTecnologiasWeb.png"
+import ReticulaSistemasEspTICs from "../ReticulaSistemasEspTICs.png";
+import ReticulaSistemasEspTecnologiasWeb from "../ReticulaSistemasEspTecnologiasWeb.png";
+import ReticulaElectronicaEspMecatronica from "../ReticulaElectronicaEspMecatronica.png";
+import ReticulaElectronicaEspSistemasEnergeticos from "../ReticulaElectronicaEspSistemasEnergeticos.png";
+import ReticulaElectricaEspSistemasElectricos from "../ReticulaElectricaEspSistemasElectricos.png";
+import ReticulaGestionEmpresarial from "../ReticulaGestionEmpresarial.png";
+import ReticulaQuimicaEspGestionAmbiental from "../ReticulaQuimicaEspGestionAmbiental.png"
+import ReticulaMecanicaEspDisenoMecanico from "../ReticulaMecanicaEspDisenoMecanico.png"
+import ReticulaMecanicaEspTermica from "../ReticulaMecanicaEspTermica.png"
+
 import Axios from "axios";
 
 function TabPanel(props) {
@@ -59,7 +68,7 @@ TabPanel.propTypes = {
     value: PropTypes.number.isRequired,
 };
 
-export default function Reticula() {
+export default function Reticula(props) {
     return (
         <Box sx={{width: "100%"}}>
             <ListaTabs/>
@@ -67,7 +76,7 @@ export default function Reticula() {
     );
 }
 
-function ListaTabs() {
+function ListaTabs(props) {
     Axios.defaults.withCredentials = true;
     const headers = {
         'Content-Type': 'application/json'
@@ -76,7 +85,7 @@ function ListaTabs() {
     const [accionUsuario, setAccionUsuario] = useState(false);
     const [reticula, setReticula] = useState([]);
     const [materias, setMaterias] = useState([]);
-    const [materiasPartidas, setMateriasPartidas] = useState([]);
+    const [historialPartido, setHistorialPartido] = useState([]);
     const [idCurso, setIdCurso] = useState("");
     const [claveMateria, setClaveMateria] = useState("");
     const [estadoMateria, setEstadoMateria] = useState("");
@@ -86,7 +95,6 @@ function ListaTabs() {
     const [anoMateria, setAnoMateria] = useState(0);
     const [tabValue, setTabValue] = useState(0);
     const [dialogoAgregarAbierto, setDialogoAgregarAbierto] = useState(false);
-    const [dialogoEditarAbierto, setDialogoEditarAbierto] = useState(false);
     const [dialogoEliminarAbierto, setDialogoEliminarAbierto] = useState(false);
     const [presionoAprobada, setPresionoAprobada] = useState(false);
     let condicion;
@@ -106,7 +114,7 @@ function ListaTabs() {
         Axios.get('http://localhost:3005/api/historial').then((res) => {
             console.log(res.data);
             setReticula(res.data);
-            setMateriasPartidas(partirReticula(res.data));
+            setHistorialPartido(partirReticula(res.data));
             console.log(partirReticula(res.data));
         }).catch((err) => {
             console.log(err);
@@ -195,15 +203,6 @@ function ListaTabs() {
         return suma / i;
     };
 
-    // const getMaterias = () => {
-    //     Axios.get('http://localhost:3005/api/materias').then((res) => {
-    //         console.log(res.data);
-    //         setMaterias(res.data);
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     });
-    // };
-
     const agregarMateria = () => {
         // getMaterias();
         setAccionUsuario(!accionUsuario);
@@ -279,7 +278,7 @@ function ListaTabs() {
                         container
                         sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
                     >
-                        {materiasPartidas[0] !== undefined ? materiasPartidas[0].length !== 0 ? materiasPartidas[0].map((materiaReticula) => (
+                        {historialPartido[0] !== undefined ? historialPartido[0].length !== 0 ? historialPartido[0].map((materiaReticula) => (
                                 <React.Fragment>
                                     <Grid container sx={{display: "block"}}>
                                         <Grid item sx={{display: "block", position: "relative"}}>
@@ -355,7 +354,7 @@ function ListaTabs() {
                         container
                         sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
                     >
-                        {materiasPartidas[1] !== undefined ? materiasPartidas[1].length !== 0 ? materiasPartidas[1].map((materiaReticula) => (
+                        {historialPartido[1] !== undefined ? historialPartido[1].length !== 0 ? historialPartido[1].map((materiaReticula) => (
                                 <React.Fragment>
                                     <Grid container sx={{display: "block"}}>
                                         <Grid item sx={{display: "block", position: "relative"}}>
@@ -404,7 +403,7 @@ function ListaTabs() {
                         container
                         sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
                     >
-                        {materiasPartidas[2] !== undefined ? materiasPartidas[2].length !== 0 ? materiasPartidas[2].map((materiaReticula) => (
+                        {historialPartido[2] !== undefined ? historialPartido[2].length !== 0 ? historialPartido[2].map((materiaReticula) => (
                                 <React.Fragment>
                                     <Grid container sx={{display: "block"}}>
                                         <Grid item sx={{display: "block", position: "relative"}}>
@@ -462,21 +461,117 @@ function ListaTabs() {
                                 <Typography>Ing. Sistemas (especialidad tecnologías de la información y la comunicación)</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
+                                <img src={ReticulaSistemasEspTICs} width={"100%"}/>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography>Ing. Sistemas (especialidad en tecnologías web y móvil)</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
                                 <img src={ReticulaSistemasEspTecnologiasWeb} width={"100%"}/>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography>Ing. Electrónica (especialidad mecatrónica y control automático)</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <img src={ReticulaElectronicaEspMecatronica} width={"100%"}/>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography>Ing. Electrónica (especialidad sistemas energéticos e industriales)</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <img src={ReticulaElectronicaEspSistemasEnergeticos} width={"100%"}/>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography>Ing. Eléctrica (especialidad sistemas eléctricos)</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <img src={ReticulaElectricaEspSistemasElectricos} width={"100%"}/>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography>Ing. Gestión Empresarial (especialidad innovación para el desarrollo empresarial)</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <img src={ReticulaGestionEmpresarial} width={"100%"}/>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography>Ing. Química (especialidad gestión ambiental)</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <img src={ReticulaQuimicaEspGestionAmbiental} width={"100%"}/>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography>Ing. Mecánica (especialidad térmica)</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <img src={ReticulaMecanicaEspTermica} width={"100%"}/>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography>Ing. Mecánica (especialidad diseño mecánico)</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <img src={ReticulaMecanicaEspDisenoMecanico} width={"100%"}/>
                             </AccordionDetails>
                         </Accordion>
                     </Grid>
                 </TabPanel>
             </Box>
             <br/>
-            {materiasPartidas[0] !== undefined ?
-                materiasPartidas[0].length !== 0 ?
-                    <h5 style={{textAlign: "center"}}>{"Promedio: " + getPromedio(materiasPartidas[0])}</h5> :
+            {historialPartido[0] !== undefined ?
+                historialPartido[0].length !== 0 ?
+                    <h5 style={{textAlign: "center"}}>{"Promedio: " + getPromedio(historialPartido[0])}</h5> :
                     <h5 style={{textAlign: "center"}}>Promedio: n/a</h5>
                 : null}
-            {materiasPartidas[0] !== undefined ?
-                materiasPartidas[0].length !== 0 ?
-                    <h5 style={{textAlign: "center"}}>{"Créditos completados: " + getCreditos(materiasPartidas[0])}</h5> :
+            {historialPartido[0] !== undefined ?
+                historialPartido[0].length !== 0 ?
+                    <h5 style={{textAlign: "center"}}>{"Créditos completados: " + getCreditos(historialPartido[0])}</h5> :
                     <h5 style={{textAlign: "center"}}>Créditos completados: n/a</h5>
                 : null}
             <br/>
