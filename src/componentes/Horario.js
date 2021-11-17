@@ -120,6 +120,16 @@ export default function Horario() {
         });
     }, [accionUsuario]);
 
+    const getNombreMateria = (clave_materia) => {
+        let result;
+        materias.forEach((materia) => {
+            if (materia.clave_materia === clave_materia) {
+                result = materia.nombre_materia;
+            }
+        });
+        return result;
+    };
+
     const partirReticula = (reticula) => {
         let aprobadasReticula = [];
         let encursoReticula = [];
@@ -280,7 +290,10 @@ export default function Horario() {
                 <TabPanel value={value} index={0}>
                     {horarioPartido[0] !== undefined ? (horarioPartido[0].length !== 0 ? horarioPartido[0].map((clase) => (
                         <Card sx={{minWidth: 100}}>
-                            <CardActionArea onClick={handleEditarAbierto}>
+                            <CardActionArea onClick={() => {
+                                handleEditarAbierto();
+                                setClaseActiva(clase.id_clase)
+                            }}>
                                 <CardContent>
                                     <Typography
                                         sx={{fontSize: 14}}
@@ -290,103 +303,124 @@ export default function Horario() {
                                         Grupo {clase.grupo}, Clave: {clase.clave_materia}, Aula {clase.aula}
                                     </Typography>
                                     <Typography variant="h5" component="div">
-                                        Nombre materia
+                                        {getNombreMateria(clase.clave_materia)}
                                     </Typography>
                                     <Typography sx={{mb: 1.5}} color="text.secondary">
                                         Docente: {clase.docente}
                                     </Typography>
-                                    <Typography variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
+                                    <Typography
+                                        variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>)) : null) : null}
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <Card sx={{minWidth: 100}}>
-                        <CardActionArea onClick={handleEditarAbierto}>
-                            <CardContent>
-                                <Typography
-                                    sx={{fontSize: 14}}
-                                    color="text.secondary"
-                                    gutterBottom
-                                >
-                                    Grupo X, Clave: XXX-XXXX, Aula XXX
-                                </Typography>
-                                <Typography variant="h5" component="div">
-                                    Nombre materia
-                                </Typography>
-                                <Typography sx={{mb: 1.5}} color="text.secondary">
-                                    Docente
-                                </Typography>
-                                <Typography variant="body2">Horario: X a X</Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
+                    {horarioPartido[1] !== undefined ? (horarioPartido[1].length !== 0 ? horarioPartido[1].map((clase) => (
+                        <Card sx={{minWidth: 100}}>
+                            <CardActionArea onClick={() => {
+                                handleEditarAbierto();
+                                setClaseActiva(clase.id_clase)
+                            }}>
+                                <CardContent>
+                                    <Typography
+                                        sx={{fontSize: 14}}
+                                        color="text.secondary"
+                                        gutterBottom
+                                    >
+                                        Grupo {clase.grupo}, Clave: {clase.clave_materia}, Aula {clase.aula}
+                                    </Typography>
+                                    <Typography variant="h5" component="div">
+                                        {getNombreMateria(clase.clave_materia)}
+                                    </Typography>
+                                    <Typography sx={{mb: 1.5}} color="text.secondary">
+                                        Docente: {clase.docente}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>)) : null) : null}
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    <Card sx={{minWidth: 100}}>
-                        <CardActionArea onClick={handleEditarAbierto}>
-                            <CardContent>
-                                <Typography
-                                    sx={{fontSize: 14}}
-                                    color="text.secondary"
-                                    gutterBottom
-                                >
-                                    Grupo X, Clave: XXX-XXXX, Aula XXX
-                                </Typography>
-                                <Typography variant="h5" component="div">
-                                    Nombre materia
-                                </Typography>
-                                <Typography sx={{mb: 1.5}} color="text.secondary">
-                                    Docente
-                                </Typography>
-                                <Typography variant="body2">Horario: X a X</Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
+                    {horarioPartido[2] !== undefined ? (horarioPartido[2].length !== 0 ? horarioPartido[2].map((clase) => (
+                        <Card sx={{minWidth: 100}}>
+                            <CardActionArea onClick={() => {
+                                handleEditarAbierto();
+                                setClaseActiva(clase.id_clase)
+                            }}>
+                                <CardContent>
+                                    <Typography
+                                        sx={{fontSize: 14}}
+                                        color="text.secondary"
+                                        gutterBottom
+                                    >
+                                        Grupo {clase.grupo}, Clave: {clase.clave_materia}, Aula {clase.aula}
+                                    </Typography>
+                                    <Typography variant="h5" component="div">
+                                        {getNombreMateria(clase.clave_materia)}
+                                    </Typography>
+                                    <Typography sx={{mb: 1.5}} color="text.secondary">
+                                        Docente: {clase.docente}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>)) : null) : null}
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    <Card sx={{minWidth: 100}}>
-                        <CardActionArea onClick={handleEditarAbierto}>
-                            <CardContent>
-                                <Typography
-                                    sx={{fontSize: 14}}
-                                    color="text.secondary"
-                                    gutterBottom
-                                >
-                                    Grupo X, Clave: XXX-XXXX, Aula XXX
-                                </Typography>
-                                <Typography variant="h5" component="div">
-                                    Nombre materia
-                                </Typography>
-                                <Typography sx={{mb: 1.5}} color="text.secondary">
-                                    Docente
-                                </Typography>
-                                <Typography variant="body2">Horario: X a X</Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
+                    {horarioPartido[3] !== undefined ? (horarioPartido[3].length !== 0 ? horarioPartido[3].map((clase) => (
+                        <Card sx={{minWidth: 100}}>
+                            <CardActionArea onClick={() => {
+                                handleEditarAbierto();
+                                setClaseActiva(clase.id_clase)
+                            }}>
+                                <CardContent>
+                                    <Typography
+                                        sx={{fontSize: 14}}
+                                        color="text.secondary"
+                                        gutterBottom
+                                    >
+                                        Grupo {clase.grupo}, Clave: {clase.clave_materia}, Aula {clase.aula}
+                                    </Typography>
+                                    <Typography variant="h5" component="div">
+                                        {getNombreMateria(clase.clave_materia)}
+                                    </Typography>
+                                    <Typography sx={{mb: 1.5}} color="text.secondary">
+                                        Docente: {clase.docente}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>)) : null) : null}
                 </TabPanel>
                 <TabPanel value={value} index={4}>
-                    <Card sx={{minWidth: 100}}>
-                        <CardActionArea onClick={handleEditarAbierto}>
-                            <CardContent>
-                                <Typography
-                                    sx={{fontSize: 14}}
-                                    color="text.secondary"
-                                    gutterBottom
-                                >
-                                    Grupo X, Clave: XXX-XXXX, Aula XXX
-                                </Typography>
-                                <Typography variant="h5" component="div">
-                                    Nombre materia
-                                </Typography>
-                                <Typography sx={{mb: 1.5}} color="text.secondary">
-                                    Docente
-                                </Typography>
-                                <Typography variant="body2">Horario: X a X</Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
+                    {horarioPartido[4] !== undefined ? (horarioPartido[4].length !== 0 ? horarioPartido[4].map((clase) => (
+                        <Card sx={{minWidth: 100}}>
+                            <CardActionArea onClick={() => {
+                                handleEditarAbierto();
+                                setClaseActiva(clase.id_clase)
+                            }}>
+                                <CardContent>
+                                    <Typography
+                                        sx={{fontSize: 14}}
+                                        color="text.secondary"
+                                        gutterBottom
+                                    >
+                                        Grupo {clase.grupo}, Clave: {clase.clave_materia}, Aula {clase.aula}
+                                    </Typography>
+                                    <Typography variant="h5" component="div">
+                                        {getNombreMateria(clase.clave_materia)}
+                                    </Typography>
+                                    <Typography sx={{mb: 1.5}} color="text.secondary">
+                                        Docente: {clase.docente}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2">Horario: {clase.hora_inicio} a {clase.hora_termino}</Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>)) : null) : null}
                 </TabPanel>
                 <br/>
                 {/*Boton agregar*/}
@@ -445,6 +479,8 @@ export default function Horario() {
                                         setValue(0);
                                     }}
                                 >
+                                    {historialPartido[1] !== undefined ? historialPartido[1].length === 0 ?
+                                        <MenuItem>Aún no estás cursando ninguna materia.</MenuItem> : null : null}
                                     {historialPartido[1] !== undefined ? historialPartido[1].map((materia) => (<MenuItem
                                         value={materia.clave_materia}>{materia.clave_materia}</MenuItem>)) : null}
                                 </Select>
@@ -737,7 +773,7 @@ export default function Horario() {
                             handleEliminarCerrado()
                         }}>No</Button>
                         <Button onClick={() => {
-                            // eliminarNota(idNota);
+                            eliminarClase();
                             handleEliminarCerrado();
                             handleEditarCerrado();
                         }} autoFocus>
