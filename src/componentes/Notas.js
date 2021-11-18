@@ -39,7 +39,6 @@ export default function Notas() {
 
     useEffect(() => {
         Axios.get('http://localhost:3005/api/notas').then((res) => {
-            console.log(res.data);
             setNotas(res.data);
         }).catch((err) => {
             console.log(err);
@@ -80,7 +79,7 @@ export default function Notas() {
             titulo: titulo,
             contenido: contenido
         }, {headers}).then((res) => {
-            console.log(res.data);
+            console.log("Nota creada.");
         }).catch((err) => {
             console.log(err);
         });
@@ -95,7 +94,7 @@ export default function Notas() {
             titulo: titulo,
             contenido: contenido
         }, {headers}).then((res) => {
-
+            console.log("Nota editada.")
         }).catch((err) => {
             console.log(err);
         });
@@ -110,7 +109,7 @@ export default function Notas() {
                 id_nota: id_nota
             }
         }, {headers}).then((res) => {
-            console.log(res.data);
+            "Nota eliminada."
         }).catch((err) => {
             console.log(err);
         });

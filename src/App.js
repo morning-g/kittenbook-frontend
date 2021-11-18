@@ -61,7 +61,7 @@ function App() {
             colorMode.toggleColorMode();
             setItemLS();
         }
-    });
+    }, []);
 
     const handleLogout = () => {
         setAuthenticated(false);
@@ -126,8 +126,8 @@ function App() {
                         <Route exact path="/horario" component={Horario}/>
                         <Route exact path="/tareas" component={Tareas}/>
                         <Route exact path="/reticula" component={Reticula}/>
-                        <Route exact path="/login" render={(props) => <Acceso estatus={estatus} login={login}/>}/>
-                        <Route exact path="/registro" component={Registro}/>
+                        {/*<Route exact path="/login" render={(props) => <Acceso estatus={estatus} login={login}/>}/>*/}
+                        {/*<Route exact path="/registro" component={Registro}/>*/}
                         <Route exact path="/precios" component={Precios}/>
                         <Route exact path="/tos" component={ToS}/>
                         <Route

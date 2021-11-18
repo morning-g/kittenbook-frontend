@@ -73,7 +73,6 @@ export default function Horario() {
     };
 
     const [accionUsuario, setAccionUsuario] = useState(false);
-    const [reticula, setReticula] = useState([]);
     const [materias, setMaterias] = useState([]);
     const [historialPartido, setHistorialPartido] = useState([]);
     const [horarioPartido, setHorarioPartido] = useState([]);
@@ -100,21 +99,16 @@ export default function Horario() {
 
     useEffect(() => {
         Axios.get('http://localhost:3005/api/materias').then((res) => {
-            console.log(res.data);
             setMaterias(res.data);
         }).catch((err) => {
             console.log(err);
         });
         Axios.get('http://localhost:3005/api/historial').then((res) => {
-            console.log(res.data);
-            setReticula(res.data);
             setHistorialPartido(partirReticula(res.data));
-            console.log(partirReticula(res.data));
         }).catch((err) => {
             console.log(err);
         });
         Axios.get('http://localhost:3005/api/horario').then((res) => {
-            console.log(res.data);
             setClases(res.data);
             setHorarioPartido(partirHorario(res.data));
         }).catch((err) => {
@@ -240,7 +234,7 @@ export default function Horario() {
             jueves: jueves,
             viernes: viernes
         }, {headers}).then((res) => {
-            console.log(res.data);
+            console.log("Clase creada.");
         }).catch((err) => {
             console.log(err);
         });
@@ -263,7 +257,7 @@ export default function Horario() {
             jueves: jueves,
             viernes: viernes
         }, {headers}).then((res) => {
-            console.log(res.data);
+            console.log("Clase editada.");
         }).catch((err) => {
             console.log(err);
         });
@@ -278,7 +272,7 @@ export default function Horario() {
                 id_clase: idClase
             }
         }, {headers}).then((res) => {
-            console.log(res.data);
+            console.log("Clase eliminada.");
         }).catch((err) => {
             console.log(err);
             setErrorHorario(true);
@@ -309,7 +303,7 @@ export default function Horario() {
                 <TabPanel value={value} index={0}>
                     {clases.length === 0 ? <div><br/><h4>No hay ninguna clase en lunes. ¡Hurrah!</h4><br/></div> : null}
                     {horarioPartido[0] !== undefined ? (horarioPartido[0].length !== 0 ? horarioPartido[0].map((clase) => (
-                        <div><Card sx={{minWidth: 100}}>
+                        <div key={clase.id_clase}><Card sx={{minWidth: 100}}>
                             <CardActionArea onClick={() => {
                                 handleEditarAbierto();
                                 setClaseActiva(clase);
@@ -353,7 +347,7 @@ export default function Horario() {
                     {clases.length === 0 ?
                         <div><br/><h4>No hay ninguna clase en martes. ¡Hurrah!</h4><br/></div> : null}
                     {horarioPartido[1] !== undefined ? (horarioPartido[1].length !== 0 ? horarioPartido[1].map((clase) => (
-                        <div><Card sx={{minWidth: 100}}>
+                        <div key={clase.id_clase}><Card sx={{minWidth: 100}}>
                             <CardActionArea onClick={() => {
                                 handleEditarAbierto();
                                 setClaseActiva(clase);
@@ -396,7 +390,7 @@ export default function Horario() {
                     {clases.length === 0 ?
                         <div><br/><h4>No hay ninguna clase en miércoles. ¡Hurrah!</h4><br/></div> : null}
                     {horarioPartido[2] !== undefined ? (horarioPartido[2].length !== 0 ? horarioPartido[2].map((clase) => (
-                        <div><Card sx={{minWidth: 100}}>
+                        <div key={clase.id_clase}><Card sx={{minWidth: 100}}>
                             <CardActionArea onClick={() => {
                                 handleEditarAbierto();
                                 setClaseActiva(clase);
@@ -439,7 +433,7 @@ export default function Horario() {
                     {clases.length === 0 ?
                         <div><br/><h4>No hay ninguna clase en jueves. ¡Hurrah!</h4><br/></div> : null}
                     {horarioPartido[3] !== undefined ? (horarioPartido[3].length !== 0 ? horarioPartido[3].map((clase) => (
-                        <div><Card sx={{minWidth: 100}}>
+                        <div key={clase.id_clase}><Card sx={{minWidth: 100}}>
                             <CardActionArea onClick={() => {
                                 handleEditarAbierto();
                                 setClaseActiva(clase);
@@ -482,7 +476,7 @@ export default function Horario() {
                     {clases.length === 0 ?
                         <div><br/><h4>No hay ninguna clase en viernes. ¡Hurrah!</h4><br/></div> : null}
                     {horarioPartido[4] !== undefined ? (horarioPartido[4].length !== 0 ? horarioPartido[4].map((clase) => (
-                        <div><Card sx={{minWidth: 100}}>
+                        <div key={clase.id_clase}><Card sx={{minWidth: 100}}>
                             <CardActionArea onClick={() => {
                                 handleEditarAbierto();
                                 setClaseActiva(clase);
@@ -583,7 +577,7 @@ export default function Horario() {
                                             materia.</MenuItem> : null : null}
                                     {historialPartido[1] !== undefined ? historialPartido[1].map((materia) => (
                                         <MenuItem
-                                            value={materia.clave_materia}>{materia.clave_materia + ": " + getNombreMateria(materia.clave_materia)}</MenuItem>)) : null}
+                                            value={materia.clave_materia} key={materia.id_curso}>{materia.clave_materia + ": " + getNombreMateria(materia.clave_materia)}</MenuItem>)) : null}
                                 </Select>
                             </FormControl>
                             <br/>

@@ -83,7 +83,6 @@ function ListaTabs(props) {
     };
 
     const [accionUsuario, setAccionUsuario] = useState(false);
-    const [reticula, setReticula] = useState([]);
     const [materias, setMaterias] = useState([]);
     const [historialPartido, setHistorialPartido] = useState([]);
     const [idCurso, setIdCurso] = useState("");
@@ -106,16 +105,12 @@ function ListaTabs(props) {
 
     useEffect(() => {
         Axios.get('http://localhost:3005/api/materias').then((res) => {
-            console.log(res.data);
             setMaterias(res.data);
         }).catch((err) => {
             console.log(err);
         });
         Axios.get('http://localhost:3005/api/historial').then((res) => {
-            console.log(res.data);
-            setReticula(res.data);
             setHistorialPartido(partirReticula(res.data));
-            console.log(partirReticula(res.data));
         }).catch((err) => {
             console.log(err);
         });
@@ -213,7 +208,7 @@ function ListaTabs(props) {
             calificacion: calificacionMateria,
             periodo_cursada: periodoMateria + " " + anoMateria
         }, {headers}).then((res) => {
-            console.log(res.data);
+            console.log("Materia creada.");
         }).catch((err) => {
             console.log(err);
         });
@@ -227,7 +222,7 @@ function ListaTabs(props) {
                 id_curso: idCurso
             }
         }, {headers}).then((res) => {
-            console.log(res.data);
+            console.log("Materia eliminada.");
         }).catch((err) => {
             console.log(err);
         });
@@ -279,73 +274,72 @@ function ListaTabs(props) {
                         sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
                     >
                         {historialPartido[0] !== undefined ? historialPartido[0].length !== 0 ? historialPartido[0].map((materiaReticula) => (
-                                <React.Fragment>
-                                    <Grid container sx={{display: "block"}}>
-                                        <Grid item sx={{display: "block", position: "relative"}}>
-                                            <Card
+                                <Grid container sx={{display: "block"}} key={materiaReticula.id_curso}>
+                                    <Grid item sx={{display: "block", position: "relative"}}>
+                                        <Card
+                                            sx={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                position: "relative",
+                                                borderRadius: "20px",
+                                            }}
+                                        >
+                                            <CardActionArea
                                                 sx={{
                                                     display: "flex",
-                                                    flexDirection: "column",
-                                                    position: "relative",
-                                                    borderRadius: "20px",
+                                                    height: "100%",
+                                                    "&:hover": {
+                                                        "background-color": "rgba(255, 0, 0, 0.2)",
+                                                        "transform": "scale3d(1.05, 1.05, 1)"
+                                                    }
                                                 }}
-                                            >
-                                                <CardActionArea
-                                                    sx={{
-                                                        display: "flex",
-                                                        height: "100%",
-                                                        "&:hover": {
-                                                            "background-color": "rgba(255, 0, 0, 0.2)",
-                                                            "transform": "scale3d(1.05, 1.05, 1)"
-                                                        }
-                                                    }}
-                                                    onClick={() => {
-                                                        setIdCurso(materiaReticula.id_curso);
-                                                        handleEliminarAbierto();
-                                                    }}>
-                                                    <CardContent>
-                                                        <Typography
-                                                            sx={{fontSize: 14}}
-                                                            color="text.secondary"
-                                                            gutterBottom
-                                                        >
-                                                            {"Clave: " + materiaReticula.clave_materia}
-                                                        </Typography>
-                                                        <Typography
-                                                            gutterBottom
-                                                            variant="h5"
-                                                        >
-                                                            {getNombreMateria(materiaReticula.clave_materia)}
-                                                        </Typography>
-                                                        <Typography
-                                                            color="text.secondary">{"Cursada: " + materiaReticula.periodo_cursada}</Typography>
-                                                        <Typography
-                                                            color="text.secondary">{"Semestre " + materiaReticula.semestre_cursada}</Typography>
-                                                    </CardContent>
-                                                    {/*Formato para la calificacion */}
-                                                    <CardContent>
-                                                        <Typography
-                                                            sx={{
-                                                                float: "right",
-                                                                height: "100%",
-                                                                marginTop: "-20px",
-                                                                marginLeft: "300px",
-                                                                marginRight: "20px",
-                                                                width: "20%",
-                                                                padding: "20px",
-                                                                display: "inline-block",
-                                                                position: "relative",
-                                                                border: "solid .1px",
-                                                                borderColor: "divider",
-                                                                flexDirection: "column",
-                                                                borderRadius: "20px",
-                                                            }}
-                                                            align="center"
-                                                        >{materiaReticula.calificacion}</Typography>
-                                                    </CardContent>
-                                                </CardActionArea>
-                                            </Card>
-                                        </Grid></Grid></React.Fragment>)) :
+                                                onClick={() => {
+                                                    setIdCurso(materiaReticula.id_curso);
+                                                    handleEliminarAbierto();
+                                                }}>
+                                                <CardContent>
+                                                    <Typography
+                                                        sx={{fontSize: 14}}
+                                                        color="text.secondary"
+                                                        gutterBottom
+                                                    >
+                                                        {"Clave: " + materiaReticula.clave_materia}
+                                                    </Typography>
+                                                    <Typography
+                                                        gutterBottom
+                                                        variant="h5"
+                                                    >
+                                                        {getNombreMateria(materiaReticula.clave_materia)}
+                                                    </Typography>
+                                                    <Typography
+                                                        color="text.secondary">{"Cursada: " + materiaReticula.periodo_cursada}</Typography>
+                                                    <Typography
+                                                        color="text.secondary">{"Semestre " + materiaReticula.semestre_cursada}</Typography>
+                                                </CardContent>
+                                                {/*Formato para la calificacion */}
+                                                <CardContent>
+                                                    <Typography
+                                                        sx={{
+                                                            float: "right",
+                                                            height: "100%",
+                                                            marginTop: "-20px",
+                                                            marginLeft: "300px",
+                                                            marginRight: "20px",
+                                                            width: "20%",
+                                                            padding: "20px",
+                                                            display: "inline-block",
+                                                            position: "relative",
+                                                            border: "solid .1px",
+                                                            borderColor: "divider",
+                                                            flexDirection: "column",
+                                                            borderRadius: "20px",
+                                                        }}
+                                                        align="center"
+                                                    >{materiaReticula.calificacion}</Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                        </Card>
+                                    </Grid></Grid>)) :
                             <h4>Aún no tienes materias aprobadas agregadas.</h4> : null}
                     </Grid>
                 </TabPanel>
@@ -355,8 +349,7 @@ function ListaTabs(props) {
                         sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
                     >
                         {historialPartido[1] !== undefined ? historialPartido[1].length !== 0 ? historialPartido[1].map((materiaReticula) => (
-                                <React.Fragment>
-                                    <Grid container sx={{display: "block"}}>
+                                    <Grid container sx={{display: "block"}} key={materiaReticula.id_curso}>
                                         <Grid item sx={{display: "block", position: "relative"}}>
                                             <Card
                                                 sx={{
@@ -394,7 +387,7 @@ function ListaTabs(props) {
                                                     </CardContent>
                                                 </CardActionArea>
                                             </Card>
-                                        </Grid></Grid></React.Fragment>)) :
+                                        </Grid></Grid>)) :
                             <h4>Aún no tienes materias en curso agregadas.</h4> : null}
                     </Grid>
                 </TabPanel>
@@ -404,8 +397,7 @@ function ListaTabs(props) {
                         sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
                     >
                         {historialPartido[2] !== undefined ? historialPartido[2].length !== 0 ? historialPartido[2].map((materiaReticula) => (
-                                <React.Fragment>
-                                    <Grid container sx={{display: "block"}}>
+                                    <Grid container sx={{display: "block"}} key={materiaReticula.id_curso}>
                                         <Grid item sx={{display: "block", position: "relative"}}>
                                             <Card
                                                 sx={{
@@ -443,7 +435,7 @@ function ListaTabs(props) {
                                                     </CardContent>
                                                 </CardActionArea>
                                             </Card>
-                                        </Grid></Grid></React.Fragment>)) :
+                                        </Grid></Grid>)) :
                             <h4>Aún no tienes materias por cursar agregadas.</h4> : null}
                     </Grid>
                 </TabPanel>
@@ -636,7 +628,7 @@ function ListaTabs(props) {
                             >
                                 {materias.map((materiaReticula) => (
                                     <MenuItem
-                                        value={materiaReticula.clave_materia}>{materiaReticula.clave_materia + ": " + materiaReticula.nombre_materia} </MenuItem>
+                                        value={materiaReticula.clave_materia} key={materiaReticula.id_curso}>{materiaReticula.clave_materia + ": " + materiaReticula.nombre_materia} </MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
