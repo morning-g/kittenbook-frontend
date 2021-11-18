@@ -3,7 +3,7 @@ import logoKitten from "../bookish.png";
 import "./image.css";
 import Container from "@mui/material/Container";
 
-export default function Producto(props) {
+export default function Producto() {
     const EstiloLogo = {};
     const producto = {fontSize: "1.2rem", alignText: "justify"};
     return <Container maxWidth="md">

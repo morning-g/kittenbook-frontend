@@ -55,7 +55,7 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box sx={{p: 3}}>
-                    <Typography>{children}</Typography>
+                    <Typography component={'div'}>{children}</Typography>
                 </Box>
             )}
         </div>
@@ -68,7 +68,7 @@ TabPanel.propTypes = {
     value: PropTypes.number.isRequired,
 };
 
-export default function Reticula(props) {
+export default function Reticula() {
     return (
         <Box sx={{width: "100%"}}>
             <ListaTabs/>
@@ -76,7 +76,7 @@ export default function Reticula(props) {
     );
 }
 
-function ListaTabs(props) {
+function ListaTabs() {
     Axios.defaults.withCredentials = true;
     const headers = {
         'Content-Type': 'application/json'

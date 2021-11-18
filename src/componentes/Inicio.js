@@ -96,7 +96,7 @@ const itemData = [
     },
 ];
 
-export default function Inicio(props) {
+export default function Inicio() {
     return (
         <React.Fragment>
             <Container maxWidth="md">

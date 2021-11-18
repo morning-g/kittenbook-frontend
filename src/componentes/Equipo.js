@@ -3,7 +3,7 @@ import logo from "../owlogo.png";
 import "./image.css";
 import Container from "@mui/material/Container";
 
-export default function Equipo(props) {
+export default function Equipo() {
   const EstiloLogo = {};
   const equipo = { fontSize: "1.2rem" };
   return <Container maxWidth="md">

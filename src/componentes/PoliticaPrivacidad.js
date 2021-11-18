@@ -3,7 +3,7 @@ import React from "react";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 
-export default function PoliticaPrivacidad(props) {
+export default function PoliticaPrivacidad() {
   return (
     <Container maxWidth="md">
       <div>

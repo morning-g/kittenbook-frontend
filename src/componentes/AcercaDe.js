@@ -4,7 +4,7 @@ import logo from "../owlogo.png";
 import logoKitten from "../bookish.png";
 import "./image.css";
 
-export default function AcercaDe(props) {
+export default function AcercaDe() {
   const EstiloLogo = {};
   const mision = { fontSize: "1.2rem" };
   return (

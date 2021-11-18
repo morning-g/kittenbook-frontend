@@ -2,7 +2,7 @@ import React from "react";
 
 import Container from "@mui/material/Container";
 
-export default function ToS(props) {
+export default function ToS() {
   return (
     <Container maxWidth="md">
       <div>
