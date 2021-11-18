@@ -6,7 +6,6 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Dialog from '@mui/material/Dialog';
@@ -31,6 +30,8 @@ import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Slider from '@mui/material/Slider';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -94,6 +95,7 @@ export default function Horario() {
     const [jueves, setJueves] = useState(true);
     const [viernes, setViernes] = useState(true);
     const [claseActiva, setClaseActiva] = useState({});
+    const [errorHorario, setErrorHorario] = useState(false);
     let condicion = claveMateria === "" || grupo === "" || docente === "" || aula === "";
 
     useEffect(() => {
@@ -270,6 +272,7 @@ export default function Horario() {
 
     const eliminarClase = () => {
         setAccionUsuario(!accionUsuario);
+        console.log(idClase)
         Axios.delete('http://localhost:3005/api/horario', {
             data: {
                 id_clase: idClase
@@ -278,6 +281,7 @@ export default function Horario() {
             console.log(res.data);
         }).catch((err) => {
             console.log(err);
+            setErrorHorario(true);
         });
         limpiar();
     };
@@ -285,6 +289,10 @@ export default function Horario() {
     return (
         <Container>
             <Box sx={{width: "100%"}}>
+                {errorHorario ? <Alert severity="error">
+                    <AlertTitle>Error</AlertTitle>
+                    Ocurrió un error al intentar eliminar la clase — <strong>No puedes eliminar una clase de tu horario si tienes tareas de esa misma clase. Elimina primero las tareas pertinentes y vuelve a intentarlo.</strong>
+                </Alert> : null}
                 <Box sx={{borderBottom: 1, borderColor: "divider"}}>
                     <Tabs
                         value={value}
@@ -557,7 +565,7 @@ export default function Horario() {
                     <DialogTitle>Nueva clase</DialogTitle>
                     <DialogContent>
                         <Box m={1} sx={{justifyContent: "space-between"}}>
-                            <FormControl fullWidth>
+                            <FormControl variant="filled" fullWidth>
                                 <InputLabel id="demo-simple-select-label">Clave de la materia</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"

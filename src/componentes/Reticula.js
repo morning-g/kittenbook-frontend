@@ -461,7 +461,7 @@ function ListaTabs(props) {
                                 <Typography>Ing. Sistemas (especialidad tecnologías de la información y la comunicación)</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <img src={ReticulaSistemasEspTICs} width={"100%"}/>
+                                <img alt={"Reticula Sistemas"} src={ReticulaSistemasEspTICs} width={"100%"}/>
                             </AccordionDetails>
                         </Accordion>
                         <Accordion>
@@ -473,7 +473,7 @@ function ListaTabs(props) {
                                 <Typography>Ing. Sistemas (especialidad en tecnologías web y móvil)</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <img src={ReticulaSistemasEspTecnologiasWeb} width={"100%"}/>
+                                <img alt={"Reticula Sistemas"} src={ReticulaSistemasEspTecnologiasWeb} width={"100%"}/>
                             </AccordionDetails>
                         </Accordion>
                         <Accordion>
@@ -485,7 +485,7 @@ function ListaTabs(props) {
                                 <Typography>Ing. Electrónica (especialidad mecatrónica y control automático)</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <img src={ReticulaElectronicaEspMecatronica} width={"100%"}/>
+                                <img alt={"Reticula Electronica"} src={ReticulaElectronicaEspMecatronica} width={"100%"}/>
                             </AccordionDetails>
                         </Accordion>
                         <Accordion>
@@ -497,7 +497,7 @@ function ListaTabs(props) {
                                 <Typography>Ing. Electrónica (especialidad sistemas energéticos e industriales)</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <img src={ReticulaElectronicaEspSistemasEnergeticos} width={"100%"}/>
+                                <img alt={"Reticula Electronica"} src={ReticulaElectronicaEspSistemasEnergeticos} width={"100%"}/>
                             </AccordionDetails>
                         </Accordion>
                         <Accordion>
@@ -509,7 +509,7 @@ function ListaTabs(props) {
                                 <Typography>Ing. Eléctrica (especialidad sistemas eléctricos)</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <img src={ReticulaElectricaEspSistemasElectricos} width={"100%"}/>
+                                <img alt={"Reticula Electrica"} src={ReticulaElectricaEspSistemasElectricos} width={"100%"}/>
                             </AccordionDetails>
                         </Accordion>
                         <Accordion>
@@ -521,7 +521,7 @@ function ListaTabs(props) {
                                 <Typography>Ing. Gestión Empresarial (especialidad innovación para el desarrollo empresarial)</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <img src={ReticulaGestionEmpresarial} width={"100%"}/>
+                                <img alt={"Reticula Gestion Empresarial"} src={ReticulaGestionEmpresarial} width={"100%"}/>
                             </AccordionDetails>
                         </Accordion>
                         <Accordion>
@@ -533,7 +533,7 @@ function ListaTabs(props) {
                                 <Typography>Ing. Química (especialidad gestión ambiental)</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <img src={ReticulaQuimicaEspGestionAmbiental} width={"100%"}/>
+                                <img alt={"Reticula Química"} src={ReticulaQuimicaEspGestionAmbiental} width={"100%"}/>
                             </AccordionDetails>
                         </Accordion>
                         <Accordion>
@@ -545,7 +545,7 @@ function ListaTabs(props) {
                                 <Typography>Ing. Mecánica (especialidad térmica)</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <img src={ReticulaMecanicaEspTermica} width={"100%"}/>
+                                <img alt={"Reticula Mecánica"} src={ReticulaMecanicaEspTermica} width={"100%"}/>
                             </AccordionDetails>
                         </Accordion>
                         <Accordion>
@@ -557,7 +557,7 @@ function ListaTabs(props) {
                                 <Typography>Ing. Mecánica (especialidad diseño mecánico)</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <img src={ReticulaMecanicaEspDisenoMecanico} width={"100%"}/>
+                                <img alt={"Reticula Mecánica"} src={ReticulaMecanicaEspDisenoMecanico} width={"100%"}/>
                             </AccordionDetails>
                         </Accordion>
                     </Grid>

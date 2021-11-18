@@ -12,7 +12,6 @@ import Reticula from "./componentes/Reticula";
 import Inicio from "./componentes/Inicio";
 import Acceso from "./componentes/Login";
 import Registro from "./componentes/Registro";
-import Creditos from "./componentes/Creditos";
 import Pie from "./componentes/Pie";
 import Dashboard from "./componentes/Dashboard"
 import MenuAppBar from "./componentes/AppBar";
@@ -29,7 +28,6 @@ import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import MuiPickersUtilsProviders from "@material-ui/pickers/MuiPickersUtilsProvider"
 
 import Axios from "axios";
 
@@ -63,7 +61,7 @@ function App() {
             colorMode.toggleColorMode();
             setItemLS();
         }
-    }, []);
+    });
 
     const handleLogout = () => {
         setAuthenticated(false);
@@ -128,7 +126,6 @@ function App() {
                         <Route exact path="/horario" component={Horario}/>
                         <Route exact path="/tareas" component={Tareas}/>
                         <Route exact path="/reticula" component={Reticula}/>
-                        <Route exact path="/creditos" component={Creditos}/>
                         <Route exact path="/login" render={(props) => <Acceso estatus={estatus} login={login}/>}/>
                         <Route exact path="/registro" component={Registro}/>
                         <Route exact path="/precios" component={Precios}/>
@@ -174,8 +171,7 @@ function App() {
                     {<Route exact path="/notas" component={Notas}/>}
                     {<Route exact path="/horario" component={Horario}/>}
                     {<Route exact path="/tareas" component={Tareas}/>}
-                    {<Route exact path="/reticula" component={Reticula}/>}
-                    {<Route exact path="/creditos" component={Creditos}/>} */}
+                    {<Route exact path="/reticula" component={Reticula}/>*/}
 
                     <Route exact path="/login" render={(props) => <Acceso estatus={estatus} login={login}/>}/>
                     <Route exact path="/registro" component={Registro}/>
