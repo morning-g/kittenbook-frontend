@@ -266,7 +266,6 @@ export default function Horario() {
 
     const eliminarClase = () => {
         setAccionUsuario(!accionUsuario);
-        console.log(idClase)
         Axios.delete('http://localhost:3005/api/horario', {
             data: {
                 id_clase: idClase
@@ -285,7 +284,9 @@ export default function Horario() {
             <Box sx={{width: "100%"}}>
                 {errorHorario ? <Alert severity="error">
                     <AlertTitle>Error</AlertTitle>
-                    Ocurrió un error al intentar eliminar la clase — <strong>No puedes eliminar una clase de tu horario si tienes tareas de esa misma clase. Elimina primero las tareas pertinentes y vuelve a intentarlo.</strong>
+                    Ocurrió un error al intentar eliminar la clase — <strong>No puedes eliminar una clase de tu horario
+                    si tienes tareas de esa misma clase. Elimina primero las tareas pertinentes y vuelve a
+                    intentarlo.</strong>
                 </Alert> : null}
                 <Box sx={{borderBottom: 1, borderColor: "divider"}}>
                     <Tabs
@@ -319,7 +320,6 @@ export default function Horario() {
                                 setMiercoles(clase.miercoles === 1);
                                 setJueves(clase.jueves === 1);
                                 setViernes(clase.viernes === 1);
-                                console.log(claseActiva.hora_inicio);
                             }}>
                                 <CardContent>
                                     <Typography
@@ -338,7 +338,7 @@ export default function Horario() {
                                     </Typography>
                                     <Typography
                                         variant="body2">Horario:
-                                        de {clase.hora_inicio.slice(0, 5)} a {clase.hora_termino.slice(0, 5)}</Typography>
+                                        de {clase.hora_inicio.toString() + ":00"} a {clase.hora_termino.toString() + ":00"}</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card><br/></div>)) : null) : null}
@@ -381,7 +381,7 @@ export default function Horario() {
                                     </Typography>
                                     <Typography
                                         variant="body2">Horario:
-                                        de {clase.hora_inicio.slice(0, 5)} a {clase.hora_termino.slice(0, 5)}</Typography>
+                                        de {clase.hora_inicio.toString() + ":00"} a {clase.hora_termino.toString() + ":00"}</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card><br/></div>)) : null) : null}
@@ -424,7 +424,7 @@ export default function Horario() {
                                     </Typography>
                                     <Typography
                                         variant="body2">Horario:
-                                        de {clase.hora_inicio.slice(0, 5)} a {clase.hora_termino.slice(0, 5)}</Typography>
+                                        de {clase.hora_inicio.toString() + ":00"} a {clase.hora_termino.toString() + ":00"}</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card><br/></div>)) : null) : null}
@@ -467,7 +467,7 @@ export default function Horario() {
                                     </Typography>
                                     <Typography
                                         variant="body2">Horario:
-                                        de {clase.hora_inicio.slice(0, 5)} a {clase.hora_termino.slice(0, 5)}</Typography>
+                                        de {clase.hora_inicio.toString() + ":00"} a {clase.hora_termino.toString() + ":00"}</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card><br/></div>)) : null) : null}
@@ -510,7 +510,7 @@ export default function Horario() {
                                     </Typography>
                                     <Typography
                                         variant="body2">Horario:
-                                        de {clase.hora_inicio.slice(0, 5)} a {clase.hora_termino.slice(0, 5)}</Typography>
+                                        de {clase.hora_inicio.toString() + ":00"} a {clase.hora_termino.toString() + ":00"}</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card><br/></div>)) : null) : null}
@@ -567,7 +567,6 @@ export default function Horario() {
                                     value={claveMateria}
                                     label="Clave de la materia"
                                     onChange={(e) => {
-                                        // handleChange();
                                         setClaveMateria(e.target.value);
                                         setValue(0);
                                     }}
@@ -577,7 +576,8 @@ export default function Horario() {
                                             materia.</MenuItem> : null : null}
                                     {historialPartido[1] !== undefined ? historialPartido[1].map((materia) => (
                                         <MenuItem
-                                            value={materia.clave_materia} key={materia.id_curso}>{materia.clave_materia + ": " + getNombreMateria(materia.clave_materia)}</MenuItem>)) : null}
+                                            value={materia.clave_materia}
+                                            key={materia.id_curso}>{materia.clave_materia + ": " + getNombreMateria(materia.clave_materia)}</MenuItem>)) : null}
                                 </Select>
                             </FormControl>
                             <br/>
@@ -716,13 +716,14 @@ export default function Horario() {
                     <DialogContent>
                         <Box m={1} sx={{justifyContent: "space-between"}}>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Clave de la materia</InputLabel>
+                                <InputLabel>Clave de la materia</InputLabel>
                                 <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
                                     value={claveMateria}
                                     label="Clave de la materia"
-                                    // onChange={handleChange}
+                                    onChange={(e) => {
+                                        setClaveMateria(e.target.value);
+                                        setValue(0);
+                                    }}
                                 >
                                     <MenuItem value={claseActiva.clave_materia}>{claseActiva.clave_materia}</MenuItem>
                                 </Select>
@@ -733,7 +734,6 @@ export default function Horario() {
                             <TextField
                                 margin="dense"
                                 size='small'
-                                id="titulo"
                                 type="text"
                                 defaultValue={claseActiva.grupo}
                                 fullWidth
@@ -756,7 +756,6 @@ export default function Horario() {
                             <TextField
                                 margin="dense"
                                 size='small'
-                                id="titulo"
                                 type="text"
                                 defaultValue={claseActiva.docente}
                                 fullWidth
@@ -779,7 +778,6 @@ export default function Horario() {
                             <TextField
                                 margin="dense"
                                 size='small'
-                                id="titulo"
                                 type="text"
                                 defaultValue={claseActiva.aula}
                                 fullWidth
@@ -800,9 +798,7 @@ export default function Horario() {
                             <br/>
                             <DialogContentText>Hora de inicio</DialogContentText>
                             <Slider
-                                aria-label="Temperature"
-                                defaultValue={claseActiva.hora_inicio !== undefined ? parseInt(claseActiva.hora_inicio.slice(0, 3)) : 0}
-                                // getAriaValueText={valuetext}
+                                defaultValue={claseActiva.hora_inicio !== undefined ? parseInt(claseActiva.hora_inicio) : 0}
                                 valueLabelDisplay="auto"
                                 step={1}
                                 marks
@@ -816,9 +812,7 @@ export default function Horario() {
                             <br/>
                             <DialogContentText>Hora de término</DialogContentText>
                             <Slider
-                                aria-label="Temperature"
-                                defaultValue={claseActiva.hora_termino !== undefined ? parseInt(claseActiva.hora_termino.slice(0, 3)) : 0}
-                                // getAriaValueText={valuetext}
+                                defaultValue={claseActiva.hora_termino !== undefined ? parseInt(claseActiva.hora_termino) : 0}
                                 valueLabelDisplay="auto"
                                 step={1}
                                 marks
@@ -832,22 +826,27 @@ export default function Horario() {
                             <br/>
                             <DialogContentText>Días</DialogContentText>
                             <FormGroup>
-                                <FormControlLabel control={<Checkbox checked={claseActiva.lunes} onChange={(e) => {
-                                    setLunes(!lunes);
-                                }}/>} label="Lunes"/>
-                                <FormControlLabel control={<Checkbox checked={claseActiva.martes} onChange={(e) => {
-                                    setMartes(!martes);
-                                }}/>} label="Martes"/>
-                                <FormControlLabel control={<Checkbox checked={claseActiva.miercoles} onChange={(e) => {
-                                    setMiercoles(!miercoles);
-                                }}/>}
-                                                  label="Miércoles"/>
-                                <FormControlLabel control={<Checkbox checked={claseActiva.jueves} onChange={(e) => {
-                                    setJueves(!jueves);
-                                }}/>} label="Jueves"/>
-                                <FormControlLabel control={<Checkbox checked={claseActiva.viernes} onChange={(e) => {
-                                    setViernes(!viernes);
-                                }}/>} label="Viernes"/>
+                                <FormControlLabel
+                                    control={<Checkbox checked={claseActiva.lunes === 1} onChange={(e) => {
+                                        setLunes(!lunes);
+                                    }}/>} label="Lunes"/>
+                                <FormControlLabel
+                                    control={<Checkbox checked={claseActiva.martes === 1} onChange={(e) => {
+                                        setMartes(!martes);
+                                    }}/>} label="Martes"/>
+                                <FormControlLabel
+                                    control={<Checkbox checked={claseActiva.miercoles === 1} onChange={(e) => {
+                                        setMiercoles(!miercoles);
+                                    }}/>}
+                                    label="Miércoles"/>
+                                <FormControlLabel
+                                    control={<Checkbox checked={claseActiva.jueves === 1} onChange={(e) => {
+                                        setJueves(!jueves);
+                                    }}/>} label="Jueves"/>
+                                <FormControlLabel
+                                    control={<Checkbox checked={claseActiva.viernes === 1} onChange={(e) => {
+                                        setViernes(!viernes);
+                                    }}/>} label="Viernes"/>
                             </FormGroup>
                         </Box>
                     </DialogContent>

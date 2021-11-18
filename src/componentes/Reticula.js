@@ -275,73 +275,72 @@ function ListaTabs() {
                         sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
                     >
                         {historialPartido[0] !== undefined ? historialPartido[0].length !== 0 ? historialPartido[0].map((materiaReticula) => (
-                                <div key={materiaReticula.id_curso.toString() + "0"}>
-                                    <Grid container sx={{display: "block"}} key={materiaReticula.id_curso}>
-                                        <Grid item sx={{display: "block", position: "relative"}}>
-                                            <Card
+                                <Grid container sx={{display: "block"}} key={materiaReticula.id_curso.toString() + "0"}>
+                                    <Grid item sx={{display: "block", position: "relative"}}>
+                                        <Card
+                                            sx={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                position: "relative",
+                                                borderRadius: "20px",
+                                            }}
+                                        >
+                                            <CardActionArea
                                                 sx={{
                                                     display: "flex",
-                                                    flexDirection: "column",
-                                                    position: "relative",
-                                                    borderRadius: "20px",
+                                                    height: "100%",
+                                                    "&:hover": {
+                                                        "backgroundColor": "rgba(255, 0, 0, 0.2)",
+                                                        "transform": "scale3d(1.05, 1.05, 1)"
+                                                    }
                                                 }}
-                                            >
-                                                <CardActionArea
-                                                    sx={{
-                                                        display: "flex",
-                                                        height: "100%",
-                                                        "&:hover": {
-                                                            "background-color": "rgba(255, 0, 0, 0.2)",
-                                                            "transform": "scale3d(1.05, 1.05, 1)"
-                                                        }
-                                                    }}
-                                                    onClick={() => {
-                                                        setIdCurso(materiaReticula.id_curso);
-                                                        handleEliminarAbierto();
-                                                    }}>
-                                                    <CardContent>
-                                                        <Typography
-                                                            sx={{fontSize: 14}}
-                                                            color="text.secondary"
-                                                            gutterBottom
-                                                        >
-                                                            {"Clave: " + materiaReticula.clave_materia}
-                                                        </Typography>
-                                                        <Typography
-                                                            gutterBottom
-                                                            variant="h5"
-                                                        >
-                                                            {getNombreMateria(materiaReticula.clave_materia)}
-                                                        </Typography>
-                                                        <Typography
-                                                            color="text.secondary">{"Cursada: " + materiaReticula.periodo_cursada}</Typography>
-                                                        <Typography
-                                                            color="text.secondary">{"Semestre " + materiaReticula.semestre_cursada}</Typography>
-                                                    </CardContent>
-                                                    {/*Formato para la calificacion */}
-                                                    <CardContent>
-                                                        <Typography
-                                                            sx={{
-                                                                float: "right",
-                                                                height: "100%",
-                                                                marginTop: "-20px",
-                                                                marginLeft: "300px",
-                                                                marginRight: "20px",
-                                                                width: "20%",
-                                                                padding: "20px",
-                                                                display: "inline-block",
-                                                                position: "relative",
-                                                                border: "solid .1px",
-                                                                borderColor: "divider",
-                                                                flexDirection: "column",
-                                                                borderRadius: "20px",
-                                                            }}
-                                                            align="center"
-                                                        >{materiaReticula.calificacion}</Typography>
-                                                    </CardContent>
-                                                </CardActionArea>
-                                            </Card>
-                                        </Grid></Grid></div>)) :
+                                                onClick={() => {
+                                                    setIdCurso(materiaReticula.id_curso);
+                                                    handleEliminarAbierto();
+                                                }}>
+                                                <CardContent>
+                                                    <Typography
+                                                        sx={{fontSize: 14}}
+                                                        color="text.secondary"
+                                                        gutterBottom
+                                                    >
+                                                        {"Clave: " + materiaReticula.clave_materia}
+                                                    </Typography>
+                                                    <Typography
+                                                        gutterBottom
+                                                        variant="h5"
+                                                    >
+                                                        {getNombreMateria(materiaReticula.clave_materia)}
+                                                    </Typography>
+                                                    <Typography
+                                                        color="text.secondary">{"Cursada: " + materiaReticula.periodo_cursada}</Typography>
+                                                    <Typography
+                                                        color="text.secondary">{"Semestre " + materiaReticula.semestre_cursada}</Typography>
+                                                </CardContent>
+                                                {/*Formato para la calificacion */}
+                                                <CardContent>
+                                                    <Typography
+                                                        sx={{
+                                                            float: "right",
+                                                            height: "100%",
+                                                            marginTop: "-20px",
+                                                            marginLeft: "300px",
+                                                            marginRight: "20px",
+                                                            width: "20%",
+                                                            padding: "20px",
+                                                            display: "inline-block",
+                                                            position: "relative",
+                                                            border: "solid .1px",
+                                                            borderColor: "divider",
+                                                            flexDirection: "column",
+                                                            borderRadius: "20px",
+                                                        }}
+                                                        align="center"
+                                                    >{materiaReticula.calificacion}</Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                        </Card>
+                                    </Grid></Grid>)) :
                             <h4>Aún no tienes materias aprobadas agregadas.</h4> : null}
                     </Grid>
                 </TabPanel>
@@ -351,46 +350,45 @@ function ListaTabs() {
                         sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
                     >
                         {historialPartido[1] !== undefined ? historialPartido[1].length !== 0 ? historialPartido[1].map((materiaReticula) => (
-                                <div key={materiaReticula.id_curso.toString() + "1"}>
-                                    <Grid container sx={{display: "block"}} key={materiaReticula.id_curso}>
-                                        <Grid item sx={{display: "block", position: "relative"}}>
-                                            <Card
-                                                sx={{
-                                                    display: "flex",
-                                                    flexDirection: "column",
-                                                    position: "relative",
-                                                    borderRadius: "20px",
-                                                }}
-                                            >
-                                                <CardActionArea sx={{
-                                                    display: "flex",
-                                                    height: "100%",
-                                                    "&:hover": {
-                                                        "background-color": "rgba(255, 0, 0, 0.2)",
-                                                        "transform": "scale3d(1.05, 1.05, 1)"
-                                                    }
-                                                }} onClick={() => {
-                                                    setIdCurso(materiaReticula.id_curso);
-                                                    handleEliminarAbierto();
-                                                }}>
-                                                    <CardContent>
-                                                        <Typography
-                                                            sx={{fontSize: 14}}
-                                                            color="text.secondary"
-                                                            gutterBottom
-                                                        >
-                                                            {"Clave: " + materiaReticula.clave_materia}
-                                                        </Typography>
-                                                        <Typography
-                                                            gutterBottom
-                                                            variant="h5"
-                                                        >
-                                                            {getNombreMateria(materiaReticula.clave_materia)}
-                                                        </Typography>
-                                                    </CardContent>
-                                                </CardActionArea>
-                                            </Card>
-                                        </Grid></Grid></div>)) :
+                                <Grid container sx={{display: "block"}} key={materiaReticula.id_curso.toString() + "1"}>
+                                    <Grid item sx={{display: "block", position: "relative"}}>
+                                        <Card
+                                            sx={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                position: "relative",
+                                                borderRadius: "20px",
+                                            }}
+                                        >
+                                            <CardActionArea sx={{
+                                                display: "flex",
+                                                height: "100%",
+                                                "&:hover": {
+                                                    "backgroundColor": "rgba(255, 0, 0, 0.2)",
+                                                    "transform": "scale3d(1.05, 1.05, 1)"
+                                                }
+                                            }} onClick={() => {
+                                                setIdCurso(materiaReticula.id_curso);
+                                                handleEliminarAbierto();
+                                            }}>
+                                                <CardContent>
+                                                    <Typography
+                                                        sx={{fontSize: 14}}
+                                                        color="text.secondary"
+                                                        gutterBottom
+                                                    >
+                                                        {"Clave: " + materiaReticula.clave_materia}
+                                                    </Typography>
+                                                    <Typography
+                                                        gutterBottom
+                                                        variant="h5"
+                                                    >
+                                                        {getNombreMateria(materiaReticula.clave_materia)}
+                                                    </Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                        </Card>
+                                    </Grid></Grid>)) :
                             <h4>Aún no tienes materias en curso agregadas.</h4> : null}
                     </Grid>
                 </TabPanel>
@@ -400,46 +398,45 @@ function ListaTabs() {
                         sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
                     >
                         {historialPartido[2] !== undefined ? historialPartido[2].length !== 0 ? historialPartido[2].map((materiaReticula) => (
-                                <div key={materiaReticula.id_curso.toString() + "2"}>
-                                    <Grid container sx={{display: "block"}}>
-                                        <Grid item sx={{display: "block", position: "relative"}}>
-                                            <Card
-                                                sx={{
-                                                    display: "flex",
-                                                    flexDirection: "column",
-                                                    position: "relative",
-                                                    borderRadius: "20px",
-                                                }}
-                                            >
-                                                <CardActionArea sx={{
-                                                    display: "flex",
-                                                    height: "100%",
-                                                    "&:hover": {
-                                                        "background-color": "rgba(255, 0, 0, 0.2)",
-                                                        "transform": "scale3d(1.05, 1.05, 1)"
-                                                    }
-                                                }} onClick={() => {
-                                                    setIdCurso(materiaReticula.id_curso);
-                                                    handleEliminarAbierto();
-                                                }}>
-                                                    <CardContent>
-                                                        <Typography
-                                                            sx={{fontSize: 14}}
-                                                            color="text.secondary"
-                                                            gutterBottom
-                                                        >
-                                                            {"Clave: " + materiaReticula.clave_materia}
-                                                        </Typography>
-                                                        <Typography
-                                                            gutterBottom
-                                                            variant="h5"
-                                                        >
-                                                            {getNombreMateria(materiaReticula.clave_materia)}
-                                                        </Typography>
-                                                    </CardContent>
-                                                </CardActionArea>
-                                            </Card>
-                                        </Grid></Grid></div>)) :
+                                <Grid container sx={{display: "block"}} key={materiaReticula.id_curso.toString() + "2"}>
+                                    <Grid item sx={{display: "block", position: "relative"}}>
+                                        <Card
+                                            sx={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                position: "relative",
+                                                borderRadius: "20px",
+                                            }}
+                                        >
+                                            <CardActionArea sx={{
+                                                display: "flex",
+                                                height: "100%",
+                                                "&:hover": {
+                                                    "backgroundColor": "rgba(255, 0, 0, 0.2)",
+                                                    "transform": "scale3d(1.05, 1.05, 1)"
+                                                }
+                                            }} onClick={() => {
+                                                setIdCurso(materiaReticula.id_curso);
+                                                handleEliminarAbierto();
+                                            }}>
+                                                <CardContent>
+                                                    <Typography
+                                                        sx={{fontSize: 14}}
+                                                        color="text.secondary"
+                                                        gutterBottom
+                                                    >
+                                                        {"Clave: " + materiaReticula.clave_materia}
+                                                    </Typography>
+                                                    <Typography
+                                                        gutterBottom
+                                                        variant="h5"
+                                                    >
+                                                        {getNombreMateria(materiaReticula.clave_materia)}
+                                                    </Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                        </Card>
+                                    </Grid></Grid>)) :
                             <h4>Aún no tienes materias por cursar agregadas.</h4> : null}
                     </Grid>
                 </TabPanel>

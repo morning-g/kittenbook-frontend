@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Tabs from "@mui/material/Tabs";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -101,12 +101,14 @@ function ListaTabs() {
 
     useEffect(() => {
         Axios.get('http://localhost:3005/api/materias').then((res) => {
+            console.log("Materias");
             console.log(res.data);
             setMaterias(res.data);
         }).catch((err) => {
             console.log(err);
         });
         Axios.get('http://localhost:3005/api/historial').then((res) => {
+            console.log("Reticula");
             console.log(res.data);
             setReticula(res.data);
             setHistorialPartido(partirReticula(res.data));
@@ -115,13 +117,14 @@ function ListaTabs() {
             console.log(err);
         });
         Axios.get('http://localhost:3005/api/horario').then((res) => {
-            console.log("Horario: ")
+            console.log("Horario")
             console.log(res.data);
             setClases(res.data);
         }).catch((err) => {
             console.log(err);
         });
         Axios.get('http://localhost:3005/api/tareas').then((res) => {
+            console.log("Tareas");
             console.log(res.data);
             setTareas(res.data);
             setTareasPartidas(partirTareas(res.data));
@@ -269,7 +272,8 @@ function ListaTabs() {
                     variant="scrollable"
                 >
                     {clases !== undefined ? clases.length !== 0 ? clases.map((clase) => (
-                        <Tab key={clase.id_clase} label={getNombreMateria(clase.clave_materia)} {...a11yProps(clase.id_clase)}/>
+                        <Tab key={clase.id_clase}
+                             label={getNombreMateria(clase.clave_materia)} {...a11yProps(clase.id_clase)}/>
                     )) : null : null}
                 </Tabs>
             </Box>
@@ -358,13 +362,13 @@ function ListaTabs() {
                     <Box m={1} sx={{justifyContent: "space-between"}}>
                         <DialogContentText>Título</DialogContentText>
                         <TextField
+                            autoFocus
                             margin="dense"
                             size='small'
                             type="text"
                             fullWidth
                             variant="outlined"
                             required
-                            // defaultValue={notaActiva.contenido}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -404,26 +408,30 @@ function ListaTabs() {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                tabValue={claveMateria}
+                                value={claveMateria}
                                 label="Clase"
                                 onChange={(e) => {
                                     setClaveMateria(e.target.value);
                                     setTabValue(0);
                                 }}
                             >
-                                {historialPartido[1] !== undefined ? historialPartido[1].length === 0 ?
-                                    <MenuItem>Aún no estás cursando ninguna
-                                        materia.</MenuItem> : null : null}
-                                {historialPartido[1] !== undefined ? historialPartido[1].map((materia) => (
+                                {clases !== undefined ? clases.length === 0 ?
+                                    <MenuItem>Aún no has agregado ninguna materia a tu
+                                        horario.</MenuItem> : null : null}
+                                {clases !== undefined ? clases.length !== 0 ? clases.map((clase) => (
                                     <MenuItem
-                                        value={materia.clave_materia} key={materia.id_curso}>{materia.clave_materia + ": " + getNombreMateria(materia.clave_materia)}</MenuItem>)) : null}
+                                        value={clase.clave_materia}
+                                        key={clase.id_clase}>{clase.clave_materia + ": " + getNombreMateria(clase.clave_materia)}</MenuItem>)) : null : null}
                             </Select>
                         </FormControl>
                     </Box>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleAgregarCerrado}>Cancelar</Button>
-                    <Button onClick={() => {agregarTarea(); handleAgregarCerrado();}} disabled={condicion}>Agregar</Button>
+                    <Button onClick={() => {
+                        agregarTarea();
+                        handleAgregarCerrado();
+                    }} disabled={condicion}>Agregar</Button>
                 </DialogActions>
             </Dialog>
             {/*VER O EDITAR TAREA*/}
@@ -479,7 +487,7 @@ function ListaTabs() {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                // tabValue={age}
+                                // value={age}
                                 label="Clase"
                                 onChange={handleChange}
                             >
