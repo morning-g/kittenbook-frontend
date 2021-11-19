@@ -253,10 +253,8 @@ function ListaTabs() {
                     textColor="primary"
                     variant="scrollable"
                 >
-                    <Tab label="Materias aprobadas" {...a11yProps(0)}/>
-                    <Tab label="Materias en curso" {...a11yProps(1)}/>
-                    <Tab label="Materias por cursar" {...a11yProps(2)}/>
-                    <Tab label="Retículas por carrera" {...a11yProps(3)}/>
+                    <Tab label="Materias" {...a11yProps(0)}/>
+                    <Tab label="Retículas por carrera" {...a11yProps(1)}/>
 
                 </Tabs>
             </Box>
@@ -283,6 +281,7 @@ function ListaTabs() {
                                                 flexDirection: "column",
                                                 position: "relative",
                                                 borderRadius: "20px",
+                                                backgroundColor: "green"
                                             }}
                                         >
                                             <CardActionArea
@@ -342,13 +341,6 @@ function ListaTabs() {
                                         </Card>
                                     </Grid></Grid>)) :
                             <h4>Aún no tienes materias aprobadas agregadas.</h4> : null}
-                    </Grid>
-                </TabPanel>
-                <TabPanel index={1} value={tabValue}>
-                    <Grid
-                        container
-                        sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
-                    >
                         {historialPartido[1] !== undefined ? historialPartido[1].length !== 0 ? historialPartido[1].map((materiaReticula) => (
                                 <Grid container sx={{display: "block"}} key={materiaReticula.id_curso.toString() + "1"}>
                                     <Grid item sx={{display: "block", position: "relative"}}>
@@ -358,6 +350,7 @@ function ListaTabs() {
                                                 flexDirection: "column",
                                                 position: "relative",
                                                 borderRadius: "20px",
+                                                backgroundColor: "blue"
                                             }}
                                         >
                                             <CardActionArea sx={{
@@ -390,13 +383,6 @@ function ListaTabs() {
                                         </Card>
                                     </Grid></Grid>)) :
                             <h4>Aún no tienes materias en curso agregadas.</h4> : null}
-                    </Grid>
-                </TabPanel>
-                <TabPanel index={2} value={tabValue}>
-                    <Grid
-                        container
-                        sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
-                    >
                         {historialPartido[2] !== undefined ? historialPartido[2].length !== 0 ? historialPartido[2].map((materiaReticula) => (
                                 <Grid container sx={{display: "block"}} key={materiaReticula.id_curso.toString() + "2"}>
                                     <Grid item sx={{display: "block", position: "relative"}}>
@@ -406,6 +392,7 @@ function ListaTabs() {
                                                 flexDirection: "column",
                                                 position: "relative",
                                                 borderRadius: "20px",
+                                                backgroundColor: "#b9b900"
                                             }}
                                         >
                                             <CardActionArea sx={{
@@ -440,7 +427,7 @@ function ListaTabs() {
                             <h4>Aún no tienes materias por cursar agregadas.</h4> : null}
                     </Grid>
                 </TabPanel>
-                <TabPanel index={3} value={tabValue}>
+                <TabPanel index={1} value={tabValue}>
                     <Grid
                         container
                         sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}
@@ -555,6 +542,11 @@ function ListaTabs() {
                     </Grid>
                 </TabPanel>
             </Box>
+            <br/>
+            <h5 style={{textAlign: "center"}}>Leyenda: </h5>
+            <p style={{ color: "green", textAlign: "center"}}><strong>Aprobadas</strong></p>
+            <p style={{ color: "blue", textAlign: "center"}}><strong>En curso</strong></p>
+            <p style={{ color: "#b9b900", textAlign: "center"}}><strong>Por cursar</strong></p>
             <br/>
             {historialPartido[0] !== undefined ?
                 historialPartido[0].length !== 0 ?
