@@ -261,7 +261,7 @@ function ListaTabs() {
             {/*Contenido de la reticula*/}
             <Box
                 sx={{
-                    width: "100%",
+                    width: "25%",
                     maxWidth: 1000,
                     margin: "0 auto",
                     display: "flex",
@@ -306,12 +306,13 @@ function ListaTabs() {
                                                     </Typography>
                                                     <Typography
                                                         gutterBottom
-                                                        variant="h5"
+                                                        variant="h6"
                                                         style={{ color: "green" }}
                                                     >
                                                         {getNombreMateria(materiaReticula.clave_materia)}
                                                     </Typography>
                                                     <Typography
+                                                    sx={{fontSize: 11}}
                                                         color="text.secondary">{"Cursada: " + materiaReticula.periodo_cursada}</Typography>
                                                     <Typography
                                                         color="text.secondary">{"Semestre " + materiaReticula.semestre_cursada}</Typography>
@@ -323,10 +324,10 @@ function ListaTabs() {
                                                             float: "right",
                                                             height: "100%",
                                                             marginTop: "-20px",
-                                                            marginLeft: "300px",
-                                                            marginRight: "20px",
-                                                            width: "20%",
-                                                            padding: "20px",
+                                                            marginLeft: "0px",
+                                                            marginRight: "10px",
+                                                            width: "110%",
+                                                            padding: "15px",
                                                             display: "inline-block",
                                                             position: "relative",
                                                             border: "solid .1px",
@@ -334,7 +335,7 @@ function ListaTabs() {
                                                             flexDirection: "column",
                                                             borderRadius: "20px",
                                                         }}
-                                                        align="center"
+                                                        align="center"                                             
                                                     >{materiaReticula.calificacion}</Typography>
                                                 </CardContent>
                                             </CardActionArea>
@@ -373,7 +374,7 @@ function ListaTabs() {
                                                     </Typography>
                                                     <Typography
                                                         gutterBottom
-                                                        variant="h5"
+                                                        variant="h6"
                                                         style={{ color: "blue" }}
                                                     >
                                                         {getNombreMateria(materiaReticula.clave_materia)}
@@ -415,7 +416,7 @@ function ListaTabs() {
                                                     </Typography>
                                                     <Typography
                                                         gutterBottom
-                                                        variant="h5"
+                                                        variant="h6"
                                                         style={{ color: "#b9b900"}}
                                                     >
                                                         {getNombreMateria(materiaReticula.clave_materia)}
