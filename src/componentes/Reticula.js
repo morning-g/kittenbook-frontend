@@ -281,7 +281,6 @@ function ListaTabs() {
                                                 flexDirection: "column",
                                                 position: "relative",
                                                 borderRadius: "20px",
-                                                backgroundColor: "green"
                                             }}
                                         >
                                             <CardActionArea
@@ -308,6 +307,7 @@ function ListaTabs() {
                                                     <Typography
                                                         gutterBottom
                                                         variant="h5"
+                                                        style={{ color: "green" }}
                                                     >
                                                         {getNombreMateria(materiaReticula.clave_materia)}
                                                     </Typography>
@@ -349,8 +349,7 @@ function ListaTabs() {
                                                 display: "flex",
                                                 flexDirection: "column",
                                                 position: "relative",
-                                                borderRadius: "20px",
-                                                backgroundColor: "blue"
+                                                borderRadius: "20px"
                                             }}
                                         >
                                             <CardActionArea sx={{
@@ -375,6 +374,7 @@ function ListaTabs() {
                                                     <Typography
                                                         gutterBottom
                                                         variant="h5"
+                                                        style={{ color: "blue" }}
                                                     >
                                                         {getNombreMateria(materiaReticula.clave_materia)}
                                                     </Typography>
@@ -392,7 +392,6 @@ function ListaTabs() {
                                                 flexDirection: "column",
                                                 position: "relative",
                                                 borderRadius: "20px",
-                                                backgroundColor: "#b9b900"
                                             }}
                                         >
                                             <CardActionArea sx={{
@@ -417,6 +416,7 @@ function ListaTabs() {
                                                     <Typography
                                                         gutterBottom
                                                         variant="h5"
+                                                        style={{ color: "#b9b900"}}
                                                     >
                                                         {getNombreMateria(materiaReticula.clave_materia)}
                                                     </Typography>
