@@ -263,7 +263,7 @@ function ListaTabs() {
                 sx={{
                     width: "25%",
                     maxWidth: 1000,
-                    margin: "0 auto",
+                    //margin: "0 auto",
                     display: "flex",
                 }}
             >
