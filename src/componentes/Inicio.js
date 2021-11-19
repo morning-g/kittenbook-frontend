@@ -16,25 +16,6 @@ function srcset(image, size, rows = 1, cols = 1) {
     };
 }
 
-function StandardImageList() {
-    return (
-        <ImageList
-            variant="quilted"
-            cols={4}
-            rowHeight={121}>
-            {itemData.map((item) => (
-                <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
-                    <img
-                        {...srcset(item.img, 121, item.rows, item.cols)}
-                        alt={item.title}
-                        loading="lazy"
-                    />
-                </ImageListItem>
-            ))}
-        </ImageList>
-    );
-}
-
 const itemData = [
     {
         img: 'https://s3.amazonaws.com/petcentral.com/wp-content/uploads/2016/09/01160419/black-cat-1.jpg',
@@ -95,6 +76,25 @@ const itemData = [
         cols: 2,
     },
 ];
+
+function StandardImageList() {
+    return (
+        <ImageList
+            variant="quilted"
+            cols={4}
+            rowHeight={121}>
+            {itemData.map((item) => (
+                <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
+                    <img
+                        {...srcset(item.img, 121, item.rows, item.cols)}
+                        alt={item.title}
+                        loading="lazy"
+                    />
+                </ImageListItem>
+            ))}
+        </ImageList>
+    );
+}
 
 export default function Inicio() {
     return (

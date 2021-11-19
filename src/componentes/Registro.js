@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useState} from "react";
+import React, {useState} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,6 +14,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import InputAdornment from '@mui/material/InputAdornment';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import BadgeIcon from '@mui/icons-material/Badge';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
 export default function Registro() {
     const [nombre, setNombre] = useState("");
@@ -22,7 +26,10 @@ export default function Registro() {
     const [password, setPassword] = useState("");
     const [estatus, setEstatus] = useState(0);
     let [estatusCheckbox, setEstatusCheckbox] = useState(false);
-    let esValido = nombre === "" || apellido === "" || usuario === "" || password === "";
+    let esInvalidoNombre = nombre.length < 3 || nombre.length > 253;
+    let esInvalidoApellido = apellido.length < 3 || apellido.length > 253;
+    let esInvalidoUsuario = usuario.length < 6 || usuario.length > 253;
+    let esInvalidoPassword = password.length < 6 || password.length > 253;
 
     Axios.defaults.withCredentials = true;
 
@@ -78,10 +85,19 @@ export default function Registro() {
                                     autoComplete="fname"
                                     name="firstName"
                                     required
+                                    error={nombre.length < 3 || nombre.length > 253}
+                                    helperText="El nombre debe tener por lo menos 3 caracteres."
                                     fullWidth
                                     id="firstName"
                                     label="Nombre"
                                     autoFocus
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <AssignmentIndIcon/>
+                                            </InputAdornment>
+                                        ),
+                                    }}
                                     onChange={(e) => {
                                         setNombre(e.target.value);
                                     }}
@@ -94,7 +110,16 @@ export default function Registro() {
                                     id="lastName"
                                     label="Apellido"
                                     name="lastName"
+                                    error={apellido.length < 3 || apellido.length > 253}
+                                    helperText="El apellido debe tener por lo menos 3 caracteres."
                                     autoComplete="lname"
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <AssignmentIndIcon/>
+                                            </InputAdornment>
+                                        ),
+                                    }}
                                     onChange={(e) => {
                                         setApellido(e.target.value);
                                     }}
@@ -108,6 +133,15 @@ export default function Registro() {
                                     label="Nombre de usuario"
                                     name="username"
                                     autoComplete="username"
+                                    error={usuario.length < 6 || usuario.length > 253}
+                                    helperText="El nombre de usuario debe tener por lo menos 6 caracteres."
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <BadgeIcon/>
+                                            </InputAdornment>
+                                        ),
+                                    }}
                                     onChange={(e) => {
                                         setUsuario(e.target.value);
                                     }}
@@ -121,7 +155,16 @@ export default function Registro() {
                                     label="Contraseña"
                                     type="password"
                                     id="password"
+                                    error={password.length < 6 || password.length > 253}
+                                    helperText="La contraseña debe tener por lo menos 6 caracteres."
                                     autoComplete="new-password"
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <VpnKeyIcon/>
+                                            </InputAdornment>
+                                        ),
+                                    }}
                                     onChange={(e) => {
                                         setPassword(e.target.value);
                                     }}
@@ -151,7 +194,7 @@ export default function Registro() {
                                 <FormControlLabel
                                     control={
                                         <Checkbox value="allowExtraEmails" color="primary" onChange={(e) => {
-                                            setEstatusCheckbox(e.target.checked)
+                                            setEstatusCheckbox(e.target.checked);
                                         }}/>
                                     }
                                     label="Confirmo que he leído y acepto los términos y condiciones y la política de privacidad."
@@ -163,7 +206,7 @@ export default function Registro() {
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
-                            disabled={esValido || estatusCheckbox === false ? true : false}
+                            disabled={esInvalidoNombre || esInvalidoApellido || esInvalidoUsuario || esInvalidoPassword || estatusCheckbox === false}
                             onClick={enviarRegistro}
                         >
                             Crear cuenta

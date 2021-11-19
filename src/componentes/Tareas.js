@@ -27,6 +27,9 @@ import Stack from '@mui/material/Stack';
 import TimerIcon from '@mui/icons-material/Timer';
 import TimerOffIcon from '@mui/icons-material/TimerOff';
 import Container from "@mui/material/Container";
+import Divider from '@mui/material/Divider';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 import Axios from "axios";
 
@@ -79,55 +82,38 @@ function ListaTabs() {
     };
 
     const [accionUsuario, setAccionUsuario] = useState(false);
-    const [reticula, setReticula] = useState([]);
     const [materias, setMaterias] = useState([]);
-    const [historialPartido, setHistorialPartido] = useState([]);
-    const [tareasPartidas, setTareasPartidas] = useState([]);
     const [tareas, setTareas] = useState([]);
     const [clases, setClases] = useState([]);
     const [tabValue, setTabValue] = useState(0);
     const [dialogoAgregarAbierto, setDialogoAgregarAbierto] = useState(false);
     const [dialogoEditarAbierto, setDialogoEditarAbierto] = useState(false);
     const [dialogoEliminarAbierto, setDialogoEliminarAbierto] = useState(false);
+    const [idTarea, setIdTarea] = useState("");
     const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [estado, setEstado] = useState("No iniciada");
-    const [tiempoCreacion, setTiempoCreacion] = useState("");
-    const [tiempoInicio, setTiempoInicio] = useState("");
-    const [tiempoFinalizacion, setTiempoFinalizacion] = useState("");
     const [claveMateria, setClaveMateria] = useState("");
+    const [tareaActiva, setTareaActiva] = useState({});
+    const [estaAbiertoSnackbarComenzada, setEstaAbiertoSnackbarComenzada] = useState(false);
+    const [estaAbiertoSnackbarFinalizada, setEstaAbiertoSnackbarFinalizada] = useState(false);
     let condicion = titulo === "" || descripcion === "" || claveMateria === "";
-    let indexValue = 0;
+    let i = 0;
+    let j = 0;
 
     useEffect(() => {
         Axios.get('http://localhost:3005/api/materias').then((res) => {
-            console.log("Materias");
-            console.log(res.data);
             setMaterias(res.data);
         }).catch((err) => {
             console.log(err);
         });
-        Axios.get('http://localhost:3005/api/historial').then((res) => {
-            console.log("Reticula");
-            console.log(res.data);
-            setReticula(res.data);
-            setHistorialPartido(partirReticula(res.data));
-            console.log(partirReticula(res.data));
-        }).catch((err) => {
-            console.log(err);
-        });
         Axios.get('http://localhost:3005/api/horario').then((res) => {
-            console.log("Horario")
-            console.log(res.data);
             setClases(res.data);
         }).catch((err) => {
             console.log(err);
         });
         Axios.get('http://localhost:3005/api/tareas').then((res) => {
-            console.log("Tareas");
-            console.log(res.data);
             setTareas(res.data);
-            setTareasPartidas(partirTareas(res.data));
         }).catch((err) => {
             console.log(err);
         });
@@ -143,55 +129,20 @@ function ListaTabs() {
         return result;
     };
 
-    const partirReticula = (reticula) => {
-        let aprobadasReticula = [];
-        let encursoReticula = [];
-        let porcursarReticula = [];
-        reticula.forEach((materiaReticula) => {
-            if (materiaReticula.estado === "Aprobada") {
-                aprobadasReticula.push(materiaReticula);
-            } else if (materiaReticula.estado === "En curso") {
-                encursoReticula.push(materiaReticula);
-            } else if (materiaReticula.estado === "Por cursar") {
-                porcursarReticula.push(materiaReticula);
+    const encontrarTareas = (clave_materia) => {
+        let tareasMateria = [];
+        tareas.forEach((tarea) => {
+            if (tarea.clave_materia === clave_materia) {
+                tareasMateria.push(tarea);
             }
         });
-        return [aprobadasReticula, encursoReticula, porcursarReticula];
-    };
-
-    const partirTareas = (horario) => {
-        let lunesHorario = [];
-        let martesHorario = [];
-        let miercolesHorario = [];
-        let juevesHorario = [];
-        let viernesHorario = [];
-        horario.forEach((clase) => {
-            if (clase.lunes === 1) {
-                lunesHorario.push(clase);
-            }
-            if (clase.martes === 1) {
-                martesHorario.push(clase);
-            }
-            if (clase.miercoles === 1) {
-                miercolesHorario.push(clase);
-            }
-            if (clase.jueves === 1) {
-                juevesHorario.push(clase);
-            }
-            if (clase.viernes === 1) {
-                viernesHorario.push(clase);
-            }
-        });
-        return [lunesHorario, martesHorario, miercolesHorario, juevesHorario, viernesHorario];
+        return tareasMateria;
     };
 
     const limpiar = () => {
         setTitulo("");
         setDescripcion("");
         setEstado("No iniciada");
-        setTiempoCreacion("");
-        setTiempoInicio("");
-        setTiempoFinalizacion("");
         setClaveMateria("");
     };
 
@@ -203,19 +154,61 @@ function ListaTabs() {
             descripcion: descripcion,
             estado: estado
         }, {headers}).then((res) => {
-            console.log(res.data);
+            console.log("Tarea creada.");
         }).catch((err) => {
             console.log(err);
         });
         limpiar();
     };
 
-    const actualizarTarea = () => {
+    const empezarTarea = () => {
+        setAccionUsuario(!accionUsuario);
+        Axios.post('http://localhost:3005/api/tareas/empezar', {
+            id_tarea: idTarea
+        }, {headers}).then((res) => {
+            console.log("Tarea comenzada.");
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
 
+    const finalizarTarea = () => {
+        setAccionUsuario(!accionUsuario);
+        Axios.post('http://localhost:3005/api/tareas/finalizar', {
+            id_tarea: idTarea
+        }, {headers}).then((res) => {
+            console.log("Tarea finalizada.");
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
+
+    const actualizarTarea = () => {
+        setAccionUsuario(!accionUsuario);
+        Axios.post('http://localhost:3005/api/tareas/actualizar', {
+            id_tarea: idTarea,
+            titulo: titulo,
+            descripcion: descripcion
+        }, {headers}).then((res) => {
+            console.log("Tarea editada.")
+        }).catch((err) => {
+            console.log(err);
+        });
+        limpiar();
     };
 
     const eliminarTarea = () => {
-
+        setAccionUsuario(!accionUsuario);
+        Axios.delete('http://localhost:3005/api/tareas', {
+            data: {
+                id_tarea: idTarea
+            }
+        }, {headers}).then((res) => {
+            console.log("Tarea eliminada.")
+        }).catch((err) => {
+            console.log(err);
+        });
+        limpiar();
     };
 
     const handleEditarAbierto = () => {
@@ -246,15 +239,6 @@ function ListaTabs() {
         setTabValue(newValue);
     };
 
-    // Arreglo de objetos tabs
-    // const [tabs, setTabs] = useState([
-    //     {titulo: "Calculo", value: 0},
-    //     {titulo: "Ecuaciones", value: 1},
-    //     {titulo: "Gestión de Proyectos de Software", value: 2},
-    //     {titulo: "Inteligencia Artificial", value: 3},
-    //     {titulo: "Lenguajes y Automatas II", value: 4},
-    // ]);
-
     return (
         <div>
             <Box
@@ -273,7 +257,7 @@ function ListaTabs() {
                 >
                     {clases !== undefined ? clases.length !== 0 ? clases.map((clase) => (
                         <Tab key={clase.id_clase}
-                             label={getNombreMateria(clase.clave_materia)} {...a11yProps(clase.id_clase)}/>
+                             label={getNombreMateria(clase.clave_materia)} {...a11yProps(j++)}/>
                     )) : null : null}
                 </Tabs>
             </Box>
@@ -284,35 +268,65 @@ function ListaTabs() {
                 display: "flex",
             }}>
                 {clases !== undefined ? clases.length !== 0 ? clases.map((clase) => (
-                    <TabPanel key={clase.id_clase} index={clase.id_clase} value={tabValue}>
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Card
-                                sx={{
-                                    height: "100%",
-                                    display: "flex",
-                                }}
-                            >
-                                <CardActionArea onClick={() => {
-                                    handleEditarAbierto();
-                                    // setNotaActiva(nota);
-                                    // setIdNota(nota.id_nota);
-                                    // setTitulo(nota.titulo);
-                                    // setContenido(nota.contenido);
-                                }}>
-                                    <CardContent sx={{flexGrow: 1}}>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            {/*{nota.titulo}*/}
-                                        </Typography>
-                                        <Typography>
-                                            {/*{nota.contenido}*/}
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                        {/*<Grid container sx={{justifyContent: "space-between", columnGap: 1, rowGap: 1}}>*/}
-                        {/*    <ListadoTareas tareas={tareas} materia={tab.titulo}/>*/}
-                        {/*</Grid>*/}
+                    <TabPanel key={clase.id_clase} index={i++} value={tabValue}>
+                        {encontrarTareas(clase.clave_materia).map((tarea, index) => (
+                            <Grid container sx={{display: "block"}} key={index}>
+                                <Card
+                                    sx={{
+                                        height: "100%",
+                                        display: "flex",
+                                    }}
+                                >
+                                    <CardActionArea onClick={() => {
+                                        handleEditarAbierto();
+                                        setTareaActiva(tarea);
+                                        setIdTarea(tarea.id_tarea);
+                                        setTitulo(tarea.titulo);
+                                        setDescripcion(tarea.descripcion);
+                                        setEstado(tarea.estado);
+                                        setClaveMateria(tarea.clave_materia);
+                                    }}>
+                                        <CardContent sx={{flexGrow: 1}}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                {tarea.titulo}
+                                            </Typography>
+                                            <Typography>
+                                                {tarea.descripcion}
+                                            </Typography>
+                                            <br/>
+                                            <Divider light/>
+                                            <br/>
+                                            <Typography sx={{fontSize: 14}}
+                                                        color="text.secondary"
+                                                        gutterBottom>
+                                                {tarea.estado}
+                                            </Typography>
+                                            <br/>
+                                            <Divider light/>
+                                            <br/>
+                                            <Typography sx={{fontSize: 13}}
+                                                        color="text.secondary"
+                                                        gutterBottom>
+                                                Tiempo de creación: {tarea.tiempo_creacion}
+                                            </Typography>
+                                            <Typography sx={{fontSize: 13}}
+                                                        color="text.secondary"
+                                                        gutterBottom>
+                                                Tiempo de
+                                                inicio: {tarea.tiempo_inicio === "" ? "No iniciada." : tarea.tiempo_inicio}
+                                            </Typography>
+                                            <Typography sx={{fontSize: 13}}
+                                                        color="text.secondary"
+                                                        gutterBottom>
+                                                Tiempo de
+                                                finalización: {tarea.tiempo_finalizacion === "" ? "No finalizada." : tarea.tiempo_finalizacion}
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                                <br/>
+                            </Grid>
+                        ))}
                     </TabPanel>
                 )) : null : null}
             </Box>
@@ -404,10 +418,8 @@ function ListaTabs() {
                         <br/>
                         <br/>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Clase</InputLabel>
+                            <InputLabel>Clase</InputLabel>
                             <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
                                 value={claveMateria}
                                 label="Clase"
                                 onChange={(e) => {
@@ -447,7 +459,7 @@ function ListaTabs() {
                             fullWidth
                             variant="outlined"
                             required
-                            // defaultValue={notaActiva.contenido}
+                            defaultValue={tareaActiva.titulo}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -455,9 +467,9 @@ function ListaTabs() {
                                     </InputAdornment>
                                 ),
                             }}
-                            // onChange={(e) => {
-                            //     setContenido(e.target.tabValue)
-                            // }}
+                            onChange={(e) => {
+                                setTitulo(e.target.value)
+                            }}
                         />
                         <DialogContentText>Descripción</DialogContentText>
                         <TextField
@@ -469,6 +481,7 @@ function ListaTabs() {
                             multiline
                             rows={6}
                             required
+                            defaultValue={tareaActiva.descripcion}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -476,33 +489,45 @@ function ListaTabs() {
                                     </InputAdornment>
                                 ),
                             }}
-                            // onChange={(e) => {
-                            //     setContenido(e.target.tabValue)
-                            // }}
+                            onChange={(e) => {
+                                setDescripcion(e.target.value)
+                            }}
                         />
                         <br/>
                         <br/>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Clase</InputLabel>
+                            <InputLabel>Clase</InputLabel>
                             <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                // value={age}
+                                value={claveMateria}
                                 label="Clase"
-                                onChange={handleChange}
+                                onChange={(e) => {
+                                    setClaveMateria(e.target.value);
+                                    setTabValue(0);
+                                }}
                             >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                <MenuItem value={tareaActiva.clave_materia}>{tareaActiva.clave_materia}</MenuItem>
                             </Select>
                         </FormControl>
                         <br/>
                         <br/>
                         <Stack direction="row" spacing={2}>
-                            <Button variant="outlined" startIcon={<TimerIcon/>}>
+                            <Button variant="outlined"
+                                    disabled={tareaActiva.estado === "Iniciada" || tareaActiva.estado === "Finalizada"}
+                                    startIcon={<TimerIcon/>}
+                                    onClick={() => {
+                                        handleEditarCerrado();
+                                        setEstaAbiertoSnackbarComenzada(true);
+                                        empezarTarea();
+                                    }}>
                                 Empezar
                             </Button>
-                            <Button variant="contained" endIcon={<TimerOffIcon/>}>
+                            <Button variant="contained" endIcon={<TimerOffIcon/>}
+                                    disabled={tareaActiva.estado === "No iniciada" || tareaActiva.estado === "Finalizada"}
+                                    onClick={() => {
+                                        handleEditarCerrado();
+                                        setEstaAbiertoSnackbarFinalizada(true);
+                                        finalizarTarea();
+                                    }}>
                                 Finalizar
                             </Button>
                         </Stack>
@@ -514,23 +539,43 @@ function ListaTabs() {
                         handleEliminarAbierto();
                     }}>Eliminar tarea</Button>
                     <Button onClick={() => {
-                        // editarNota(idNota);
+                        actualizarTarea(idTarea);
                         handleEditarCerrado();
                     }}>Aceptar</Button>
                 </DialogActions>
             </Dialog>
-            {/*CONFIRMAR ELIMINAR NOTA*/}
+            {/*SNACKBAR TAREA COMENZADA*/}
+            <Snackbar
+                anchorOrigin={{vertical: "bottom", horizontal: "center"}}
+                autoHideDuration={5000}
+                open={estaAbiertoSnackbarComenzada}
+                onClose={() => {
+                    setEstaAbiertoSnackbarComenzada(false);
+                }}
+            >
+                <Alert severity="info">¡Tarea comenzada!</Alert>
+            </Snackbar>
+            {/*SNACKBAR TAREA FINALIZADA*/}
+            <Snackbar
+                anchorOrigin={{vertical: "bottom", horizontal: "center"}}
+                autoHideDuration={5000}
+                open={estaAbiertoSnackbarFinalizada}
+                onClose={() => {
+                    setEstaAbiertoSnackbarFinalizada(false);
+                }}
+            >
+                <Alert severity="success">¡Tarea finalizada!</Alert>
+            </Snackbar>
+            {/*CONFIRMAR ELIMINAR TAREA*/}
             <Dialog
                 open={dialogoEliminarAbierto}
                 onClose={handleEliminarCerrado}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">
+                <DialogTitle>
                     {"¿Estás segur@ que quieres eliminar la tarea?"}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
+                    <DialogContentText>
                         Esta acción es permanente y no se puede revertir.
                     </DialogContentText>
                 </DialogContent>
@@ -539,7 +584,7 @@ function ListaTabs() {
                         handleEliminarCerrado()
                     }}>No</Button>
                     <Button onClick={() => {
-                        // eliminarNota(idNota);
+                        eliminarTarea(idTarea);
                         handleEliminarCerrado();
                         handleEditarCerrado();
                     }} autoFocus>

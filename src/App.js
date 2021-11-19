@@ -13,7 +13,7 @@ import Inicio from "./componentes/Inicio";
 import Acceso from "./componentes/Login";
 import Registro from "./componentes/Registro";
 import Pie from "./componentes/Pie";
-import Dashboard from "./componentes/Dashboard"
+import Dashboard from "./componentes/Dashboard";
 import MenuAppBar from "./componentes/AppBar";
 import MenuAppBarLogeado from "./componentes/AppBarLogeado";
 import Precios from "./componentes/Precios";

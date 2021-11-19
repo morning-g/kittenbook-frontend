@@ -562,8 +562,6 @@ export default function Horario() {
                             <FormControl variant="filled" fullWidth>
                                 <InputLabel id="demo-simple-select-label">Clave de la materia</InputLabel>
                                 <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
                                     value={claveMateria}
                                     label="Clave de la materia"
                                     onChange={(e) => {
@@ -650,9 +648,7 @@ export default function Horario() {
                             <br/>
                             <DialogContentText>Hora de inicio</DialogContentText>
                             <Slider
-                                aria-label="Temperature"
                                 defaultValue={12}
-                                // getAriaValueText={valuetext}
                                 valueLabelDisplay="auto"
                                 step={1}
                                 marks
@@ -666,9 +662,7 @@ export default function Horario() {
                             <br/>
                             <DialogContentText>Hora de término</DialogContentText>
                             <Slider
-                                aria-label="Temperature"
                                 defaultValue={12}
-                                // getAriaValueText={valuetext}
                                 valueLabelDisplay="auto"
                                 step={1}
                                 marks
@@ -869,20 +863,18 @@ export default function Horario() {
                 <Dialog
                     open={dialogoEliminarAbierto}
                     onClose={handleEliminarCerrado}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">
+                    <DialogTitle>
                         {"¿Estás segur@ que quieres eliminar la clase?"}
                     </DialogTitle>
                     <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
+                        <DialogContentText>
                             Esta acción es permanente y no se puede revertir.
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={() => {
-                            handleEliminarCerrado()
+                            handleEliminarCerrado();
                         }}>No</Button>
                         <Button onClick={() => {
                             eliminarClase();
@@ -893,9 +885,6 @@ export default function Horario() {
                         </Button>
                     </DialogActions>
                 </Dialog>
-                {/*<TabPanel value={value} index={1}>*/}
-                {/*  No definido*/}
-                {/*</TabPanel>*/}
             </Box>
         </Container>
     );

@@ -14,6 +14,9 @@ import Typography from "@mui/material/Typography";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { useState} from "react";
+import InputAdornment from "@mui/material/InputAdornment";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import BadgeIcon from "@mui/icons-material/Badge";
 
 export default function Login(props) {
     const [usuario, setUsuario] = useState("");
@@ -72,6 +75,13 @@ export default function Login(props) {
                                 label="Nombre de usuario"
                                 name="username"
                                 autoFocus
+                                InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <BadgeIcon/>
+                                            </InputAdornment>
+                                        ),
+                                    }}
                                 onChange={(e) => {
                                     setUsuario(e.target.value);
                                 }}
@@ -84,6 +94,13 @@ export default function Login(props) {
                                 label="Contraseña"
                                 type="password"
                                 id="password"
+                                InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <VpnKeyIcon/>
+                                            </InputAdornment>
+                                        ),
+                                    }}
                                 onChange={(e) => {
                                     setPassword(e.target.value);
                                 }}

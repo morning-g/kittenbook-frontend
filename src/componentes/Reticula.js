@@ -35,9 +35,9 @@ import ReticulaElectronicaEspMecatronica from "../ReticulaElectronicaEspMecatron
 import ReticulaElectronicaEspSistemasEnergeticos from "../ReticulaElectronicaEspSistemasEnergeticos.png";
 import ReticulaElectricaEspSistemasElectricos from "../ReticulaElectricaEspSistemasElectricos.png";
 import ReticulaGestionEmpresarial from "../ReticulaGestionEmpresarial.png";
-import ReticulaQuimicaEspGestionAmbiental from "../ReticulaQuimicaEspGestionAmbiental.png"
-import ReticulaMecanicaEspDisenoMecanico from "../ReticulaMecanicaEspDisenoMecanico.png"
-import ReticulaMecanicaEspTermica from "../ReticulaMecanicaEspTermica.png"
+import ReticulaQuimicaEspGestionAmbiental from "../ReticulaQuimicaEspGestionAmbiental.png";
+import ReticulaMecanicaEspDisenoMecanico from "../ReticulaMecanicaEspDisenoMecanico.png";
+import ReticulaMecanicaEspTermica from "../ReticulaMecanicaEspTermica.png";
 
 import Axios from "axios";
 
@@ -449,7 +449,6 @@ function ListaTabs() {
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon/>}
                                 aria-controls="panel1a-content"
-                                id="panel1a-header"
                             >
                                 <Typography>Ing. Sistemas (especialidad tecnologías de la información y la
                                     comunicación)</Typography>
@@ -462,7 +461,6 @@ function ListaTabs() {
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon/>}
                                 aria-controls="panel1a-content"
-                                id="panel1a-header"
                             >
                                 <Typography>Ing. Sistemas (especialidad en tecnologías web y móvil)</Typography>
                             </AccordionSummary>
@@ -474,7 +472,6 @@ function ListaTabs() {
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon/>}
                                 aria-controls="panel1a-content"
-                                id="panel1a-header"
                             >
                                 <Typography>Ing. Electrónica (especialidad mecatrónica y control
                                     automático)</Typography>
@@ -488,7 +485,6 @@ function ListaTabs() {
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon/>}
                                 aria-controls="panel1a-content"
-                                id="panel1a-header"
                             >
                                 <Typography>Ing. Electrónica (especialidad sistemas energéticos e
                                     industriales)</Typography>
@@ -502,7 +498,6 @@ function ListaTabs() {
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon/>}
                                 aria-controls="panel1a-content"
-                                id="panel1a-header"
                             >
                                 <Typography>Ing. Eléctrica (especialidad sistemas eléctricos)</Typography>
                             </AccordionSummary>
@@ -515,7 +510,6 @@ function ListaTabs() {
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon/>}
                                 aria-controls="panel1a-content"
-                                id="panel1a-header"
                             >
                                 <Typography>Ing. Gestión Empresarial (especialidad innovación para el desarrollo
                                     empresarial)</Typography>
@@ -529,7 +523,6 @@ function ListaTabs() {
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon/>}
                                 aria-controls="panel1a-content"
-                                id="panel1a-header"
                             >
                                 <Typography>Ing. Química (especialidad gestión ambiental)</Typography>
                             </AccordionSummary>
@@ -541,7 +534,6 @@ function ListaTabs() {
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon/>}
                                 aria-controls="panel1a-content"
-                                id="panel1a-header"
                             >
                                 <Typography>Ing. Mecánica (especialidad térmica)</Typography>
                             </AccordionSummary>
@@ -553,7 +545,6 @@ function ListaTabs() {
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon/>}
                                 aria-controls="panel1a-content"
-                                id="panel1a-header"
                             >
                                 <Typography>Ing. Mecánica (especialidad diseño mecánico)</Typography>
                             </AccordionSummary>
@@ -625,10 +616,8 @@ function ListaTabs() {
                 <DialogContent>
                     <Box m={1} sx={{justifyContent: "space-between"}}>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Clave de la materia</InputLabel>
+                            <InputLabel>Clave de la materia</InputLabel>
                             <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
                                 value={claveMateria}
                                 label="Clave de la materia"
                                 onChange={(e) => {
@@ -647,8 +636,6 @@ function ListaTabs() {
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Estado de la materia</InputLabel>
                             <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
                                 value={estadoMateria}
                                 label="Estado de la materia"
                                 onChange={(e) => {
@@ -695,9 +682,7 @@ function ListaTabs() {
                                 <br/>
                                 <DialogContentText>Calificación</DialogContentText>
                                 <Slider
-                                    aria-label="Calificación"
                                     defaultValue={70}
-                                    // getAriaValueText={valuetext}
                                     valueLabelDisplay="auto"
                                     step={1}
                                     marks
@@ -710,10 +695,8 @@ function ListaTabs() {
                                 <br/>
                                 <br/>
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Periodo</InputLabel>
+                                    <InputLabel>Periodo</InputLabel>
                                     <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
                                         value={periodoMateria}
                                         label="Clave de la materia"
                                         onChange={(e) => {
@@ -771,14 +754,12 @@ function ListaTabs() {
             <Dialog
                 open={dialogoEliminarAbierto}
                 onClose={handleEliminarCerrado}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">
+                <DialogTitle>
                     {"¿Estás segur@ que quieres eliminar el curso?"}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
+                    <DialogContentText>
                         Esta acción es permanente y no se puede revertir.
                     </DialogContentText>
                 </DialogContent>

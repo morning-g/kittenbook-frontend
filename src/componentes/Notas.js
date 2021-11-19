@@ -94,7 +94,7 @@ export default function Notas() {
             titulo: titulo,
             contenido: contenido
         }, {headers}).then((res) => {
-            console.log("Nota editada.")
+            console.log("Nota editada.");
         }).catch((err) => {
             console.log(err);
         });
@@ -109,7 +109,7 @@ export default function Notas() {
                 id_nota: id_nota
             }
         }, {headers}).then((res) => {
-            "Nota eliminada."
+            console.log("Nota eliminada.");
         }).catch((err) => {
             console.log(err);
         });
@@ -231,7 +231,7 @@ export default function Notas() {
                                     ),
                                 }}
                                 onChange={(e) => {
-                                    setTitulo(e.target.value)
+                                    setTitulo(e.target.value);
                                 }}
                             />
                             <DialogContentText>Contenido</DialogContentText>
@@ -333,20 +333,18 @@ export default function Notas() {
                 <Dialog
                     open={dialogoEliminarAbierto}
                     onClose={handleEliminarCerrado}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">
+                    <DialogTitle>
                         {"¿Estás segur@ que quieres eliminar la nota?"}
                     </DialogTitle>
                     <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
+                        <DialogContentText>
                             Esta acción es permanente y no se puede revertir.
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={() => {
-                            handleEliminarCerrado()
+                            handleEliminarCerrado();
                         }}>No</Button>
                         <Button onClick={() => {
                             eliminarNota(idNota);
