@@ -18,21 +18,21 @@ function srcset(image, size, rows = 1, cols = 1) {
 
 const itemData = [
     {
-        img: 'https://s3.amazonaws.com/petcentral.com/wp-content/uploads/2016/09/01160419/black-cat-1.jpg',
+        img: 'https://images.pexels.com/photos/7517/animal-sitting-animals-inside.jpg?auto=compress&cs=tinysrgb&h=350',
         title: 'Breakfast',
         rows: 2,
         cols: 2,
     },
     {
-        img: 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555295760/shape/mentalfloss/istock_70404513_small.jpg',
+        img: 'https://i1.pickpik.com/photos/815/460/1004/cat-eyes-cat-s-eyes-face-thumb.jpg',
         title: 'Burger',
     },
     {
-        img: 'https://1.bp.blogspot.com/-uRzGQMQMT3c/XboZEzxfAYI/AAAAAAAAAW8/x5ih3hNW9xcIjdu-RxftDnd4QGIgwK69QCEwYBhgL/s1600/0.jpg',
+        img: 'https://i1.pickpik.com/photos/224/711/745/cat-animal-pet-mieze-thumb.jpg',
         title: 'Camera',
     },
     {
-        img: 'https://myminipanther.com/wp-content/uploads/2020/09/117638244_1186002988430051_1773905469144139956_o.jpg',
+        img: 'https://c.pxhere.com/photos/6d/ee/cat_cat_portrait_animal_cat\'s_eyes_domestic_cat_eyes_head_cute-1055378.jpg!s',
         title: 'Coffee',
         cols: 2,
     },
@@ -42,14 +42,14 @@ const itemData = [
         cols: 2,
     },
     {
-        img: 'http://cdn0.wideopenpets.com/wp-content/uploads/2018/02/AdobeStock_137892129.jpeg',
+        img: 'https://images.pexels.com/photos/416088/pexels-photo-416088.jpeg?auto=compress&cs=tinysrgb&h=350',
         title: 'Honey',
         author: '@arwinneil',
         rows: 2,
         cols: 2,
     },
     {
-        img: 'https://www.petmoo.com/wp-content/uploads/2018/07/Black-Cat-Breed-990x556.jpg',
+        img: 'https://c4.wallpaperflare.com/wallpaper/969/866/525/cat-look-muzzle-black-background-wallpaper-thumb.jpg',
         title: 'Basketball',
     },
     {
@@ -57,21 +57,21 @@ const itemData = [
         title: 'Fern',
     },
     {
-        img: 'https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/VhMpQkPilil163b9e/young-black-cat-is-resting-in-the-forest_vogteh1pig_thumbnail-1080_01.png',
+        img: 'https://c4.wallpaperflare.com/wallpaper/839/157/113/cat-gravel-gray-wallpaper-thumb.jpg',
         title: 'Mushrooms',
         rows: 2,
         cols: 2,
     },
     {
-        img: 'https://fthmb.tqn.com/Ltj-tDlYoAgVB_IAI43_ORK75mc=/1920x1277/filters:fill(auto,1)/egypt-59b7224c6f53ba00114fa958-59bae4346f53ba0010439047.jpg',
+        img: 'https://c4.wallpaperflare.com/wallpaper/648/247/811/cat-animals-photography-wallpaper-thumb.jpg',
         title: 'Tomato basil',
     },
     {
-        img: 'https://1.bp.blogspot.com/-oEKOysdY6R8/UPO89obgTaI/AAAAAAAAAhU/a-TTBiptDXA/s1600/back+cat+06.jpg',
+        img: 'https://c4.wallpaperflare.com/wallpaper/678/169/152/animals-hands-cat-wallpaper-thumb.jpg',
         title: 'Sea star',
     },
     {
-        img: 'https://www.rover.com/blog/wp-content/uploads/2019/12/black-cat-outside-unsplash-min.jpg',
+        img: 'https://c.pxhere.com/photos/94/66/cat_feline_pet_playful_portrait_friendship_cute_cat_black-582217.jpg!s',
         title: 'Bike',
         cols: 2,
     },
