@@ -337,7 +337,7 @@ function ListaTabs() {
                                             </CardContent>
                                         </CardActionArea>
                                     </Card></Grid>)) :
-                            <h4>Aún no tienes materias aprobadas agregadas.</h4> : null}
+                            null : null}
                         {historialPartido[1] !== undefined ? historialPartido[1].length !== 0 ? historialPartido[1].map((materiaReticula) => (
                                 <Grid item xs={12} sm={6} md={2} key={materiaReticula.id_curso.toString() + "1"}>
                                     <Card
@@ -377,7 +377,7 @@ function ListaTabs() {
                                         </CardActionArea>
                                     </Card>
                                 </Grid>)) :
-                            <h4>Aún no tienes materias en curso agregadas.</h4> : null}
+                            null : null}
                         {historialPartido[2] !== undefined ? historialPartido[2].length !== 0 ? historialPartido[2].map((materiaReticula) => (
                                 <Grid item xs={12} sm={6} md={2} key={materiaReticula.id_curso.toString() + "2"}>
                                     <Card
@@ -417,7 +417,7 @@ function ListaTabs() {
                                         </CardActionArea>
                                     </Card>
                                 </Grid>)) :
-                            <h4>Aún no tienes materias por cursar agregadas.</h4> : null}
+                            null : null}
                     </Grid>
                 </TabPanel>
                 <TabPanel index={1} value={tabValue}>
