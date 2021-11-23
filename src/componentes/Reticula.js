@@ -41,47 +41,50 @@ import ReticulaMecanicaEspTermica from "../ReticulaMecanicaEspTermica.png";
 
 import Axios from "axios";
 
+//Funcion para generar los paneles de materia y reticula
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
 
     return (
+        //Propiedades para cada panel
         <div
             role="tabpanel"
             hidden={value !== index}
             id={`simple-tabpanel-${index}`}
             aria-labelledby={`simple-tab-${index}`}
             {...other}
-            style={{width: "100%"}}
+            style={{width: "100%"}} //tamaño de la barra de paneles
         >
             {value === index && (
-                <Box sx={{p: 3}}>
+                <Box sx={{p: 3}}>{/*Espaciado entre paneles*/}
                     <Typography component={'div'}>{children}</Typography>
                 </Box>
             )}
         </div>
     );
 }
-
+//Propiedades para generar los paneles
 TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
 };
-
+//Funcion principal para devolver el contenido
 export default function Reticula() {
     return (
-        <Box sx={{width: "100%"}}>
+        <Box sx={{width: "100%"}}>{/*Tamaño del cuadro de contenido*/}
             <ListaTabs/>
         </Box>
     );
 }
-
+//Funcion para generar los tabs de la reticula
 function ListaTabs() {
     Axios.defaults.withCredentials = true;
     const headers = {
         'Content-Type': 'application/json'
     };
 
+    //Estados para agregar las materias, semestres, datos, etc.
     const [accionUsuario, setAccionUsuario] = useState(false);
     const [materias, setMaterias] = useState([]);
     const [historialPartido, setHistorialPartido] = useState([]);
@@ -98,6 +101,7 @@ function ListaTabs() {
     const [presionoAprobada, setPresionoAprobada] = useState(false);
     let i = 0;
     let condicion;
+    //Condicion por si la materia fue aprobada
     if (presionoAprobada) {
         condicion = claveMateria === "" || estadoMateria === "" || semestreMateria === 0 || periodoMateria === "" || anoMateria === 0;
     } else {
@@ -117,6 +121,7 @@ function ListaTabs() {
         });
     }, [accionUsuario]);
 
+    //Funcion que pone en 0 o vacio los datos
     const limpiar = () => {
         setClaveMateria("");
         setEstadoMateria("");
@@ -125,7 +130,7 @@ function ListaTabs() {
         setPeriodo("");
         setAnoMateria(0);
     };
-
+    //funcion para organizar la reticula de acuerdo a su estado
     const partirReticula = (reticula) => {
         let aprobadasReticula = [];
         let encursoReticula = [];
