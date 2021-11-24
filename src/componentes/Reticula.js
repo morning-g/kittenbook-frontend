@@ -79,7 +79,7 @@ export default function Reticula() {
     </Box>
   );
 }
-//Funcion para generar los tabs de la reticula
+//Funcion para generar los tabs de la reticula, solo accesible por inicio de sesion
 function ListaTabs() {
   Axios.defaults.withCredentials = true;
   const headers = {
