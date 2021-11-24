@@ -277,7 +277,7 @@ function ListaTabs() {
   }
 
   return (
-    //Box para el contennido debajo del nav bar entre materias y reticula
+    //Box para el contenido debajo del nav bar entre materias y reticula
     <div>
       <Box
         sx={{
