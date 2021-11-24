@@ -151,7 +151,7 @@ export default function Notas() {
         <Container sx={{ py: 1 }} maxWidth="md">
           <Grid container spacing={4}>
             {" "}
-            //Grid principal
+            {/*Grid principal*/}
             {notas.length === 0 ? ( //Mostrar mensaje para cuando no hay notas
               <div>
                 <br />
