@@ -1,10 +1,9 @@
+// Imports utilizados por esta clase
 import React from "react";
 import Axios from "axios";
-
 import logo from "../bookish.png";
 import logoDark from "../bookishDark.png";
 import "./image.css";
-
 import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -17,15 +16,19 @@ import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
 
+// Función que exporta la clase
 export default function MenuAppBarLogeado(props) {
     Axios.defaults.withCredentials = true;
 
+    // Estado original del menú
     const [anchorEl, setAnchorEl] = React.useState(null);
 
+    // Función para abrir el menú
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
+    // Función para cerrar el menú
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -36,6 +39,7 @@ export default function MenuAppBarLogeado(props) {
                 styles={{ul: {margin: 0, padding: 0, listStyle: "none"}}}
             />
             <CssBaseline/>
+            {/* Componente AppBar */}
             <AppBar
                 position="sticky"
                 color="default"
@@ -43,6 +47,7 @@ export default function MenuAppBarLogeado(props) {
                 sx={{borderBottom: (theme) => `2px solid ${theme.palette.divider}`}}
             >
                 <Container maxWidth="md">
+                    {/* Barra de herramientas */}
                     <Toolbar sx={{flexWrap: "wrap"}}>
                         <Typography
                             variant="h4"
@@ -50,6 +55,7 @@ export default function MenuAppBarLogeado(props) {
                             width="60%"
                             sx={{flexGrow: 1}}
                         >
+                            {/* Logo y link a la página de inicio */}
                             <Link
                                 color="#125394"
                                 href="/"
@@ -65,6 +71,7 @@ export default function MenuAppBarLogeado(props) {
                             </Link>
                         </Typography>
                         <div>
+                            {/* Boton que abre un menú de acciones del usuario */}
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
@@ -75,6 +82,7 @@ export default function MenuAppBarLogeado(props) {
                             >
                                 <AccountCircle/>
                             </IconButton>
+                            {/* Menú */}
                             <Menu
                                 id="menu-appbar"
                                 anchorEl={anchorEl}
@@ -90,7 +98,9 @@ export default function MenuAppBarLogeado(props) {
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
+                                {/* Datos del usuario */}
                                 <MenuItem divider={true}>{props.username}</MenuItem>
+                                {/* Botón para cerrar la sesión */}
                                 <MenuItem onClick={() => {
                                     props.handleLogout();
                                     props.logout();

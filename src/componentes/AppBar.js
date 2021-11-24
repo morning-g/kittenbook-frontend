@@ -1,9 +1,8 @@
+// Imports utilizados por esta clase
 import * as React from "react";
-
 import logo from "../bookish.png";
 import logoDark from "../bookishDark.png";
 import "./image.css";
-
 import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,6 +12,7 @@ import Link from "@mui/material/Link";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import Button from "@mui/material/Button";
 
+// Función que exporta la clase
 export default function MenuAppBar(props) {
     return (
         <React.Fragment>
@@ -21,6 +21,7 @@ export default function MenuAppBar(props) {
             />
             <CssBaseline/>
 
+            {/* Componente AppBar */}
             <AppBar
                 position="sticky"
                 color="default"
@@ -28,6 +29,7 @@ export default function MenuAppBar(props) {
                 sx={{borderBottom: (theme) => `2px solid ${theme.palette.divider}`}}
             >
                 <Container maxWidth="md">
+                    {/* Barra de herramientas */}
                     <Toolbar sx={{flexWrap: "wrap"}}>
                         <Typography
                             variant="h4"
@@ -35,6 +37,7 @@ export default function MenuAppBar(props) {
                             width="60%"
                             sx={{flexGrow: 1}}
                         >
+                            {/* Logo y link a la pagina de inicio */}
                             <Link
                                 color="#125394"
                                 href="/"
@@ -50,6 +53,7 @@ export default function MenuAppBar(props) {
                             </Link>
                         </Typography>
                         {props.dark ? <div>
+                            {/* Botón para iniciar sesión modo oscuro */}
                             <Button href="/login" variant="outlined"
                                     sx={{
                                         my: 1, mx: 1.5, borderColor: '#000000', color: 'black', '&:hover': {
@@ -60,6 +64,7 @@ export default function MenuAppBar(props) {
                                     }}>
                                 Iniciar sesión
                             </Button>
+                            {/* Botón para registrar usuario modo oscuro */}
                             <Button
                                 href="/registro"
                                 variant="contained"
@@ -74,6 +79,7 @@ export default function MenuAppBar(props) {
                                 Registro
                             </Button>
                         </div> : <div>
+                            {/* Botón para registrar usuario modo claro */}
                             <Button href="/login" variant="outlined"
                                     sx={{
                                         my: 1, mx: 1.5, borderColor: '#FFFFFF', color: '#FFFFFF', '&:hover': {
@@ -84,6 +90,7 @@ export default function MenuAppBar(props) {
                                     }}>
                                 Iniciar sesión
                             </Button>
+                            {/* Botón para registrar usuario modo claro */}
                             <Button
                                 href="/registro"
                                 variant="contained"
