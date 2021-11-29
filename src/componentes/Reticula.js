@@ -323,7 +323,7 @@ function ListaTabs() {
                       <Card
                         sx={{
                           //Formato para el card de la materia aprobada
-                          height: "100%",
+                          height: "110%",
                           display: "flex",
                           flexDirection: "column",
                           borderRadius: "15px",
@@ -406,7 +406,7 @@ function ListaTabs() {
                     >
                       <Card
                         sx={{
-                          height: "100%",
+                          height: "110%",
                           display: "flex",
                           flexDirection: "column",
                           borderRadius: "15px",
@@ -460,7 +460,7 @@ function ListaTabs() {
                     >
                       <Card
                         sx={{
-                          height: "280px",
+                          height: "110%",
                           display: "flex",
                           flexDirection: "column",
                           borderRadius: "15px",
@@ -670,6 +670,7 @@ function ListaTabs() {
           </Grid>
         </TabPanel>
       </Box>
+      <br/>
       {/*Formato de leyenda*/}
       <br />
       <h5 style={{ textAlign: "center" }}>Leyenda: </h5>
@@ -702,7 +703,16 @@ function ListaTabs() {
           <h5 style={{ textAlign: "center" }}>Créditos completados: n/a</h5>
         )
       ) : null}
-      <br />
+      {historialPartido[0] !== undefined ? (
+        historialPartido[0].length !== 0 ? (
+          <h5 style={{ textAlign: "center" }}>
+            {"Créditos faltantes: " + (250 - getCreditos(historialPartido[0]))}
+          </h5>
+        ) : (
+          <h5 style={{ textAlign: "center" }}>Créditos faltantes: n/a</h5>
+        )
+      ) : null}
+      <br/>
       {/*Boton agregar*/}
       <Container sx={{ py: 1 }} maxWidth="md">
         <Grid container spacing={4}>
