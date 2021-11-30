@@ -113,21 +113,21 @@ export default function Horario() {
     claveMateria === "" || grupo === "" || docente === "" || aula === "";
 
   useEffect(() => {
-    Axios.get("http://localhost:3005/api/materias")
+    Axios.get("https://kittenbook.software:3005/api/materias")
       .then((res) => {
         setMaterias(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    Axios.get("http://localhost:3005/api/historial")
+    Axios.get("https://kittenbook.software:3005/api/historial")
       .then((res) => {
         setHistorialPartido(partirReticula(res.data));
       })
       .catch((err) => {
         console.log(err);
       });
-    Axios.get("http://localhost:3005/api/horario")
+    Axios.get("https://kittenbook.software:3005/api/horario")
       .then((res) => {
         setClases(res.data);
         setHorarioPartido(partirHorario(res.data));
@@ -262,7 +262,7 @@ export default function Horario() {
   const agregarClase = () => {
     setAccionUsuario(!accionUsuario);
     Axios.post(
-      "http://localhost:3005/api/horario",
+      "https://kittenbook.software:3005/api/horario",
       {
         clave_materia: claveMateria,
         grupo: grupo,
@@ -291,7 +291,7 @@ export default function Horario() {
   const editarClase = () => {
     setAccionUsuario(!accionUsuario);
     Axios.post(
-      "http://localhost:3005/api/horario/actualizar",
+      "https://kittenbook.software:3005/api/horario/actualizar",
       {
         id_clase: idClase,
         clave_materia: claveMateria,
@@ -321,7 +321,7 @@ export default function Horario() {
   const eliminarClase = () => {
     setAccionUsuario(!accionUsuario);
     Axios.delete(
-      "http://localhost:3005/api/horario",
+      "https://kittenbook.software:3005/api/horario",
       {
         data: {
           id_clase: idClase,

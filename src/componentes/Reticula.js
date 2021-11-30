@@ -116,14 +116,14 @@ function ListaTabs() {
   }
 
   useEffect(() => {
-    Axios.get("http://localhost:3005/api/materias")
+    Axios.get("https://kittenbook.software:3005/api/materias")
       .then((res) => {
         setMaterias(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    Axios.get("http://localhost:3005/api/historial")
+    Axios.get("https://kittenbook.software:3005/api/historial")
       .then((res) => {
         setHistorialPartido(partirReticula(res.data));
       })
@@ -229,7 +229,7 @@ function ListaTabs() {
     // getMaterias();
     setAccionUsuario(!accionUsuario);
     Axios.post(
-      "http://localhost:3005/api/historial",
+      "https://kittenbook.software:3005/api/historial",
       {
         clave_materia: claveMateria,
         estado: estadoMateria,
@@ -251,7 +251,7 @@ function ListaTabs() {
   const eliminarMateria = (idCurso) => {
     setAccionUsuario(!accionUsuario);
     Axios.delete(
-      "http://localhost:3005/api/historial",
+      "https://kittenbook.software:3005/api/historial",
       {
         data: {
           id_curso: idCurso,

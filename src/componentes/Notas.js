@@ -41,7 +41,7 @@ export default function Notas() {
   const [notaActiva, setNotaActiva] = useState({});
 
   useEffect(() => {
-    Axios.get("http://localhost:3005/api/notas")
+    Axios.get("https://kittenbook.software:3005/api/notas")
       .then((res) => {
         setNotas(res.data);
       })
@@ -83,7 +83,7 @@ export default function Notas() {
   const enviarNota = () => {
     setAccionUsuario(!accionUsuario);
     Axios.post(
-      "http://localhost:3005/api/notas",
+      "https://kittenbook.software:3005/api/notas",
       {
         titulo: titulo,
         contenido: contenido,
@@ -103,7 +103,7 @@ export default function Notas() {
   const editarNota = (id_nota) => {
     setAccionUsuario(!accionUsuario);
     Axios.post(
-      "http://localhost:3005/api/notas/actualizar",
+      "https://kittenbook.software:3005/api/notas/actualizar",
       {
         id_nota: id_nota,
         titulo: titulo,
@@ -125,7 +125,7 @@ export default function Notas() {
     setAccionUsuario(!accionUsuario);
     Axios.delete(
       //Se conecta a la base de datos y se elimina el registro
-      "http://localhost:3005/api/notas",
+      "https://kittenbook.software:3005/api/notas",
       {
         data: {
           id_nota: id_nota,

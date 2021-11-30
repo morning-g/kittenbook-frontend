@@ -1,6 +1,5 @@
 // Imports utilizados por esta clase
 import React from "react";
-import Axios from "axios";
 import logo from "../bookish.png";
 import logoDark from "../bookishDark.png";
 import "./image.css";
@@ -18,8 +17,6 @@ import IconButton from "@mui/material/IconButton";
 
 // Función que exporta la clase
 export default function MenuAppBarLogeado(props) {
-  Axios.defaults.withCredentials = true;
-
   // Estado original del menú
   const [anchorEl, setAnchorEl] = React.useState(null);
 

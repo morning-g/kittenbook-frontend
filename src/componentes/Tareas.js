@@ -113,21 +113,21 @@ function ListaTabs() {
   let j = 0; //Contador de tabs
 
   useEffect(() => {
-    Axios.get("http://localhost:3005/api/materias")
+    Axios.get("https://kittenbook.software:3005/api/materias")
       .then((res) => {
         setMaterias(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    Axios.get("http://localhost:3005/api/horario")
+    Axios.get("https://kittenbook.software:3005/api/horario")
       .then((res) => {
         setClases(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    Axios.get("http://localhost:3005/api/tareas")
+    Axios.get("https://kittenbook.software:3005/api/tareas")
       .then((res) => {
         setTareas(res.data);
       })
@@ -170,7 +170,7 @@ function ListaTabs() {
   const agregarTarea = () => {
     setAccionUsuario(!accionUsuario);
     Axios.post(
-      "http://localhost:3005/api/tareas",
+      "https://kittenbook.software:3005/api/tareas",
       {
         //Asigna el valor correspondiente a cada variable
         clave_materia: claveMateria,
@@ -196,7 +196,7 @@ function ListaTabs() {
   const empezarTarea = () => {
     setAccionUsuario(!accionUsuario);
     Axios.post(
-      "http://localhost:3005/api/tareas/empezar",
+      "https://kittenbook.software:3005/api/tareas/empezar",
       {
         //Asigna la id de la tarea que va a empezar
         id_tarea: idTarea,
@@ -217,7 +217,7 @@ function ListaTabs() {
   const finalizarTarea = () => {
     setAccionUsuario(!accionUsuario);
     Axios.post(
-      "http://localhost:3005/api/tareas/finalizar",
+      "https://kittenbook.software:3005/api/tareas/finalizar",
       {
         //Asigna la idTarea seleccionada
         id_tarea: idTarea,
@@ -238,7 +238,7 @@ function ListaTabs() {
   const actualizarTarea = () => {
     setAccionUsuario(!accionUsuario);
     Axios.post(
-      "http://localhost:3005/api/tareas/actualizar",
+      "https://kittenbook.software:3005/api/tareas/actualizar",
       {
         id_tarea: idTarea, //Asigna la id de la tarea
         titulo: titulo, //Asigna el título
@@ -262,7 +262,7 @@ function ListaTabs() {
   const eliminarTarea = () => {
     setAccionUsuario(!accionUsuario);
     Axios.delete(
-      "http://localhost:3005/api/tareas",
+      "https://kittenbook.software:3005/api/tareas",
       {
         data: {
           id_tarea: idTarea, //Asigna el id de la tarea
