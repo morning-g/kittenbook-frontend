@@ -66,7 +66,7 @@ const itemData = [
     title: "Basketball",
   },
   {
-    img: "http://cdn0.wideopenpets.com/wp-content/uploads/2018/02/bigstock-Cute-Black-Cat-Under-A-Newspap-5003454.jpg",
+    img: "https://pixnio.com/free-images/2017/03/01/2017-03-01-16-28-35.jpg",
     title: "Fern",
   },
   {

@@ -26,7 +26,7 @@ export default function Componente404() {
         alt={"Un gato"}
         src={
           //dirección de ruta donde se encuentra el gif
-          "http://amazinganimalphotos.com/wp-content/uploads/2014/10/best-slow-mo-video-ever.gif"
+          "https://amazinganimalphotos.com/wp-content/uploads/2014/10/best-slow-mo-video-ever.gif"
         }
       />
     </Container>

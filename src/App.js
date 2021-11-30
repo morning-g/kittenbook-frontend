@@ -97,7 +97,7 @@ function App() {
     };
     const data = new FormData(e.currentTarget);
     Axios.post(
-      "http://localhost:3005/api/usuarios/login",
+      "https://kittenbook.software:3005/api/usuarios/login",
       {
         //nombre de usuario y contraseña para acceder a la aplicación
         username: data.get("username"),
@@ -117,7 +117,7 @@ function App() {
 
   //constante para el cierre de sesión
   const logout = (e) => {
-    Axios.get("http://localhost:3005/api/usuarios/logout")
+    Axios.get("https://kittenbook.software:3005/api/usuarios/logout")
       .then((res) => {
         console.log("Logout successful.");
       })
