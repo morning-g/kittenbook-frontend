@@ -62,7 +62,7 @@ function App() {
 
   useEffect(() => {
     //efecto de uso
-    Axios.get("http://localhost:3005/api/usuarios/autenticado")
+    Axios.get("https://kittenbook.software:3005/api/usuarios/autenticado")
       .then((res) => {
         if (
           res.data.username !== undefined &&
