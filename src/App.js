@@ -62,7 +62,7 @@ function App() {
 
   useEffect(() => {
     //efecto de uso
-    Axios.get("https://kittenbook.software:3005/api/usuarios/autenticado")
+    Axios.get("http://kittenbook.software:3005/api/usuarios/autenticado")
       .then((res) => {
         if (
           res.data.username !== undefined &&
@@ -97,7 +97,7 @@ function App() {
     };
     const data = new FormData(e.currentTarget);
     Axios.post(
-      "https://kittenbook.software:3005/api/usuarios/login",
+      "http://kittenbook.software:3005/api/usuarios/login",
       {
         //nombre de usuario y contraseña para acceder a la aplicación
         username: data.get("username"),
@@ -117,7 +117,7 @@ function App() {
 
   //constante para el cierre de sesión
   const logout = (e) => {
-    Axios.get("https://kittenbook.software:3005/api/usuarios/logout")
+    Axios.get("http://kittenbook.software:3005/api/usuarios/logout")
       .then((res) => {
         console.log("Logout successful.");
       })

@@ -66,7 +66,7 @@ const itemData = [
     title: "Basketball",
   },
   {
-    img: "https://pixnio.com/free-images/2017/03/01/2017-03-01-16-28-35.jpg",
+    img: "https://www.publicdomainpictures.net/pictures/90000/velka/ginger-cat-14011197866ER.jpg",
     title: "Fern",
   },
   {

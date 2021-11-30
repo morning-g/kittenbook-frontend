@@ -44,7 +44,7 @@ export default function Registro() {
     };
     const data = new FormData(event.currentTarget);
     Axios.post(
-      "https://kittenbook.software:3005/api/usuarios/registro",
+      "http://kittenbook.software:3005/api/usuarios/registro",
       {
         username: data.get("username"),
         firstName: data.get("firstName"), //Llamamos a la api y enviamos sus datos hacia la base de datos
